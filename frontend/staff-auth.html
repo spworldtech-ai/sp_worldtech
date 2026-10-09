@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Staff Access | SP WorldTech</title>
+<link rel="icon" href="./assets/favicon.jpeg">
+<link rel="stylesheet" href="./assets/styles.css"><link rel="stylesheet" href="./assets/brand-theme.css"><link rel="stylesheet" href="./assets/light-theme.css"><link rel="stylesheet" href="./assets/corporate.css"><link rel="stylesheet" href="./assets/site-fixes.css"><link rel="stylesheet" href="./assets/global-ui.css"><link rel="stylesheet" href="./assets/chat-widget.css"><link rel="stylesheet" href="./assets/world-net-hosting-ads.css">
+<script defer src="./assets/app-config.js"></script><script defer src="./assets/global-ui.js"></script><script defer src="./assets/staff.js"></script>
+<style>
+.staff-auth{min-height:calc(100vh - 90px);padding:50px 0;background:linear-gradient(180deg,#f4f8fd,#fff)}
+.staff-auth-grid{display:grid;grid-template-columns:1fr 520px;gap:28px;align-items:stretch;max-width:1050px;margin:auto}
+.staff-intro{border-radius:24px;padding:48px;background:linear-gradient(135deg,#06182e,#0a3b78 58%,#0877e8);color:#fff;display:flex;flex-direction:column;justify-content:center;box-shadow:0 24px 60px rgba(18,55,95,.12)}
+.staff-intro h1{font-size:clamp(40px,5vw,60px);line-height:1.02;margin:14px 0}.staff-intro p{line-height:1.8;color:#d7e7f7;font-size:14px}.staff-card{background:#fff;border:1px solid #dce7f2;border-radius:24px;padding:32px;box-shadow:0 24px 60px rgba(18,55,95,.1)}
+.staff-tabs{display:flex;gap:5px;padding:5px;background:#f3f7fb;border-radius:12px;margin-bottom:24px}.staff-tab{flex:1;border:0;background:transparent;padding:11px;border-radius:9px;font-weight:800;color:#607086;cursor:pointer}.staff-tab.active{background:#fff;color:#0868f7;box-shadow:0 4px 15px rgba(20,55,95,.08)}
+.staff-panel[hidden]{display:none}.staff-panel h2{margin:0 0 7px;font-size:28px}.staff-panel>p{font-size:12px;line-height:1.6;color:#687890;margin-bottom:18px}.form-stack{display:grid;gap:13px}.form-stack label{font-size:10px;font-weight:800}.form-stack input{margin-top:6px;width:100%;height:46px;padding:0 12px;border:1px solid #dce7f2;border-radius:10px;box-sizing:border-box}.password-field-wrap{position:relative}.password-field-wrap input{padding-right:85px}.password-toggle{position:absolute;right:5px;bottom:5px;height:36px;border:0;background:#f3f7fb;color:#0868f7;border-radius:7px;padding:0 9px;font-size:9px;font-weight:800}.full{width:100%}.google-card{display:flex;justify-content:center;margin-bottom:7px}.google-note{text-align:center;font-size:9px;color:#687890;margin-bottom:12px}.status{min-height:18px;font-size:10px;color:#d13d4d}.status.success{color:#13865e}.auth-divider{display:flex;align-items:center;gap:10px;color:#8a98aa;font-size:9px;margin:15px 0}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e5edf5;flex:1}
+@media(max-width:850px){.staff-auth-grid{grid-template-columns:1fr}.staff-intro{min-height:300px;padding:34px}.staff-card{padding:24px}}
+</style>
+
+<link rel="stylesheet" href="./assets/wireframe-header.css"><link rel="stylesheet" href="./assets/auth-consistency.css">
+<style id="spwt-shared-theme-style">
+/* SP WorldTech shared light/dark theme */
+:root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
+html[data-spwt-theme="dark"]{color-scheme:dark;--spwt-bg:#0b1220;--spwt-surface:#111d30;--spwt-text:#edf4ff;--spwt-muted:#a8b8ce;--spwt-border:#2b3c54;--spwt-input:#0e192a;--spwt-shadow:0 8px 28px rgba(0,0,0,.24)}
+html[data-spwt-theme="dark"] body{background-color:var(--spwt-bg)!important;color:var(--spwt-text)!important}
+html[data-spwt-theme="dark"] main,html[data-spwt-theme="dark"] section,html[data-spwt-theme="dark"] article,html[data-spwt-theme="dark"] aside,html[data-spwt-theme="dark"] .card,html[data-spwt-theme="dark"] .panel,html[data-spwt-theme="dark"] .modal,html[data-spwt-theme="dark"] .dashboard-card,html[data-spwt-theme="dark"] .content-card,html[data-spwt-theme="dark"] .auth-card,html[data-spwt-theme="dark"] .form-card,html[data-spwt-theme="dark"] .stat-card{color:var(--spwt-text)}
+html[data-spwt-theme="dark"] [class*="card"],html[data-spwt-theme="dark"] [class*="panel"],html[data-spwt-theme="dark"] [class*="modal"],html[data-spwt-theme="dark"] [class*="surface"]{border-color:var(--spwt-border)}
+html[data-spwt-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),html[data-spwt-theme="dark"] select,html[data-spwt-theme="dark"] textarea{background:var(--spwt-input)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] input::placeholder,html[data-spwt-theme="dark"] textarea::placeholder{color:var(--spwt-muted)!important}
+html[data-spwt-theme="dark"] table,html[data-spwt-theme="dark"] th,html[data-spwt-theme="dark"] td{border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] a:not([class*="btn"]):not([class*="button"]){color:#79baff}
+html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-theme="dark"] label,html[data-spwt-theme="dark"] small{color:inherit}
+#spwt-theme-toggle{position:fixed;right:18px;bottom:22px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 14px;background:#0758b8;color:#fff;font:700 13px/1.1 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,35,90,.25);cursor:pointer;transition:transform .15s,box-shadow .15s}
+#spwt-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,35,90,.32)}#spwt-theme-toggle:focus-visible{outline:3px solid #61d7ff;outline-offset:3px}#spwt-theme-toggle .spwt-theme-icon{font-size:17px;line-height:1}
+@media(max-width:600px){#spwt-theme-toggle{right:12px;bottom:14px;padding:9px 12px;font-size:12px}}
+
+</style>
+<link rel="stylesheet" href="./assets/theme-switcher-position.css">
+</head>
+<body class="auth-page">
+<header class="spw-wireframe-header" data-spw-wireframe-header>
+  <div class="spw-header-inner">
+    <a class="spw-brand" href="./index.html" aria-label="SP WorldTech home">
+      <img src="./assets/logo.jpeg" alt="SP WorldTech logo">
+      <span class="spw-brand-name">SP WorldTech</span>
+      <span class="spw-brand-tagline">Technology <b>•</b> Innovation <b>•</b> Global Growth</span>
+    </a>
+    <nav class="spw-desktop-nav" aria-label="Primary navigation">
+      <a class="spw-nav-home" href="./index.html"><span class="spw-ico">⌂</span><span>Home</span></a>
+      <a href="./services.html"><span class="spw-ico">⚙</span><span>Services</span></a>
+      <a href="./businesses.html"><span class="spw-ico">▥</span><span>Businesses</span></a>
+      <a href="./projects.html"><span class="spw-ico">□</span><span>Projects</span></a>
+      <a href="./pricing.html"><span class="spw-ico">◇</span><span>Pricing</span></a>
+      <a href="./marketplace.html"><span class="spw-ico">🛒</span><span>Marketplace</span></a>
+      <a href="./academy.html"><span class="spw-ico">◇</span><span>Academy</span></a>
+      <a href="./about.html"><span class="spw-ico">ⓘ</span><span>About</span></a>
+      <a href="./privacy-policy.html"><span class="spw-ico">♢</span><span>Privacy</span></a>
+      <a href="./terms-and-conditions.html"><span class="spw-ico">▤</span><span>Terms</span></a>
+      <a href="./contact.html"><span class="spw-ico">⌕</span><span>Contact</span></a>
+      <a class="spw-join-btn" href="./auth.html">Join Free</a>
+    </nav>
+    <button class="spw-mobile-btn" id="spwWireframeMenuBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+  <div class="spw-mobile-menu" id="spwWireframeMenu" hidden>
+    <a href="./index.html">Home</a><a href="./services.html">Services</a><a href="./businesses.html">Businesses</a>
+    <a href="./projects.html">Projects</a><a href="./pricing.html">Pricing</a><a href="./marketplace.html">Marketplace</a>
+    <a href="./academy.html">Academy</a><a href="./about.html">About</a><a href="./privacy-policy.html">Privacy</a>
+    <a href="./terms-and-conditions.html">Terms</a><a href="./contact.html">Contact</a><a class="mobile-join" href="./auth.html">Join Free</a>
+  </div>
+</header>
+<main class="staff-auth"><div class="container staff-auth-grid">
+<section class="staff-intro"><span class="eyebrow">SP WorldTech Staff Portal</span><h1>Secure staff access.</h1><p>Staff members can sign in with email and password or use the authorized Google account. Staff accounts open the dashboard after secure authentication.</p></section>
+<section class="staff-card">
+<div class="staff-tabs"><button class="staff-tab active" data-staff-tab="login" type="button">Staff Login</button><button class="staff-tab" data-staff-tab="register" type="button">Staff Signup</button></div>
+<section id="staffLoginPanel" class="staff-panel"><h2>Welcome back</h2><p>Sign in with your staff email and password.</p><div id="staffGoogleLogin" class="google-card"></div><div class="google-note">Sign in with authorized Google</div><div class="auth-divider"><span>or continue with staff credentials</span></div><form id="staffLoginForm" class="form-stack"><label>Email<input name="email" type="email" autocomplete="username" required></label><label>Password<div class="password-field-wrap"><input name="password" type="password" autocomplete="current-password" required><button type="button" class="password-toggle" data-toggle-password>View Password</button></div></label><button class="primary full" type="submit">Login to Staff Dashboard</button><div id="staffLoginStatus" class="status"></div></form></section>
+<section id="staffRegisterPanel" class="staff-panel" hidden><h2>Create staff account</h2><p>Use an authorized staff email or the Google signup option. Password signup uses secure password authentication.</p><div id="staffGoogleRegister" class="google-card"></div><div class="google-note">Create staff access with authorized Google</div><div class="auth-divider"><span>or register with staff credentials</span></div><form id="staffRegisterForm" class="form-stack"><label>Full Name<input name="fullName" autocomplete="name" required></label><label>Email<input name="email" type="email" autocomplete="email" required></label><label>Username<input name="username" autocomplete="username" required></label><label>Password<div class="password-field-wrap"><input name="password" type="password" autocomplete="new-password" minlength="8" required><button type="button" class="password-toggle" data-toggle-password>View Password</button></div></label><button class="primary full" type="submit">Create Staff Account</button><div id="staffRegisterStatus" class="status"></div></form></section>
+</section></div></main>
+<script defer src="./assets/world-net-hosting-ads.js"></script>
+<script defer src="./assets/chat-widget.js"></script>
+
+<script defer src="./assets/wireframe-header.js"></script>
+<script id="spwt-shared-theme-script">
+(()=>{'use strict';const KEY='spworldtech-theme';const root=document.documentElement;function read(){try{return localStorage.getItem(KEY)}catch(e){return null}}function save(v){try{localStorage.setItem(KEY,v)}catch(e){}}function apply(theme){theme=theme==='dark'?'dark':'light';root.setAttribute('data-spwt-theme',theme);root.style.colorScheme=theme;const b=document.getElementById('spwt-theme-toggle');if(b){const dark=theme==='dark';b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');b.innerHTML='<span class="spwt-theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light mode':'Dark mode')+'</span>'}save(theme)}const initial=read();apply(initial==='dark'?'dark':'light');function install(){if(document.getElementById('spwt-theme-toggle'))return;const b=document.createElement('button');b.id='spwt-theme-toggle';b.type='button';b.addEventListener('click',()=>apply(root.getAttribute('data-spwt-theme')==='dark'?'light':'dark'));(document.body||document.documentElement).appendChild(b);apply(root.getAttribute('data-spwt-theme')||'light')}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();})();
+
+</script>
+<script defer src="./assets/theme-switcher-position.js"></script>
+</body></html>

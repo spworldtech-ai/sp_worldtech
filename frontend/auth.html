@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Secure SP WorldTech login and account registration.">
+<title>Login or Create Account | SP WorldTech</title>
+<link rel="icon" href="./assets/favicon.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/styles.css"><link rel="stylesheet" href="./assets/brand-theme.css"><link rel="stylesheet" href="./assets/light-theme.css"><link rel="stylesheet" href="./assets/corporate.css">
+<script defer src="./assets/app-config.js"></script><script defer src="./assets/global-ui.js"></script>
+<link rel="stylesheet" href="./assets/site-fixes.css"><link rel="stylesheet" href="./assets/global-ui.css"><script defer src="./assets/site-images.js"></script><link rel="stylesheet" href="./assets/chat-widget.css"><link rel="stylesheet" href="./assets/world-net-hosting-ads.css">
+<style>
+.auth-fixed-main{padding:42px 0 70px;background:#f7faff}
+.auth-fixed-grid{align-items:stretch}
+.auth-fixed-card{background:#fff}
+.auth-fixed-main .auth-intro{display:flex;flex-direction:column;justify-content:center;min-height:610px;padding:48px;background:linear-gradient(135deg,#06182e 0%,#0a3b78 55%,#0877e8 100%);color:#fff;border-radius:24px;box-shadow:0 24px 60px rgba(18,55,95,.14)}
+.auth-fixed-main .auth-intro h1{font-size:clamp(42px,5vw,62px);line-height:1.02;letter-spacing:-2px;margin:14px 0 18px}
+.auth-fixed-main .auth-intro p{font-size:14px;line-height:1.8;color:#d7e7f7;max-width:560px}
+.auth-fixed-main .auth-trust{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}.auth-fixed-main .auth-trust span{padding:10px 14px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.08);font-size:10px;color:#eef7ff}
+.auth-fixed-card{padding:32px;border-radius:24px;border:1px solid #dce7f2;box-shadow:0 24px 60px rgba(18,55,95,.10)}
+.auth-fixed-card .auth-tabs{margin-bottom:24px}.auth-fixed-card .auth-panel[hidden]{display:none}.auth-fixed-card .auth-panel h2{font-size:29px;margin:0 0 7px}.auth-fixed-card .auth-panel>p{font-size:11px;line-height:1.6;color:#687890;margin:0 0 18px}
+.auth-fixed-card .form-stack{display:grid;gap:13px}.auth-fixed-card .form-stack label{font-size:10px;font-weight:800}.auth-fixed-card .form-stack input{margin-top:6px;height:46px}.auth-fixed-card .password-field-wrap{position:relative}.auth-fixed-card .password-field-wrap input{padding-right:62px}.auth-fixed-card .password-toggle{position:absolute;right:5px;bottom:5px;height:36px;border:0;background:#f3f7fb;color:#0868f7;border-radius:7px;padding:0 9px;font-size:9px;font-weight:800}.auth-fixed-card .google-note{font-size:9px;color:#687890;text-align:center;margin-top:4px}.auth-fixed-card .status{min-height:17px;font-size:10px;color:#d13d4d}.auth-fixed-card .status.success{color:#13865e}.auth-bottom-link{text-align:center;font-size:10px;color:#718096;margin-top:17px}.auth-bottom-link button{border:0;background:none;color:#0868f7;font-weight:800;cursor:pointer}.auth-check{display:flex!important;gap:7px;align-items:flex-start;color:#66778d!important;font-weight:600!important;line-height:1.45}.auth-check input{width:auto!important;height:auto!important;margin-top:2px}.auth-check a{color:#0868f7}.auth-security{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}.auth-security span{background:#f7faff;border:1px solid #e4edf6;border-radius:9px;padding:9px 5px;text-align:center;font-size:8px;color:#66778d}.auth-security strong{display:block;color:#25384f;font-size:9px;margin-bottom:2px}
+/* Critical desktop fix: the mobile navigation must not render as full-width cards on auth.html. */
+.auth-page .mobile-menu{display:none!important}.auth-page .mobile-menu.open{display:flex!important}
+@media(max-width:980px){.auth-fixed-main{padding:28px 0 50px}.auth-fixed-main .auth-intro{min-height:410px;padding:34px}.auth-fixed-main .auth-intro h1{font-size:42px}.auth-page .mobile-menu-btn{display:inline-flex!important}.auth-page .mobile-menu.open{display:flex!important}}
+@media(max-width:560px){.auth-fixed-card{padding:22px;border-radius:18px}.auth-fixed-main .auth-intro{padding:28px;min-height:380px;border-radius:18px}.auth-fixed-main .auth-intro h1{font-size:36px}.auth-security{grid-template-columns:1fr}}
+</style>
+
+<link rel="stylesheet" href="./assets/wireframe-header.css"><link rel="stylesheet" href="./assets/auth-consistency.css">
+<style id="spwt-shared-theme-style">
+/* SP WorldTech shared light/dark theme */
+:root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
+html[data-spwt-theme="dark"]{color-scheme:dark;--spwt-bg:#0b1220;--spwt-surface:#111d30;--spwt-text:#edf4ff;--spwt-muted:#a8b8ce;--spwt-border:#2b3c54;--spwt-input:#0e192a;--spwt-shadow:0 8px 28px rgba(0,0,0,.24)}
+html[data-spwt-theme="dark"] body{background-color:var(--spwt-bg)!important;color:var(--spwt-text)!important}
+html[data-spwt-theme="dark"] main,html[data-spwt-theme="dark"] section,html[data-spwt-theme="dark"] article,html[data-spwt-theme="dark"] aside,html[data-spwt-theme="dark"] .card,html[data-spwt-theme="dark"] .panel,html[data-spwt-theme="dark"] .modal,html[data-spwt-theme="dark"] .dashboard-card,html[data-spwt-theme="dark"] .content-card,html[data-spwt-theme="dark"] .auth-card,html[data-spwt-theme="dark"] .form-card,html[data-spwt-theme="dark"] .stat-card{color:var(--spwt-text)}
+html[data-spwt-theme="dark"] [class*="card"],html[data-spwt-theme="dark"] [class*="panel"],html[data-spwt-theme="dark"] [class*="modal"],html[data-spwt-theme="dark"] [class*="surface"]{border-color:var(--spwt-border)}
+html[data-spwt-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),html[data-spwt-theme="dark"] select,html[data-spwt-theme="dark"] textarea{background:var(--spwt-input)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] input::placeholder,html[data-spwt-theme="dark"] textarea::placeholder{color:var(--spwt-muted)!important}
+html[data-spwt-theme="dark"] table,html[data-spwt-theme="dark"] th,html[data-spwt-theme="dark"] td{border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] a:not([class*="btn"]):not([class*="button"]){color:#79baff}
+html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-theme="dark"] label,html[data-spwt-theme="dark"] small{color:inherit}
+#spwt-theme-toggle{position:fixed;right:18px;bottom:22px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 14px;background:#0758b8;color:#fff;font:700 13px/1.1 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,35,90,.25);cursor:pointer;transition:transform .15s,box-shadow .15s}
+#spwt-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,35,90,.32)}#spwt-theme-toggle:focus-visible{outline:3px solid #61d7ff;outline-offset:3px}#spwt-theme-toggle .spwt-theme-icon{font-size:17px;line-height:1}
+@media(max-width:600px){#spwt-theme-toggle{right:12px;bottom:14px;padding:9px 12px;font-size:12px}}
+
+</style>
+<link rel="stylesheet" href="./assets/theme-switcher-position.css">
+</head>
+<body class="auth-page">
+<header class="spw-wireframe-header" data-spw-wireframe-header>
+  <div class="spw-header-inner">
+    <a class="spw-brand" href="./index.html" aria-label="SP WorldTech home">
+      <img src="./assets/logo.jpeg" alt="SP WorldTech logo">
+      <span class="spw-brand-name">SP WorldTech</span>
+      <span class="spw-brand-tagline">Technology <b>•</b> Innovation <b>•</b> Global Growth</span>
+    </a>
+    <nav class="spw-desktop-nav" aria-label="Primary navigation">
+      <a class="spw-nav-home" href="./index.html"><span class="spw-ico">⌂</span><span>Home</span></a>
+      <a href="./services.html"><span class="spw-ico">⚙</span><span>Services</span></a>
+      <a href="./businesses.html"><span class="spw-ico">▥</span><span>Businesses</span></a>
+      <a href="./projects.html"><span class="spw-ico">□</span><span>Projects</span></a>
+      <a href="./pricing.html"><span class="spw-ico">◇</span><span>Pricing</span></a>
+      <a href="./marketplace.html"><span class="spw-ico">🛒</span><span>Marketplace</span></a>
+      <a href="./academy.html"><span class="spw-ico">◇</span><span>Academy</span></a>
+      <a href="./about.html"><span class="spw-ico">ⓘ</span><span>About</span></a>
+      <a href="./privacy-policy.html"><span class="spw-ico">♢</span><span>Privacy</span></a>
+      <a href="./terms-and-conditions.html"><span class="spw-ico">▤</span><span>Terms</span></a>
+      <a href="./contact.html"><span class="spw-ico">⌕</span><span>Contact</span></a>
+      <a class="spw-join-btn" href="./auth.html">Join Free</a>
+    </nav>
+    <button class="spw-mobile-btn" id="spwWireframeMenuBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+  <div class="spw-mobile-menu" id="spwWireframeMenu" hidden>
+    <a href="./index.html">Home</a><a href="./services.html">Services</a><a href="./businesses.html">Businesses</a>
+    <a href="./projects.html">Projects</a><a href="./pricing.html">Pricing</a><a href="./marketplace.html">Marketplace</a>
+    <a href="./academy.html">Academy</a><a href="./about.html">About</a><a href="./privacy-policy.html">Privacy</a>
+    <a href="./terms-and-conditions.html">Terms</a><a href="./contact.html">Contact</a><a class="mobile-join" href="./auth.html">Join Free</a>
+  </div>
+</header>
+<main class="auth-portal-main auth-fixed-main">
+<div class="container">
+<section class="auth-portal-grid auth-fixed-grid">
+  <div class="auth-intro">
+    <span class="eyebrow">SP WorldTech Account</span>
+    <h1>Connect to your global digital workspace.</h1>
+    <p>Create an account or sign in to access your dashboard, digital marketplace purchases, services and secure payment history.</p>
+    <div class="auth-trust"><span>Secure account access</span><span>Digital products</span><span>Services worldwide</span></div>
+  </div>
+  <div class="auth-portal-card auth-fixed-card">
+    <div class="auth-tabs"><button type="button" class="auth-tab active" data-auth-tab="login">Login</button><button type="button" class="auth-tab" data-auth-tab="register">Create account</button></div>
+    <section id="loginPanel" class="auth-panel">
+      <h2>Welcome back</h2><p>Sign in with Google or your email and password to access your dashboard.</p>
+      <div id="googleButtonLogin" class="google-card"></div><div class="google-note">Google Sign-In</div>
+      <div class="auth-divider"><span>or continue with email</span></div>
+      <form id="loginForm" class="form-stack">
+        <label>Email or Username<input id="loginEmail" name="identifier" type="text" autocomplete="username" placeholder="Email or username" required></label>
+        <label>Password<div class="password-field-wrap"><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button class="password-toggle" type="button" data-password="loginPassword">Show</button></div></label>
+        <button class="primary full" type="submit">Login to Dashboard</button><div id="loginStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+      <div class="auth-bottom-link">Don't have an account? <button type="button" data-switch="register">Create account</button></div>
+    </section>
+    <section id="registerPanel" class="auth-panel" hidden>
+      <h2>Create your account</h2><p>Register with your email or Google and access your dashboard after your account is created.</p>
+      <div id="googleButtonRegister" class="google-card"></div><div class="google-note">Google Sign-Up</div>
+      <div class="auth-divider"><span>or register with email</span></div>
+      <form id="registerForm" class="form-stack">
+        <label>First Name<input id="firstName" name="firstName" autocomplete="given-name" placeholder="First name" required></label>
+        <label>Last Name<input id="lastName" name="lastName" autocomplete="family-name" placeholder="Last name" required></label>
+        <label>Email<input id="signupEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<div class="password-field-wrap"><input id="signupPassword" name="password" type="password" minlength="8" autocomplete="new-password" placeholder="Create a password" required><button class="password-toggle" type="button" data-password="signupPassword">Show</button></div></label>
+        <label>Confirm Password<div class="password-field-wrap"><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Confirm your password" required><button class="password-toggle" type="button" data-password="confirmPassword">Show</button></div></label>
+        <label class="auth-check"><input id="terms" type="checkbox" required><span>I agree to the <a href="./terms-and-conditions.html">Terms & Conditions</a> and <a href="./privacy-policy.html">Privacy Policy</a>.</span></label>
+        <button class="primary full" type="submit">Create Account</button><div id="registerStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+      <div class="auth-bottom-link">Already have an account? <button type="button" data-switch="login">Sign in</button></div>
+    </section>
+    <div class="auth-security"><span><strong>Secure</strong>Encrypted authentication</span><span><strong>Password protected</strong>Secure account access</span><span><strong>Private</strong>Your account data</span></div>
+  </div>
+</section>
+</div>
+</main>
+
+
+
+<script defer src="./assets/world-net-hosting-ads.js"></script>
+<script defer src="./assets/chat-widget.js"></script>
+<script>
+(() => {
+  const API=(window.SPW_APP?.API_BASE||window.location.origin).replace(/\/$/,'').replace(/\/api$/i,'');
+  const next=new URLSearchParams(location.search).get('next')||'./dashboard.html';
+  const setStatus=(id,msg,ok=false)=>{const el=document.getElementById(id);if(el){el.textContent=msg;el.className='status'+(ok?' success':'');}};
+  const api=async(path,body)=>{let r;try{r=await fetch(`${API}${path}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});}catch(_){throw new Error('The authentication service is temporarily unavailable. Please refresh the page and try again.');}const d=await(window.SPW_APP?.parseResponse?window.SPW_APP.parseResponse(r):r.json());if(!r.ok)throw new Error(d.message||`Authentication request failed (HTTP ${r.status}).`);return d;};
+  const continueAuth=(result)=>{if(!result.token)throw new Error('Authentication completed without a valid session.');localStorage.setItem('spw_user_token',result.token);localStorage.setItem('spw_user',JSON.stringify(result.user||{}));location.replace(next);};
+  document.querySelectorAll('[data-auth-tab]').forEach(b=>b.addEventListener('click',()=>{const tab=b.dataset.authTab;const login=tab==='login';document.querySelectorAll('[data-auth-tab]').forEach(x=>x.classList.toggle('active',x.dataset.authTab===tab));document.getElementById('loginPanel').hidden=!login;document.getElementById('registerPanel').hidden=login;}));
+  document.querySelectorAll('[data-switch]').forEach(b=>b.addEventListener('click',()=>document.querySelector(`[data-auth-tab="${b.dataset.switch}"]`)?.click()));
+  document.querySelectorAll('[data-password]').forEach(b=>b.addEventListener('click',()=>{const i=document.getElementById(b.dataset.password);if(!i)return;i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'Show':'Hide';}));
+  document.getElementById('loginForm').addEventListener('submit',async e=>{e.preventDefault();const b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;b.textContent='Signing in…';try{continueAuth(await api('/api/auth/user-login',{identifier:document.getElementById('loginEmail').value.trim(),password:document.getElementById('loginPassword').value}));}catch(err){setStatus('loginStatus',err.message);b.disabled=false;b.textContent='Login to Dashboard';}});
+  document.getElementById('registerForm').addEventListener('submit',async e=>{e.preventDefault();const p=document.getElementById('signupPassword').value,c=document.getElementById('confirmPassword').value;if(p!==c){setStatus('registerStatus','Passwords do not match.');return;}const b=e.currentTarget.querySelector('button[type="submit"]');b.disabled=true;b.textContent='Creating account…';try{const fullName=`${document.getElementById('firstName').value.trim()} ${document.getElementById('lastName').value.trim()}`.trim();continueAuth(await api('/api/auth/register',{fullName,email:document.getElementById('signupEmail').value.trim(),password:p}));}catch(err){setStatus('registerStatus',err.message);b.disabled=false;b.textContent='Create Account';}});
+  async function loadGoogle(){try{const r=await fetch(`${API}/api/public-config`);const cfg=await(window.SPW_APP?.parseResponse?window.SPW_APP.parseResponse(r):r.json());if(!r.ok||!cfg.googleClientId){document.querySelectorAll('.google-note').forEach(x=>x.textContent='Google Sign-In is not configured yet. Please contact SP WorldTech support.');return;}const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=true;s.defer=true;s.onload=()=>{google.accounts.id.initialize({client_id:cfg.googleClientId,callback:async response=>{try{setStatus('loginStatus','Google verified. Completing secure sign-in…');setStatus('registerStatus','Google verified. Completing secure account setup…');const result=await api('/api/auth/google',{credential:response.credential,role:'user'});continueAuth(result);}catch(err){setStatus('loginStatus',err.message);setStatus('registerStatus',err.message);}},ux_mode:'popup'});google.accounts.id.renderButton(document.getElementById('googleButtonLogin'),{theme:'outline',size:'large',shape:'rectangular',text:'signin_with',width:340});google.accounts.id.renderButton(document.getElementById('googleButtonRegister'),{theme:'outline',size:'large',shape:'rectangular',text:'signup_with',width:340});document.querySelectorAll('.google-note').forEach(x=>x.style.display='none');};s.onerror=()=>document.querySelectorAll('.google-note').forEach(x=>x.textContent='Google Sign-In could not load. Check your internet connection.');document.head.appendChild(s);}catch(_){document.querySelectorAll('.google-note').forEach(x=>x.textContent='Google Sign-In configuration could not be loaded.');}}
+  loadGoogle();
+})();
+</script>
+
+<script defer src="./assets/wireframe-header.js"></script>
+<script id="spwt-shared-theme-script">
+(()=>{'use strict';const KEY='spworldtech-theme';const root=document.documentElement;function read(){try{return localStorage.getItem(KEY)}catch(e){return null}}function save(v){try{localStorage.setItem(KEY,v)}catch(e){}}function apply(theme){theme=theme==='dark'?'dark':'light';root.setAttribute('data-spwt-theme',theme);root.style.colorScheme=theme;const b=document.getElementById('spwt-theme-toggle');if(b){const dark=theme==='dark';b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');b.innerHTML='<span class="spwt-theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light mode':'Dark mode')+'</span>'}save(theme)}const initial=read();apply(initial==='dark'?'dark':'light');function install(){if(document.getElementById('spwt-theme-toggle'))return;const b=document.createElement('button');b.id='spwt-theme-toggle';b.type='button';b.addEventListener('click',()=>apply(root.getAttribute('data-spwt-theme')==='dark'?'light':'dark'));(document.body||document.documentElement).appendChild(b);apply(root.getAttribute('data-spwt-theme')||'light')}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();})();
+
+</script>
+<script defer src="./assets/theme-switcher-position.js"></script>
+</body></html>

@@ -1,0 +1,127 @@
+
+/* ==========================================================
+   SP WORLDTECH — OWNER WIREFRAME HEADER
+   One authoritative header used across public + role pages.
+========================================================== */
+.spw-wireframe-header{
+  position:relative; z-index:1000; width:100%;
+  background:#fff; border-bottom:1px solid #e5edf6;
+  box-shadow:0 10px 30px rgba(20,55,90,.08);
+}
+.spw-header-inner{
+  width:min(100% - 28px, 2048px); min-height:154px; margin:0 auto;
+  display:flex; align-items:center; gap:24px; padding:18px 16px 14px;
+}
+.spw-brand{
+  flex:0 0 250px; width:250px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  text-decoration:none!important; color:#10233f!important; gap:5px;
+}
+.spw-brand img{
+  width:72px; height:72px; object-fit:contain; border-radius:16px;
+  display:block; box-shadow:0 5px 16px rgba(15,35,60,.12);
+}
+.spw-brand-name{font-size:22px; line-height:1; font-weight:950; letter-spacing:-.7px;}
+.spw-brand-tagline{font-size:11px; line-height:1.2; color:#6c8198; white-space:nowrap;}
+.spw-brand-tagline b{color:#1aa5b6; margin:0 3px;}
+.spw-desktop-nav{
+  flex:1; min-width:0; display:flex; align-items:center; justify-content:flex-start;
+  gap:2px; height:100%;
+}
+.spw-desktop-nav>a:not(.spw-join-btn){
+  min-height:62px; padding:7px 13px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:5px; border-right:1px solid #e9eff6;
+  text-decoration:none!important; color:#132a49!important; font-size:15px; font-weight:850;
+  white-space:nowrap; transition:.18s ease;
+}
+.spw-desktop-nav>a:not(.spw-join-btn):hover{color:#116bd1!important;background:#f7fbff;border-radius:10px;}
+.spw-desktop-nav .spw-nav-home{
+  min-width:138px; flex-direction:row!important; gap:8px!important;
+  border:0!important; border-radius:42px; color:#fff!important;
+  background:linear-gradient(135deg,#2675e8,#16a7bd)!important;
+  box-shadow:0 10px 22px rgba(38,117,232,.2); font-size:17px!important;
+}
+.spw-desktop-nav .spw-nav-home:hover{color:#fff!important;transform:translateY(-1px);}
+.spw-ico{font-size:23px; line-height:1; font-weight:500;}
+.spw-desktop-nav i{font-style:normal;font-size:13px;margin-left:2px;}
+.spw-search-btn{
+  flex:0 0 58px; width:58px; height:58px; margin-left:10px; border:0; border-radius:50%;
+  background:#f1f6ff; color:#176edb; font-size:31px; cursor:pointer;
+}
+.spw-search-btn:hover{background:#e7f0ff;transform:translateY(-1px);}
+.spw-join-btn{
+  flex:0 0 auto; min-height:58px; padding:0 28px; margin-left:8px; border-radius:34px;
+  display:flex!important; flex-direction:row!important; align-items:center; justify-content:center;
+  gap:8px; text-decoration:none!important; color:#fff!important;
+  background:linear-gradient(135deg,#2675e8,#12a8b8)!important;
+  box-shadow:0 10px 24px rgba(38,117,232,.2); font-size:17px!important; font-weight:900!important;
+}
+.spw-mobile-btn{
+  display:none; margin-left:auto; width:52px; height:52px; border:0; border-radius:50%;
+  background:#f0f6ff; color:#1670db; font-size:27px; cursor:pointer;
+}
+.spw-mobile-menu{
+  width:min(100% - 28px, 1640px); margin:0 auto 14px; padding:12px;
+  background:#fff; border:1px solid #dbe7f4; border-radius:18px; box-shadow:0 15px 35px rgba(20,55,90,.1);
+}
+.spw-mobile-menu a{
+  display:block; padding:15px 14px; margin:7px 0; border:1px solid #dce8f5;
+  border-radius:12px; color:#142c4c!important; text-decoration:none!important;
+  font-weight:850; background:#f8fbff;
+}
+.spw-mobile-menu a:hover{background:#edf6ff;border-color:#bdd6f0;}
+.spw-mobile-menu .mobile-join{background:linear-gradient(135deg,#2675e8,#12a8b8);color:#fff!important;text-align:center;}
+@media(max-width:1500px){
+  .spw-header-inner{min-height:132px;gap:12px;padding-left:8px;padding-right:8px;}
+  .spw-brand{flex-basis:205px;width:205px}.spw-brand img{width:62px;height:62px}
+  .spw-brand-name{font-size:19px}.spw-brand-tagline{font-size:9px}
+  .spw-desktop-nav>a:not(.spw-join-btn){padding-left:8px;padding-right:8px;font-size:13px;}
+  .spw-desktop-nav .spw-nav-home{min-width:110px;font-size:15px!important;}
+  .spw-ico{font-size:19px}.spw-join-btn{padding:0 19px;font-size:15px!important;}
+}
+@media(max-width:1180px){
+  .spw-desktop-nav{display:none}.spw-mobile-btn{display:block}
+  .spw-header-inner{min-height:92px;padding:9px 10px;}
+  .spw-brand{flex-direction:row;width:auto;flex-basis:auto;gap:11px;text-align:left;}
+  .spw-brand img{width:56px;height:56px}.spw-brand-name{font-size:19px}
+  .spw-brand-tagline{display:none}
+}
+@media(max-width:600px){
+  .spw-header-inner{min-height:82px;width:calc(100% - 18px);padding:7px 2px;}
+  .spw-brand img{width:50px;height:50px}.spw-brand-name{font-size:17px;}
+  .spw-mobile-btn{width:48px;height:48px;font-size:24px;}
+}
+
+/* 2026-10-07 owner navigation cleanup: no standalone header search button. */
+.spw-desktop-nav > .spw-search-btn{display:none!important;}
+
+/* Professional, text-first navigation: preserve the SP WorldTech logo and brand block. */
+.spw-desktop-nav .spw-ico,
+.spw-desktop-nav > a:not(.spw-join-btn) > span:first-child:not(:last-child) { display:none!important; }
+.spw-desktop-nav>a:not(.spw-join-btn){
+  min-height:48px; padding:0 12px; flex-direction:row; gap:0;
+  border-right:0; border-radius:10px; font-size:14px; font-weight:750;
+}
+.spw-desktop-nav>a:not(.spw-join-btn):hover{background:#edf5ff;color:#075fc5!important;}
+.spw-desktop-nav .spw-nav-home{min-width:auto;padding:0 20px;min-height:48px;border-radius:12px;}
+.spw-join-btn{min-height:48px;border-radius:12px;padding:0 20px;font-size:14px!important;}
+@media(max-width:1500px){.spw-desktop-nav>a:not(.spw-join-btn){padding:0 9px;font-size:12px}.spw-desktop-nav .spw-nav-home{min-width:auto;padding:0 15px}}
+
+/* SP WorldTech navigation polish: clear professional buttons with white bold labels. */
+.spw-desktop-nav>a:not(.spw-join-btn){
+  min-height:48px!important;padding:10px 13px!important;margin:0 2px!important;
+  border:1px solid #1769c2!important;border-radius:10px!important;
+  background:linear-gradient(135deg,#1257a6 0%,#087fbd 58%,#0c9b9a 100%)!important;
+  color:#fff!important;font-weight:850!important;text-shadow:0 1px 1px rgba(0,0,0,.15);
+  box-shadow:0 4px 12px rgba(8,75,145,.13);text-decoration:none!important;
+}
+.spw-desktop-nav>a:not(.spw-join-btn):hover,.spw-desktop-nav>a:not(.spw-join-btn):focus-visible{
+  background:linear-gradient(135deg,#0d478c 0%,#066da7 58%,#087f7e 100%)!important;color:#fff!important;
+  transform:translateY(-1px);outline:2px solid #8bd8ff;outline-offset:2px;
+}
+.spw-desktop-nav .spw-ico{display:none!important}
+.spw-join-btn::before,.spw-join-btn::after{content:none!important;display:none!important}
+.spw-join-btn{color:#fff!important;font-weight:900!important;background:linear-gradient(135deg,#1257a6,#087fbd 58%,#0c9b9a)!important}
+.spw-mobile-menu a{background:linear-gradient(135deg,#1257a6,#087fbd 58%,#0c9b9a)!important;color:#fff!important;border-color:#1769c2!important;font-weight:800!important}
+.spw-mobile-menu .mobile-join{color:#fff!important}
+@media(max-width:980px){.spw-desktop-nav>a:not(.spw-join-btn){min-height:44px!important;padding:9px 12px!important}}

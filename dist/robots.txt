@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /ads.txt
+Disallow: /admin.html
+Disallow: /admin
+Sitemap: https://spworldtech.com/sitemap.xml

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://spworldtech.com/</loc></url>
+  <url><loc>https://spworldtech.com/services.html</loc></url>
+  <url><loc>https://spworldtech.com/businesses.html</loc></url>
+  <url><loc>https://spworldtech.com/projects.html</loc></url>
+  <url><loc>https://spworldtech.com/pricing.html</loc></url>
+  <url><loc>https://spworldtech.com/about.html</loc></url>
+  <url><loc>https://spworldtech.com/contact.html</loc></url>
+  <url><loc>https://spworldtech.com/reviews.html</loc></url>
+  <url><loc>https://spworldtech.com/privacy-policy.html</loc></url>
+
+  <url><loc>https://spworldtech.com/terms-and-conditions.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+<url><loc>https://spworldtech.com/marketplace.html</loc></url><url><loc>https://spworldtech.com/auth.html</loc></url><url><loc>https://spworldtech.com/dashboard.html</loc></url></urlset>

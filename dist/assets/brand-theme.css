@@ -1,0 +1,36 @@
+/* SP WorldTech unified 2026 brand theme — generated 2026-07-07 */
+:root{
+  --sp-black:#050704;--sp-deep:#0b1208;--sp-panel:#111a0d;--sp-panel-2:#182312;
+  --sp-gold:#ffd700;--sp-gold-2:#fff4a3;--sp-green:#83e600;--sp-green-2:#b8ff26;
+  --sp-white:#fffdf1;--sp-muted:#cbd5bd;--sp-border:rgba(184,255,38,.28);
+  --sp-gradient:linear-gradient(135deg,#fff7b0 0%,#ffd700 42%,#98f000 100%);
+  --sp-shadow:0 18px 50px rgba(0,0,0,.4);--sp-glow:0 0 28px rgba(131,230,0,.20);
+}
+html{background:var(--sp-black)!important}
+body,body.user-app,main{background:radial-gradient(circle at 15% 0%,rgba(131,230,0,.10),transparent 30%),linear-gradient(180deg,var(--sp-black),var(--sp-deep))!important;color:var(--sp-white)!important;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important}
+.site-header{background:rgba(5,7,4,.94)!important;border-bottom:1px solid var(--sp-border)!important;box-shadow:0 8px 30px rgba(0,0,0,.32)!important;backdrop-filter:blur(16px)}
+.nav-wrap{min-height:82px!important}.brand-logo{display:block!important;width:auto!important;height:64px!important;max-width:190px!important;object-fit:contain!important;filter:drop-shadow(0 0 8px rgba(255,215,0,.32))!important}.brand-link{display:flex!important;align-items:center!important;flex:0 0 auto!important}
+.main-nav a,.mobile-menu a{color:#f4f8ec!important;font-weight:700!important}.main-nav a:hover,.mobile-menu a:hover,.main-nav a.active,.mobile-menu a.active{color:var(--sp-gold)!important}.main-nav a.active{border-bottom-color:var(--sp-green)!important}
+.mobile-menu{background:#080d06!important;border-color:var(--sp-border)!important}.mobile-menu-btn{color:var(--sp-gold)!important;border-color:var(--sp-border)!important;background:var(--sp-panel)!important}
+h1,h2,.section-title,.hero-title{background:var(--sp-gradient)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;color:var(--sp-gold)!important}h3,h4,h5,h6{color:var(--sp-white)!important}p,li,.section-lead,.muted,.status-text{color:var(--sp-muted)!important}
+a{color:var(--sp-green-2)}
+.primary,button.primary,.nav-btn.primary,.btn-primary,[class*="primary-btn"]{background:linear-gradient(135deg,#ffd700,#a8ef00)!important;color:#111800!important;border:1px solid #fff3a0!important;box-shadow:0 10px 28px rgba(255,215,0,.22)!important;font-weight:800!important}
+.primary:hover,button.primary:hover,.nav-btn.primary:hover,.btn-primary:hover{filter:brightness(1.08)!important;transform:translateY(-2px)}
+.secondary,.ghost-link-btn,.btn-secondary,button.secondary{background:var(--sp-panel-2)!important;color:var(--sp-gold)!important;border:1px solid var(--sp-green)!important;box-shadow:none!important}
+.hero-card,.strip-card,.bank-service-card,.info-card,.dashboard-preview-card,.summary-card,.panel,.contact-box,.feature-panel,.course-card,.job-card,.service-card,.pricing-card,.card,.stat-card,.wallet-card,.auth-card,.calculator-card{background:linear-gradient(145deg,rgba(24,35,18,.96),rgba(10,16,8,.96))!important;border:1px solid var(--sp-border)!important;box-shadow:var(--sp-shadow),var(--sp-glow)!important;color:var(--sp-white)!important}
+.hero-card:hover,.bank-service-card:hover,.info-card:hover,.course-card:hover,.job-card:hover,.service-card:hover,.card:hover{border-color:rgba(255,215,0,.66)!important}
+input,textarea,select{background:#090e07!important;color:var(--sp-white)!important;border:1px solid rgba(184,255,38,.3)!important}input:focus,textarea:focus,select:focus{border-color:var(--sp-gold)!important;box-shadow:0 0 0 3px rgba(255,215,0,.13)!important}input::placeholder,textarea::placeholder{color:#93a287!important}
+.site-footer{background:#050704!important;border-top:1px solid var(--sp-border)!important}.site-footer a{color:var(--sp-muted)!important}.site-footer a:hover{color:var(--sp-gold)!important}
+.badge,.pill,.tag,.status-badge{background:rgba(131,230,0,.12)!important;color:var(--sp-green-2)!important;border-color:rgba(131,230,0,.32)!important}
+table{background:var(--sp-panel)!important;color:var(--sp-white)!important}th{background:#182312!important;color:var(--sp-gold)!important}td{border-color:var(--sp-border)!important}
+img.brand-logo[src*="logo"]{content:url('./logo.jpeg')}
+@media(max-width:900px){.brand-logo{height:54px!important;max-width:160px!important}.nav-wrap{min-height:70px!important}}
+@media(max-width:520px){.brand-logo{height:46px!important;max-width:138px!important}}
+
+
+/* SP WorldTech business portfolio */
+.sp-business-grid { align-items: stretch; }
+.sp-business-card { display: flex; flex-direction: column; gap: .65rem; }
+.sp-business-card .primary, .sp-business-card .secondary { align-self: flex-start; margin-top: auto; }
+.sp-business-kicker { font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; opacity: .72; }
+.business-note { padding: .8rem 1rem; border-radius: .8rem; background: rgba(0,0,0,.04); font-size: .9rem; line-height: 1.5; }

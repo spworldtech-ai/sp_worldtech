@@ -1,0 +1,7 @@
+/* SP WorldTech company presentation layer — 2026 */
+:root{--company-blue:#2563eb;--company-green:#10b981;--company-ink:#07111f;--company-muted:#64748b;--company-line:#dbe4ef;}
+.company-trust{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.25rem 0 0}.company-trust span{display:inline-flex;align-items:center;padding:.48rem .75rem;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.06);font-size:.82rem;font-weight:700;color:#e2e8f0}
+.company-intro{max-width:850px}.company-intro p{font-size:1.06rem;line-height:1.75}.business-link-card{display:flex;flex-direction:column;height:100%}.business-link-card .business-card-footer{margin-top:auto;padding-top:1rem;display:flex;gap:.65rem;flex-wrap:wrap}.business-link-card h3{margin-bottom:.55rem}.business-label{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--company-blue)}
+.company-cta{border-radius:22px;padding:2rem;background:linear-gradient(135deg,#0b1730,#0f2744);color:#fff;display:grid;grid-template-columns:1.5fr auto;gap:1.5rem;align-items:center}.company-cta h2,.company-cta p{color:#fff}.company-cta p{opacity:.84}.company-cta-actions{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:flex-end}
+.company-note{border-left:4px solid var(--company-green);padding:1rem 1.1rem;background:#f8fafc;border-radius:0 12px 12px 0;color:#334155}.company-note strong{color:#0f172a}
+@media(max-width:760px){.company-cta{grid-template-columns:1fr}.company-cta-actions{justify-content:flex-start}.company-trust span{font-size:.76rem}}

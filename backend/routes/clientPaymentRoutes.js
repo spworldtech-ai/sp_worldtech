@@ -1,0 +1,10 @@
+const router = require('express').Router();
+const { createClientPayment, createAuthenticatedClientPayment, createWalletClientPayment, verifyAuthenticatedClientPayment, markClientPaymentSettled, listClientPayments } = require('../controllers/clientPaymentController');
+const { protect, authorize } = require('../middleware/auth');
+router.post('/', createClientPayment);
+router.post('/checkout', protect, createAuthenticatedClientPayment);
+router.post('/wallet-pay', protect, createWalletClientPayment);
+router.get('/verify/:reference', protect, verifyAuthenticatedClientPayment);
+router.get('/', protect, authorize('admin'), listClientPayments);
+router.post('/:id/settle', protect, authorize('admin'), markClientPaymentSettled);
+module.exports = router;

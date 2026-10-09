@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin Login | SP WorldTech</title>
+<link rel="icon" href="./assets/favicon.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/styles.css"><link rel="stylesheet" href="./assets/brand-theme.css"><link rel="stylesheet" href="./assets/light-theme.css"><link rel="stylesheet" href="./assets/corporate.css"><link rel="stylesheet" href="./assets/global-ui.css">
+<script defer src="./assets/app-config.js"></script>
+<script defer src="./assets/admin-auth.js"></script>
+<style>
+body.admin-auth-page{min-height:100vh;background:linear-gradient(135deg,#06182e,#0a3b78 58%,#0877e8);display:grid;place-items:center;padding:24px}
+.admin-auth-wrap{width:min(100%,520px)}
+.admin-auth-brand{text-align:center;color:#fff;margin-bottom:18px}.admin-auth-brand img{width:62px;height:62px;border-radius:16px;object-fit:cover;box-shadow:0 10px 30px rgba(0,0,0,.25)}.admin-auth-brand h1{font-size:22px;margin:12px 0 4px}.admin-auth-brand p{font-size:10px;color:#cfe0f4;margin:0}
+.admin-auth-card{background:#fff;border:1px solid rgba(255,255,255,.35);border-radius:22px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.24)}
+.admin-auth-card .tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f2f6fb;padding:5px;border-radius:11px;margin-bottom:24px}.admin-auth-card .tabs button{border:0;background:transparent;border-radius:8px;padding:11px;font-size:11px;font-weight:800;color:#6a7b91}.admin-auth-card .tabs button.active{background:#fff;color:#0868f7;box-shadow:0 4px 12px rgba(20,45,80,.08)}
+.admin-auth-card .panel[hidden]{display:none}.admin-auth-card h2{font-size:24px;margin:0 0 7px;color:#142238}.admin-auth-card .lead{font-size:11px;line-height:1.6;color:#687890;margin:0 0 20px}.admin-auth-card .form-stack{display:grid;gap:13px}.admin-auth-card label{font-size:10px;font-weight:800;color:#24364d}.admin-auth-card input{width:100%;height:46px;margin-top:6px;border:1px solid #dbe5ef;border-radius:9px;padding:0 12px;outline:none;font-size:12px}.admin-auth-card input:focus{border-color:#0870f7;box-shadow:0 0 0 3px rgba(8,112,247,.08)}.password-wrap{position:relative}.password-wrap input{padding-right:60px}.password-wrap button{position:absolute;right:5px;bottom:5px;height:36px;border:0;background:#f2f6fb;color:#0868f7;border-radius:7px;padding:0 9px;font-size:9px;font-weight:800}.admin-auth-card .primary-btn{width:100%;height:46px;border:0;border-radius:9px;background:#0868f7;color:#fff;font-weight:800;font-size:11px}.google-card{display:flex;justify-content:center;min-height:44px}.google-note{text-align:center;font-size:9px;color:#77879a;margin-top:6px}.google-config-note{text-align:center;background:#f7f9fc;border:1px solid #e5ebf3;border-radius:9px;padding:10px;font-size:9px;color:#687890}.divider{display:flex;align-items:center;gap:10px;margin:18px 0;color:#94a0af;font-size:9px}.divider:before,.divider:after{content:"";height:1px;background:#e5ebf3;flex:1}.status{min-height:17px;font-size:10px;color:#d13d4d}.status.success{color:#13865e}.switch{text-align:center;font-size:10px;color:#718096;margin-top:16px}.switch button{border:0;background:none;color:#0868f7;font-weight:800}.admin-auth-foot{text-align:center;color:#bfd1e6;font-size:9px;margin-top:14px}
+</style>
+
+<link rel="stylesheet" href="./assets/auth-consistency.css">
+<style id="spwt-shared-theme-style">
+/* SP WorldTech shared light/dark theme */
+:root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
+html[data-spwt-theme="dark"]{color-scheme:dark;--spwt-bg:#0b1220;--spwt-surface:#111d30;--spwt-text:#edf4ff;--spwt-muted:#a8b8ce;--spwt-border:#2b3c54;--spwt-input:#0e192a;--spwt-shadow:0 8px 28px rgba(0,0,0,.24)}
+html[data-spwt-theme="dark"] body{background-color:var(--spwt-bg)!important;color:var(--spwt-text)!important}
+html[data-spwt-theme="dark"] main,html[data-spwt-theme="dark"] section,html[data-spwt-theme="dark"] article,html[data-spwt-theme="dark"] aside,html[data-spwt-theme="dark"] .card,html[data-spwt-theme="dark"] .panel,html[data-spwt-theme="dark"] .modal,html[data-spwt-theme="dark"] .dashboard-card,html[data-spwt-theme="dark"] .content-card,html[data-spwt-theme="dark"] .auth-card,html[data-spwt-theme="dark"] .form-card,html[data-spwt-theme="dark"] .stat-card{color:var(--spwt-text)}
+html[data-spwt-theme="dark"] [class*="card"],html[data-spwt-theme="dark"] [class*="panel"],html[data-spwt-theme="dark"] [class*="modal"],html[data-spwt-theme="dark"] [class*="surface"]{border-color:var(--spwt-border)}
+html[data-spwt-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),html[data-spwt-theme="dark"] select,html[data-spwt-theme="dark"] textarea{background:var(--spwt-input)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] input::placeholder,html[data-spwt-theme="dark"] textarea::placeholder{color:var(--spwt-muted)!important}
+html[data-spwt-theme="dark"] table,html[data-spwt-theme="dark"] th,html[data-spwt-theme="dark"] td{border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] a:not([class*="btn"]):not([class*="button"]){color:#79baff}
+html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-theme="dark"] label,html[data-spwt-theme="dark"] small{color:inherit}
+#spwt-theme-toggle{position:fixed;right:18px;bottom:22px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 14px;background:#0758b8;color:#fff;font:700 13px/1.1 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,35,90,.25);cursor:pointer;transition:transform .15s,box-shadow .15s}
+#spwt-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,35,90,.32)}#spwt-theme-toggle:focus-visible{outline:3px solid #61d7ff;outline-offset:3px}#spwt-theme-toggle .spwt-theme-icon{font-size:17px;line-height:1}
+@media(max-width:600px){#spwt-theme-toggle{right:12px;bottom:14px;padding:9px 12px;font-size:12px}}
+
+</style>
+<link rel="stylesheet" href="./assets/theme-switcher-position.css">
+</head>
+<body class="admin-auth-page">
+<div class="admin-auth-wrap">
+  <div class="admin-auth-brand"><img src="./assets/logo.jpeg" alt="SP WorldTech"><h1>SP WorldTech Administration</h1><p>Secure administrator access</p></div>
+  <main class="admin-auth-card">
+    <div class="tabs"><button type="button" class="active" data-auth-tab="login">Admin Login</button><button type="button" data-auth-tab="signup">Create Account</button></div>
+    <section id="loginPanel" class="panel">
+      <h2>Welcome back</h2><p class="lead">Sign in with your administrator credentials or authorized Google account. Your administrator session will open after authentication.</p>
+      <div id="adminGoogleLogin" class="google-card"></div><div class="google-note google-config-note">Loading Google authentication…</div>
+      <div class="divider">or use admin credentials</div>
+      <form id="adminLogin" class="form-stack">
+        <label>Username<input id="adminUsername" autocomplete="username" required></label>
+        <label>Password<div class="password-wrap"><input id="adminPassword" type="password" autocomplete="current-password" required><button type="button" data-password="adminPassword">Show</button></div></label>
+        <button class="primary-btn" type="submit">Login to Admin Dashboard</button><div id="loginStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+      <div class="switch">Need to create the admin account? <button type="button" data-switch="signup">Create account</button></div>
+    </section>
+    <section id="signupPanel" class="panel" hidden>
+      <h2>Create admin account</h2><p class="lead">Create the authorized administrator account. After registration, your admin dashboard will open.</p>
+      <div id="adminGoogleSignup" class="google-card"></div><div class="google-note google-config-note">Google Signup</div>
+      <div class="divider">or create with credentials</div>
+      <form id="adminSignup" class="form-stack">
+        <label>Full Name<input id="adminSignupName" autocomplete="name" required></label>
+        <label>Username<input id="adminSignupUsername" autocomplete="username" required></label>
+        <label>Admin Email<input id="adminSignupEmail" type="email" autocomplete="email" required></label>
+        <label>Password<div class="password-wrap"><input id="adminSignupPassword" type="password" minlength="8" autocomplete="new-password" required><button type="button" data-password="adminSignupPassword">Show</button></div></label>
+        <label>Admin Setup Code<div class="password-wrap"><input id="adminSetupCode" type="password" autocomplete="off" required><button type="button" data-password="adminSetupCode">Show</button></div></label>
+        <button class="primary-btn" type="submit">Create Account & Login to Admin Dashboard</button><div id="signupStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+      <div class="switch">Already have an admin account? <button type="button" data-switch="login">Sign in</button></div>
+    </section>
+  </main>
+</div>
+
+
+<script id="spwt-shared-theme-script">
+(()=>{'use strict';const KEY='spworldtech-theme';const root=document.documentElement;function read(){try{return localStorage.getItem(KEY)}catch(e){return null}}function save(v){try{localStorage.setItem(KEY,v)}catch(e){}}function apply(theme){theme=theme==='dark'?'dark':'light';root.setAttribute('data-spwt-theme',theme);root.style.colorScheme=theme;const b=document.getElementById('spwt-theme-toggle');if(b){const dark=theme==='dark';b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');b.innerHTML='<span class="spwt-theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light mode':'Dark mode')+'</span>'}save(theme)}const initial=read();apply(initial==='dark'?'dark':'light');function install(){if(document.getElementById('spwt-theme-toggle'))return;const b=document.createElement('button');b.id='spwt-theme-toggle';b.type='button';b.addEventListener('click',()=>apply(root.getAttribute('data-spwt-theme')==='dark'?'light':'dark'));(document.body||document.documentElement).appendChild(b);apply(root.getAttribute('data-spwt-theme')||'light')}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();})();
+
+</script>
+<script defer src="./assets/theme-switcher-position.js"></script>
+</body>
+</html>
