@@ -1,0 +1,14 @@
+/* SP WorldTech professional rating badges */
+.spw-rating{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:14px 0 0;min-height:24px}
+.spw-stars{display:inline-flex;gap:2px;color:#f5b301;font-size:18px;line-height:1;letter-spacing:0;text-shadow:0 1px 1px rgba(0,0,0,.08)}
+.spw-rating-score{font-size:13px;font-weight:900;color:#142238}
+.spw-rating-label{font-size:11px;font-weight:800;color:#64748b}
+.spw-rating-note{font-size:10px;color:#8290a2;font-weight:600}
+.spw-rating.compact{margin-top:8px;gap:6px}
+.spw-rating.compact .spw-stars{font-size:14px}
+.spw-rating.compact .spw-rating-score{font-size:11px}
+.spw-rating.compact .spw-rating-label{font-size:10px}
+
+.spw-hero-rating{margin-top:20px;padding:12px 16px;width:max-content;max-width:100%;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.10);backdrop-filter:blur(8px)}
+.spw-hero-rating .spw-rating-score,.spw-hero-rating .spw-rating-label{color:#fff}
+@media(max-width:640px){.spw-hero-rating{width:100%;justify-content:center}.spw-rating{gap:6px}}

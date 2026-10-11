@@ -1,0 +1,48 @@
+/* Shared theme control placement: inside the World Net Hosting banner on every page. */
+.wnh-ad-banner { position: relative !important; }
+.wnh-ad-banner #spwt-theme-toggle,
+[data-wnh-ad] #spwt-theme-toggle,
+.wnh-hero #spwt-theme-toggle {
+  position: absolute !important;
+  left: 58% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 5 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  max-width: 155px !important;
+  padding: 9px 12px !important;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.96) !important;
+  color: #0758b8 !important;
+  box-shadow: 0 5px 16px rgba(0,25,70,.22) !important;
+  font: 800 12px/1.1 system-ui, sans-serif !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+.wnh-ad-banner #spwt-theme-toggle:hover, [data-wnh-ad] #spwt-theme-toggle:hover, .wnh-hero #spwt-theme-toggle:hover { background: #eaf4ff !important; }
+.wnh-ad-banner #spwt-theme-toggle:focus-visible, [data-wnh-ad] #spwt-theme-toggle:focus-visible, .wnh-hero #spwt-theme-toggle:focus-visible { outline: 3px solid #61d7ff !important; outline-offset: 3px !important; }
+.wnh-ad-banner #spwt-theme-toggle .spwt-theme-icon, [data-wnh-ad] #spwt-theme-toggle .spwt-theme-icon, .wnh-hero #spwt-theme-toggle .spwt-theme-icon { font-size: 16px !important; line-height: 1 !important; }
+/* Dashboard/auth pages without the hosting banner get a top-header fallback. */
+html.spwt-theme-fallback #spwt-theme-toggle {
+  position: fixed !important; top: 16px !important; right: 18px !important; bottom: auto !important; left: auto !important;
+  z-index: 2147483000 !important; display: inline-flex !important; align-items: center !important; gap: 7px !important;
+  padding: 9px 12px !important; border: 1px solid rgba(255,255,255,.45) !important; border-radius: 999px !important;
+  background: #0758b8 !important; color: #fff !important; font: 800 12px/1.1 system-ui,sans-serif !important;
+  box-shadow: 0 7px 20px rgba(0,35,90,.22) !important; cursor: pointer !important;
+}
+@media (max-width: 700px) {
+  .wnh-ad-banner { padding-top: 13px !important; padding-bottom: 13px !important; }
+  .wnh-ad-banner #spwt-theme-toggle,
+[data-wnh-ad] #spwt-theme-toggle,
+.wnh-hero #spwt-theme-toggle {
+    position: relative !important; left: auto !important; top: auto !important; right: auto !important; bottom: auto !important;
+    transform: none !important; align-self: flex-start !important; margin: 10px 0 0 !important; max-width: 100% !important;
+  }
+  html.spwt-theme-fallback #spwt-theme-toggle { top: 10px !important; right: 10px !important; padding: 8px 10px !important; }
+}

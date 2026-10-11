@@ -1,0 +1,35 @@
+/* World Net Hosting site-wide promotional components */
+.wnh-ad-banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;margin:14px auto;padding:14px 18px;max-width:1400px;border:1px solid rgba(24,128,255,.25);border-radius:14px;background:linear-gradient(110deg,#061a31 0%,#0a3970 58%,#075edc 100%);color:#fff;box-shadow:0 10px 28px rgba(7,55,110,.16);overflow:hidden}
+.wnh-ad-banner:after{content:"";position:absolute;width:180px;height:180px;right:-70px;top:-90px;border-radius:50%;background:rgba(91,190,255,.15);pointer-events:none}
+.wnh-ad-copy{position:relative;z-index:1;min-width:0}.wnh-ad-kicker{display:block;font-size:9px;letter-spacing:.9px;font-weight:800;color:#9fd1ff;margin-bottom:4px}.wnh-ad-banner strong{display:block;font-size:18px;line-height:1.15;margin-bottom:4px}.wnh-ad-banner p{margin:0;color:#d8eaff;font-size:10px;line-height:1.5}.wnh-ad-cta{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:10px 14px;border-radius:8px;background:#fff;color:#075edc;font-size:10px;font-weight:800;text-decoration:none}.wnh-ad-cta:hover{transform:translateY(-1px)}
+.wnh-ad-footer{max-width:1400px;margin:28px auto 18px;padding:20px;border-radius:16px;background:linear-gradient(120deg,#081a2e,#0a4b8d);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:0 10px 28px rgba(7,55,110,.14)}.wnh-ad-footer strong{display:block;font-size:16px;margin-bottom:5px}.wnh-ad-footer p{margin:0;color:#cfe4fb;font-size:10px;line-height:1.5}.wnh-ad-footer a{display:inline-flex;align-items:center;justify-content:center;background:#1685ff;color:#fff;border-radius:8px;padding:10px 14px;font-size:10px;font-weight:800;text-decoration:none;white-space:nowrap}.wnh-ad-floating{position:fixed;left:18px;right:auto;bottom:18px;z-index:9990;width:min(330px,calc(100vw - 36px));padding:13px 14px;border-radius:13px;background:#071a2e;color:#fff;box-shadow:0 14px 38px rgba(0,0,0,.2);border:1px solid rgba(93,183,255,.28)}.wnh-ad-floating .close{position:absolute;right:7px;top:5px;border:0;background:transparent;color:#a8c6e3;font-size:16px;cursor:pointer}.wnh-ad-floating b{display:block;font-size:11px;color:#74c1ff;padding-right:16px}.wnh-ad-floating span{display:block;font-size:9px;color:#d8e7f7;margin:4px 0 9px;line-height:1.4}.wnh-ad-floating a{display:inline-block;background:#fff;color:#075edc;border-radius:7px;padding:7px 9px;font-size:9px;font-weight:800;text-decoration:none}
+@media(min-width:761px){html.spw-dashboard-page .wnh-ad-floating{left:263px}}
+@media(max-width:700px){.wnh-ad-banner,.wnh-ad-footer{margin-left:12px;margin-right:12px;flex-direction:column;align-items:flex-start}.wnh-ad-cta,.wnh-ad-footer a{width:100%}.wnh-ad-banner strong{font-size:16px}.wnh-ad-floating{left:10px;right:auto;bottom:10px;width:calc(100vw - 20px)}}
+
+/* === FINAL WNH POPUP: opposite side from community feedback === */
+.wnh-ad-floating{
+  position:fixed!important;
+  left:20px!important;
+  right:auto!important;
+  bottom:22px!important;
+  z-index:1190!important;
+  width:min(340px,calc(100vw - 40px))!important;
+  padding:14px 16px!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#071a2e,#0a3156)!important;
+  border:1px solid rgba(104,190,255,.28)!important;
+  box-shadow:0 18px 50px rgba(7,26,46,.25)!important;
+  opacity:0!important;
+  transform:translateY(16px) scale(.98)!important;
+  transition:opacity .35s ease,transform .35s ease!important;
+}
+.wnh-ad-floating.is-visible{opacity:1!important;transform:none!important}
+.wnh-ad-floating b{font-size:11px!important;letter-spacing:.2px!important;color:#70c6ff!important}
+.wnh-ad-floating span{font-size:10px!important;line-height:1.5!important;color:#d9eafa!important;margin:5px 0 10px!important}
+.wnh-ad-floating a{font-size:10px!important;padding:8px 11px!important;border-radius:9px!important}
+.wnh-ad-floating .close{right:8px!important;top:7px!important;width:25px!important;height:25px!important;border-radius:50%!important;background:rgba(255,255,255,.08)!important;color:#c9deef!important}
+html.spw-dashboard-page .wnh-ad-floating{left:285px!important;right:auto!important;bottom:22px!important}
+@media(max-width:760px){
+  .wnh-ad-floating{left:12px!important;right:auto!important;bottom:12px!important;width:min(310px,calc(100vw - 24px))!important}
+  html.spw-dashboard-page .wnh-ad-floating{left:12px!important}
+}
