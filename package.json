@@ -1,0 +1,13 @@
+{
+  "name": "sp-worldtech",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SP WorldTech monorepo deployment wrapper",
+  "scripts": {
+    "build": "node scripts/build-frontend.js",
+    "build:frontend": "node scripts/build-frontend.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

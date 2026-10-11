@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="SP WorldTech builds software, AI, digital infrastructure and technology solutions." name="description"/>
+<meta content="index,follow" name="robots"/>
+<link href="https://spworldtech.com/" rel="canonical"/>
+<title>SP WorldTech International Digital Solutions | SP WorldTech</title>
+
+<link href="./assets/favicon.jpeg" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+
+<link href="./assets/styles.css" rel="stylesheet"/>
+<link href="./assets/brand-theme.css" rel="stylesheet"/>
+<link href="./assets/light-theme.css" rel="stylesheet"/>
+<link href="./assets/corporate.css" rel="stylesheet"/>
+<link href="./assets/site-fixes.css" rel="stylesheet"/>
+
+<style>
+:root{
+--sp-blue:#1268d8;
+--sp-cyan:#00a9b7;
+--sp-green:#00ff91;
+--sp-dark-green:#003d29;
+--sp-navy:#071b3a;
+--sp-text:#17345d;
+--sp-light:#f5fbff;
+}
+
+/* =========================================================
+   PREMIUM REAL UNSPLASH CIRCUIT-BOARD HERO
+   ========================================================= */
+
+.hero-section{
+position:relative;
+overflow:hidden;
+min-height:680px;
+padding:0 0 70px;
+
+background:
+linear-gradient(
+90deg,
+rgba(3,18,35,.90) 0%,
+rgba(3,18,35,.78) 30%,
+rgba(3,18,35,.46) 58%,
+rgba(3,18,35,.20) 100%
+),
+linear-gradient(
+135deg,
+rgba(255,205,75,.20),
+transparent 45%
+),
+url("https://images.unsplash.com/photo-1771189956746-e96f8bf77d42?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=90&w=2400")
+center center/cover no-repeat!important;
+
+box-shadow:
+inset 0 0 120px rgba(0,0,0,.22),
+inset 0 -90px 130px rgba(0,12,30,.32);
+}
+
+.hero-section::before{
+content:"";
+position:absolute;
+inset:-10%;
+z-index:1;
+pointer-events:none;
+
+background:
+radial-gradient(
+circle at 78% 10%,
+rgba(255,249,200,.88) 0%,
+rgba(255,218,86,.42) 9%,
+rgba(255,190,50,.14) 20%,
+transparent 34%
+),
+radial-gradient(
+circle at 88% 55%,
+rgba(51,220,255,.20),
+transparent 30%
+),
+linear-gradient(
+115deg,
+transparent 18%,
+rgba(255,235,150,.18) 42%,
+transparent 58%
+);
+
+mix-blend-mode:screen;
+
+animation:
+spRealHeroGlow 7s ease-in-out infinite alternate;
+}
+
+.hero-section::after{
+content:"";
+position:absolute;
+inset:0;
+z-index:1;
+pointer-events:none;
+
+background:
+linear-gradient(
+115deg,
+transparent 0%,
+rgba(255,255,255,.05) 30%,
+rgba(255,224,115,.16) 43%,
+transparent 58%
+),
+linear-gradient(
+180deg,
+rgba(255,255,255,.03),
+transparent 58%,
+rgba(0,12,28,.34)
+);
+}
+
+.hero-section .container{
+position:relative!important;
+z-index:5!important;
+}
+
+.hero-visual{
+position:absolute;
+inset:0;
+height:590px;
+overflow:hidden;
+pointer-events:none;
+z-index:2;
+}
+
+.hero-visual::before{
+content:"";
+position:absolute;
+inset:0;
+
+background-image:
+linear-gradient(
+rgba(255,255,255,.045) 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+rgba(255,255,255,.045) 1px,
+transparent 1px
+);
+
+background-size:48px 48px;
+
+mask-image:
+linear-gradient(
+to bottom,
+black,
+transparent 88%
+);
+}
+
+.hero-tech-orbit{
+position:absolute;
+
+width:620px;
+height:620px;
+
+right:-80px;
+top:-170px;
+
+border-radius:50%;
+
+border:
+1px solid
+rgba(255,255,255,.16);
+
+box-shadow:
+0 0 0 55px rgba(0,169,183,.035),
+0 0 0 110px rgba(18,104,216,.025),
+0 0 85px rgba(255,220,90,.18);
+
+animation:
+heroOrbit 18s linear infinite;
+}
+
+.hero-tech-orbit::before,
+.hero-tech-orbit::after{
+content:"";
+position:absolute;
+border-radius:50%;
+}
+
+.hero-tech-orbit::before{
+width:18px;
+height:18px;
+
+background:#00d9a0;
+
+box-shadow:
+0 0 30px #00ffb0;
+
+left:80px;
+top:110px;
+}
+
+.hero-tech-orbit::after{
+width:12px;
+height:12px;
+
+background:#1680ff;
+
+box-shadow:
+0 0 25px #1680ff;
+
+right:85px;
+bottom:110px;
+}
+
+.hero-tech-network{
+position:absolute;
+
+right:8%;
+top:70px;
+
+width:520px;
+height:380px;
+
+opacity:.72;
+
+filter:
+drop-shadow(
+0 0 20px
+rgba(255,218,90,.10)
+);
+}
+
+.tech-node{
+position:absolute;
+
+width:76px;
+height:76px;
+
+border-radius:20px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:30px;
+color:white;
+
+background:
+linear-gradient(
+145deg,
+#0c3978,
+#087fa5
+);
+
+border:
+1px solid
+rgba(255,255,255,.35);
+
+box-shadow:
+0 18px 45px
+rgba(4,40,80,.30),
+0 0 32px
+rgba(76,217,255,.26),
+0 0 60px
+rgba(255,218,86,.10),
+inset 0 1px 0
+rgba(255,255,255,.50);
+
+animation:
+nodeFloat 5s ease-in-out infinite;
+}
+
+.tech-node:nth-child(1){
+left:220px;
+top:30px;
+}
+
+.tech-node:nth-child(2){
+left:50px;
+top:150px;
+animation-delay:-1s;
+}
+
+.tech-node:nth-child(3){
+right:40px;
+top:155px;
+animation-delay:-2s;
+}
+
+.tech-node:nth-child(4){
+left:220px;
+bottom:25px;
+animation-delay:-3s;
+}
+
+.tech-line{
+position:absolute;
+
+height:2px;
+
+transform-origin:left center;
+
+background:
+linear-gradient(
+90deg,
+rgba(18,104,216,.05),
+rgba(0,169,183,.65),
+rgba(0,255,145,.1)
+);
+
+box-shadow:
+0 0 12px
+rgba(0,169,183,.3);
+}
+
+.tech-line.one{
+width:205px;
+left:125px;
+top:190px;
+transform:rotate(-34deg);
+}
+
+.tech-line.two{
+width:205px;
+left:285px;
+top:190px;
+transform:rotate(31deg);
+}
+
+.tech-line.three{
+width:180px;
+left:115px;
+top:220px;
+transform:rotate(34deg);
+}
+
+.tech-line.four{
+width:180px;
+left:285px;
+top:220px;
+transform:rotate(-32deg);
+}
+
+.tech-code-panel{
+position:absolute;
+
+right:12%;
+top:355px;
+
+width:330px;
+
+padding:18px 20px;
+
+border-radius:18px;
+
+background:
+rgba(5,25,53,.90);
+
+border:
+1px solid
+rgba(255,255,255,.12);
+
+box-shadow:
+0 20px 60px
+rgba(0,30,70,.34),
+0 0 38px
+rgba(0,213,255,.14);
+
+color:#dffeff;
+
+font-family:
+Consolas,
+Monaco,
+monospace;
+
+font-size:12px;
+line-height:1.7;
+}
+
+.tech-code-panel .green{
+color:#00ff9d;
+}
+
+.tech-code-panel .blue{
+color:#55a9ff;
+}
+
+.tech-code-panel .purple{
+color:#d49aff;
+}
+
+@keyframes heroOrbit{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+
+@keyframes nodeFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-9px);
+}
+}
+
+@keyframes spRealHeroGlow{
+0%{
+opacity:.78;
+transform:scale(1);
+}
+100%{
+opacity:1;
+transform:scale(1.035);
+}
+}
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero-grid{
+display:grid;
+
+grid-template-columns:
+minmax(0,1.2fr)
+minmax(350px,.8fr);
+
+gap:60px;
+
+align-items:center;
+}
+
+.hero-copy{
+position:relative;
+z-index:6;
+}
+
+.hero-copy h1{
+max-width:900px;
+
+color:#ffffff!important;
+
+text-shadow:
+0 3px 24px
+rgba(0,0,0,.65),
+0 0 35px
+rgba(255,215,90,.16);
+}
+
+.hero-copy>p{
+max-width:850px;
+
+color:
+rgba(255,255,255,.94)!important;
+
+text-shadow:
+0 2px 16px
+rgba(0,0,0,.60);
+}
+
+.hero-copy .eyebrow{
+color:#ffffff!important;
+
+text-shadow:
+0 2px 15px
+rgba(0,0,0,.65);
+}
+
+.company-trust{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.company-trust span{
+color:#ffffff!important;
+
+background:
+rgba(4,25,48,.58)!important;
+
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+
+border:
+1px solid
+rgba(255,255,255,.28)!important;
+
+border-radius:999px;
+
+padding:10px 16px;
+
+font-weight:800;
+
+box-shadow:
+0 10px 30px
+rgba(0,0,0,.20),
+0 0 24px
+rgba(255,218,90,.10);
+}
+
+.hero-card{
+position:relative!important;
+z-index:6!important;
+
+background:
+rgba(255,255,255,.92)!important;
+
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:
+1px solid
+rgba(255,255,255,.82)!important;
+
+box-shadow:
+0 30px 80px
+rgba(0,20,50,.34),
+0 0 55px
+rgba(255,214,83,.16),
+inset 0 1px 0
+rgba(255,255,255,.96)!important;
+}
+
+/* =========================================================
+   TECHNOLOGY CARDS
+   ========================================================= */
+
+.tech-image-grid{
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:18px;
+
+margin-top:35px;
+}
+
+.tech-image-card{
+min-height:190px;
+
+border-radius:22px;
+
+padding:22px;
+
+position:relative;
+
+overflow:hidden;
+
+color:white;
+
+background:
+linear-gradient(
+145deg,
+#071d3e,
+#075d7d 55%,
+#00a88a
+);
+
+box-shadow:
+0 15px 35px
+rgba(0,45,90,.12);
+}
+
+.tech-image-card::after{
+content:"";
+
+position:absolute;
+
+width:130px;
+height:130px;
+
+right:-30px;
+bottom:-40px;
+
+border-radius:50%;
+
+border:
+20px solid
+rgba(255,255,255,.08);
+}
+
+.tech-icon{
+font-size:38px;
+margin-bottom:25px;
+}
+
+.tech-image-card h3{
+color:white;
+margin:0 0 8px;
+}
+
+.tech-image-card p{
+color:
+rgba(255,255,255,.82);
+
+margin:0;
+}
+
+/* =========================================================
+   ROLLING TECHNOLOGY SECTIONS
+   ========================================================= */
+
+.sp-tech-roll-section{
+position:relative;
+
+width:100%;
+
+padding:72px 0;
+
+overflow:hidden;
+
+background:#ffffff;
+}
+
+.sp-tech-roll-section.alt{
+background:
+linear-gradient(
+135deg,
+#f4faff 0%,
+#ffffff 55%,
+#f0fffb 100%
+);
+}
+
+.sp-tech-roll-heading{
+width:min(1180px,92%);
+
+margin:0 auto 28px;
+}
+
+.sp-tech-roll-heading span{
+display:inline-block;
+
+margin-bottom:9px;
+
+padding:7px 13px;
+
+border-radius:999px;
+
+color:#087b83;
+
+background:#e8fbf7;
+
+font-size:12px;
+
+font-weight:900;
+
+letter-spacing:1.2px;
+
+text-transform:uppercase;
+}
+
+.sp-tech-roll-heading h2{
+margin:0 0 8px;
+
+color:#082746;
+
+font-size:
+clamp(26px,3vw,40px);
+
+line-height:1.12;
+
+font-weight:900;
+}
+
+.sp-tech-roll-heading p{
+max-width:760px;
+
+margin:0;
+
+color:#60748d;
+
+line-height:1.65;
+}
+
+.sp-tech-roll-viewport{
+width:100%;
+
+overflow:hidden;
+
+padding:6px 0 18px;
+
+cursor:grab;
+}
+
+.sp-tech-roll-viewport:active{
+cursor:grabbing;
+}
+
+.sp-tech-roll-track{
+display:flex;
+
+width:max-content;
+
+gap:18px;
+
+padding-left:18px;
+
+will-change:transform;
+}
+
+.sp-tech-roll-card{
+position:relative;
+
+flex:0 0 280px;
+
+height:190px;
+
+overflow:hidden;
+
+border-radius:22px;
+
+background:#071d3e;
+
+border:
+1px solid
+rgba(18,104,216,.13);
+
+box-shadow:
+0 16px 40px
+rgba(0,45,90,.14);
+
+text-decoration:none;
+}
+
+.sp-tech-roll-card img{
+display:block;
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+transition:
+transform .65s ease;
+}
+
+.sp-tech-roll-card::after{
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,0) 35%,
+rgba(0,18,38,.78) 100%
+);
+
+pointer-events:none;
+}
+
+.sp-tech-roll-card:hover img{
+transform:scale(1.08);
+}
+
+.sp-tech-roll-label{
+position:absolute;
+
+left:18px;
+right:18px;
+bottom:16px;
+
+z-index:2;
+
+color:#ffffff;
+
+font-size:17px;
+
+font-weight:900;
+
+text-shadow:
+0 2px 10px
+rgba(0,0,0,.45);
+}
+
+.sp-tech-roll-card img{
+width:100%;
+height:100%;
+display:block;
+object-fit:cover;
+object-position:center center;
+background:#071a33;
+}
+
+.sp-tech-roll-card{
+min-height:240px;
+overflow:hidden;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:950px){
+
+.hero-grid{
+grid-template-columns:1fr;
+gap:35px;
+}
+
+.hero-section{
+min-height:720px;
+
+background-position:
+60% center!important;
+}
+
+.hero-section::before{
+background:
+radial-gradient(
+circle at 78% 9%,
+rgba(255,249,204,.78),
+rgba(255,222,100,.28) 13%,
+transparent 32%
+),
+linear-gradient(
+90deg,
+rgba(3,18,35,.90),
+rgba(3,18,35,.52)
+);
+}
+
+.hero-tech-network{
+right:-80px;
+opacity:.25!important;
+}
+
+.tech-code-panel{
+display:none;
+}
+
+.tech-image-grid{
+grid-template-columns:
+repeat(2,1fr);
+}
+
+.sp-tech-roll-section{
+padding:58px 0;
+}
+
+.sp-tech-roll-card{
+flex-basis:250px;
+height:175px;
+}
+}
+
+@media(max-width:700px){
+
+.sp-tech-roll-card{
+min-height:210px;
+}
+}
+
+@media(max-width:650px){
+
+.hero-section{
+min-height:auto!important;
+padding-bottom:45px;
+
+background-position:
+62% center!important;
+}
+
+.hero-section::before{
+background:
+radial-gradient(
+circle at 76% 8%,
+rgba(255,249,205,.72),
+rgba(255,221,100,.25) 14%,
+transparent 34%
+),
+linear-gradient(
+90deg,
+rgba(3,18,35,.92),
+rgba(3,18,35,.56)
+);
+}
+
+.hero-card{
+background:
+rgba(255,255,255,.95)!important;
+}
+
+.hero-copy h1{
+text-shadow:
+0 3px 22px
+rgba(0,0,0,.70);
+}
+
+.tech-image-grid{
+grid-template-columns:1fr;
+}
+
+.sp-tech-roll-section{
+padding:48px 0;
+}
+
+.sp-tech-roll-heading{
+width:90%;
+}
+
+.sp-tech-roll-card{
+flex-basis:220px;
+height:150px;
+border-radius:17px;
+}
+
+.sp-tech-roll-track{
+gap:12px;
+padding-left:12px;
+}
+
+.sp-tech-roll-label{
+left:14px;
+right:14px;
+bottom:13px;
+font-size:14px;
+}
+}
+
+@media(prefers-reduced-motion:reduce){
+
+.hero-section::before,
+.hero-tech-orbit,
+.tech-node{
+animation:none!important;
+}
+}
+</style>
+
+<script defer src="./assets/site.js"></script>
+<script defer src="./assets/app-config.js"></script>
+<script defer src="./assets/global-ui.js"></script><script defer src="./assets/footer.js"></script>
+<script defer src="./assets/google-setup.js"></script>
+
+<script async crossorigin="anonymous"
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5207077935751414"></script>
+
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Organization",
+"name":"SP WorldTech International Digital Solutions",
+"alternateName":"SP WorldTech",
+"url":"https://spworldtech.com/",
+"logo":"https://spworldtech.com/assets/logo.png",
+"email":"support@spworldtech.com",
+"telephone":"+234 912 919 3069",
+"sameAs":[
+"https://www.facebook.com/spworldtech",
+"https://www.instagram.com/spworldtech",
+"https://www.linkedin.com/company/spworldtech"
+]
+}
+</script>
+
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"WebSite",
+"name":"SP WorldTech International Digital Solutions",
+"url":"https://spworldtech.com/"
+}
+</script>
+
+<link rel="stylesheet" href="./assets/global-ui.css"/><link rel="stylesheet" href="./assets/premium-header.css"/>
+<script defer src="./assets/site-images.js"></script>
+<script defer src="./assets/home-marketplace.js"></script>
+
+<style>
+.nigeria-clock,
+.clock-face,
+.clock-hand,
+.clock-center{
+display:none!important;
+}
+</style>
+
+<link rel="stylesheet" href="./assets/chat-widget.css"><link rel="stylesheet" href="./assets/world-net-hosting-ads.css">
+<script defer src="./assets/image-fallback.js"></script><link rel="stylesheet" href="./assets/platform-rating.css"><link rel="stylesheet" href="./assets/client-social-proof.css"><link rel="stylesheet" href="./assets/comments.css"><link rel="stylesheet" href="./assets/wireframe-header.css"><style id="spwt-shared-theme-style">
+/* SP WorldTech shared light/dark theme */
+:root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
+html[data-spwt-theme="dark"]{color-scheme:dark;--spwt-bg:#0b1220;--spwt-surface:#111d30;--spwt-text:#edf4ff;--spwt-muted:#a8b8ce;--spwt-border:#2b3c54;--spwt-input:#0e192a;--spwt-shadow:0 8px 28px rgba(0,0,0,.24)}
+html[data-spwt-theme="dark"] body{background-color:var(--spwt-bg)!important;color:var(--spwt-text)!important}
+html[data-spwt-theme="dark"] main,html[data-spwt-theme="dark"] section,html[data-spwt-theme="dark"] article,html[data-spwt-theme="dark"] aside,html[data-spwt-theme="dark"] .card,html[data-spwt-theme="dark"] .panel,html[data-spwt-theme="dark"] .modal,html[data-spwt-theme="dark"] .dashboard-card,html[data-spwt-theme="dark"] .content-card,html[data-spwt-theme="dark"] .auth-card,html[data-spwt-theme="dark"] .form-card,html[data-spwt-theme="dark"] .stat-card{color:var(--spwt-text)}
+html[data-spwt-theme="dark"] [class*="card"],html[data-spwt-theme="dark"] [class*="panel"],html[data-spwt-theme="dark"] [class*="modal"],html[data-spwt-theme="dark"] [class*="surface"]{border-color:var(--spwt-border)}
+html[data-spwt-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),html[data-spwt-theme="dark"] select,html[data-spwt-theme="dark"] textarea{background:var(--spwt-input)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] input::placeholder,html[data-spwt-theme="dark"] textarea::placeholder{color:var(--spwt-muted)!important}
+html[data-spwt-theme="dark"] table,html[data-spwt-theme="dark"] th,html[data-spwt-theme="dark"] td{border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] a:not([class*="btn"]):not([class*="button"]){color:#79baff}
+html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-theme="dark"] label,html[data-spwt-theme="dark"] small{color:inherit}
+#spwt-theme-toggle{position:fixed;right:18px;bottom:22px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 14px;background:#0758b8;color:#fff;font:700 13px/1.1 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,35,90,.25);cursor:pointer;transition:transform .15s,box-shadow .15s}
+#spwt-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,35,90,.32)}#spwt-theme-toggle:focus-visible{outline:3px solid #61d7ff;outline-offset:3px}#spwt-theme-toggle .spwt-theme-icon{font-size:17px;line-height:1}
+@media(max-width:600px){#spwt-theme-toggle{right:12px;bottom:14px;padding:9px 12px;font-size:12px}}
+
+</style>
+<link rel="stylesheet" href="./assets/theme-switcher-position.css">
+</head>
+
+<body>
+
+<header class="spw-wireframe-header" data-spw-wireframe-header>
+  <div class="spw-header-inner">
+    <a class="spw-brand" href="./index.html" aria-label="SP WorldTech home">
+      <img src="./assets/logo.jpeg" alt="SP WorldTech logo">
+      <span class="spw-brand-name">SP WorldTech</span>
+      <span class="spw-brand-tagline">Technology <b>•</b> Innovation <b>•</b> Global Growth</span>
+    </a>
+    <nav class="spw-desktop-nav" aria-label="Primary navigation">
+      <a class="spw-nav-home" href="./index.html"><span class="spw-ico">⌂</span><span>Home</span></a>
+      <a href="./services.html"><span class="spw-ico">⚙</span><span>Services</span></a>
+      <a href="./businesses.html"><span class="spw-ico">▥</span><span>Businesses</span></a>
+      <a href="./projects.html"><span class="spw-ico">□</span><span>Projects</span></a>
+      <a href="./pricing.html"><span class="spw-ico">◇</span><span>Pricing</span></a>
+      <a href="./marketplace.html"><span class="spw-ico">🛒</span><span>Marketplace</span></a>
+      <a href="./academy.html"><span class="spw-ico">◇</span><span>Academy</span></a>
+      <a href="./about.html"><span class="spw-ico">ⓘ</span><span>About</span></a>
+      <a href="./privacy-policy.html"><span class="spw-ico">♢</span><span>Privacy</span></a>
+      <a href="./terms-and-conditions.html"><span class="spw-ico">▤</span><span>Terms</span></a>
+      <a href="./contact.html"><span class="spw-ico">⌕</span><span>Contact</span></a>
+      <a class="spw-join-btn" href="./auth.html">Join Free</a>
+    </nav>
+    <button class="spw-mobile-btn" id="spwWireframeMenuBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+  <div class="spw-mobile-menu" id="spwWireframeMenu" hidden>
+    <a href="./index.html">Home</a><a href="./services.html">Services</a><a href="./businesses.html">Businesses</a>
+    <a href="./projects.html">Projects</a><a href="./pricing.html">Pricing</a><a href="./marketplace.html">Marketplace</a>
+    <a href="./academy.html">Academy</a><a href="./about.html">About</a><a href="./privacy-policy.html">Privacy</a>
+    <a href="./terms-and-conditions.html">Terms</a><a href="./contact.html">Contact</a><a class="mobile-join" href="./auth.html">Join Free</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero-section">
+
+<div
+aria-hidden="true"
+class="hero-visual">
+
+<div class="hero-tech-orbit"></div>
+
+<div class="hero-tech-network">
+
+<div class="tech-line one"></div>
+<div class="tech-line two"></div>
+<div class="tech-line three"></div>
+<div class="tech-line four"></div>
+
+<div class="tech-node">⚙</div>
+<div class="tech-node">AI</div>
+<div class="tech-node">API</div>
+<div class="tech-node">☁</div>
+
+</div>
+
+<div class="tech-code-panel">
+
+<div>
+<span class="purple">const</span>
+<span class="blue"> platform</span> =
+<span class="green">"SP WorldTech"</span>;
+</div>
+
+<div>
+<span class="purple">build</span>(
+<span class="green">web</span>,
+<span class="green">AI</span>,
+<span class="green">API</span>
+);
+</div>
+
+<div>
+<span class="blue">deploy</span>(
+<span class="green">cloud</span>
+);
+</div>
+
+<div>
+<span class="green">
+// end-to-end digital solutions
+</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="hero-grid">
+
+<div class="hero-copy">
+
+<span class="eyebrow">
+SP WorldTech International Digital Solutions
+</span>
+
+<h1>
+We build digital solutions that help businesses move forward.
+</h1>
+
+<p>
+We design and develop websites, web applications, APIs,
+AI-powered products, automation systems, and digital
+infrastructure for businesses, organizations, and individuals.
+</p>
+
+<div class="company-trust">
+
+<span>Software Engineering</span>
+<span>AI &amp; Automation</span>
+<span>Digital Infrastructure</span>
+<span>Technology Education</span>
+
+</div>
+
+<div class="hero-actions">
+
+<a
+class="primary"
+href="./contact.html">
+Start a Project
+</a>
+
+<a
+class="secondary"
+href="./projects.html">
+View Projects
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<span class="panel-badge">
+Professional Delivery
+</span>
+
+<h3>
+From idea to deployed product.
+</h3>
+
+<ul class="feature-list">
+
+<li>
+Business websites and full-stack applications
+</li>
+
+<li>
+Backend systems, APIs and databases
+</li>
+
+<li>
+AI integrations and workflow automation
+</li>
+
+<li>
+Digital infrastructure through World Net Hosting
+</li>
+
+<li>
+Maintenance, improvement and technical support
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="content-section light">
+
+<div class="container">
+
+<span class="eyebrow dark">
+What We Do
+</span>
+
+<h2>
+Technology built around real business needs.
+</h2>
+
+<p class="section-lead">
+We focus on practical solutions rather than unnecessary complexity.
+Every project starts with the problem, users, requirements, budget
+and expected outcome.
+</p>
+
+<div class="cards-grid four">
+
+<article class="info-card">
+
+<h3>Web Development</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Responsive websites, portals and full-stack web applications.
+</p>
+
+</article>
+
+<article class="info-card">
+
+<h3>AI Solutions</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+AI-powered features, automation and intelligent workflows.
+</p>
+
+</article>
+
+<article class="info-card">
+
+<h3>APIs &amp; Backend</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Secure APIs, databases, integrations and server-side systems.
+</p>
+
+</article>
+
+<article class="info-card">
+
+<h3>Digital Infrastructure</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Domains, hosting and infrastructure through our separate
+World Net Hosting platform.
+</p>
+
+<div class="page-actions">
+
+<a
+class="secondary"
+href="https://worldnethosting.com"
+rel="noopener"
+target="_blank">
+Visit World Net Hosting
+</a>
+
+<a
+class="secondary"
+href="https://worldnethosting.com"
+rel="noopener"
+target="_blank">
+Buy Domain
+</a>
+
+</div>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="sp-tech-roll-section"
+data-direction="left">
+
+<div class="sp-tech-roll-heading">
+
+<span>Technology 01</span>
+
+<h2>Technology in Motion</h2>
+
+<p>
+Explore another layer of the digital technologies used across
+modern products, platforms and infrastructure.
+</p>
+
+</div>
+
+<div class="sp-tech-roll-viewport">
+
+<div
+class="sp-tech-roll-track"
+data-roll-track="">
+
+<a
+aria-label="Artificial Intelligence"
+class="sp-tech-roll-card"
+href="#technology-1-0">
+
+<img
+alt="Artificial Intelligence"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Artificial Intelligence
+</span>
+
+</a>
+
+<a
+aria-label="Software Engineering"
+class="sp-tech-roll-card"
+href="#technology-1-1">
+
+<img
+alt="Software Engineering"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Software Engineering
+</span>
+
+</a>
+
+<a
+aria-label="Cloud Computing"
+class="sp-tech-roll-card"
+href="#technology-1-2">
+
+<img
+alt="Cloud Computing"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Cloud Computing
+</span>
+
+</a>
+
+<a
+aria-label="Cybersecurity"
+class="sp-tech-roll-card"
+href="#technology-1-3">
+
+<img
+alt="Cybersecurity"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Cybersecurity
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="content-section">
+
+<div class="container">
+
+<span class="eyebrow dark">
+Technology
+</span>
+
+<h2>
+End-to-end digital technology.
+</h2>
+
+<p class="section-lead">
+From frontend experiences to backend infrastructure, APIs,
+automation and deployment, SP WorldTech works across the
+complete digital product lifecycle.
+</p>
+
+<div class="tech-image-grid">
+
+<article class="tech-image-card">
+
+<div class="tech-icon">💻</div>
+
+<h3>Web Engineering</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Modern websites and powerful web applications.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">🤖</div>
+
+<h3>Artificial Intelligence</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+AI integrations, intelligent tools and automation.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">🔗</div>
+
+<h3>APIs</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Reliable integrations and connected digital systems.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">☁️</div>
+
+<h3>Cloud Infrastructure</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Hosting, domains and scalable digital infrastructure.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">🗄️</div>
+
+<h3>Databases</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Structured data systems for modern applications.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">⚙️</div>
+
+<h3>Automation</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Business workflows designed to reduce repetitive work.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">📱</div>
+
+<h3>Digital Products</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Professional platforms designed around real users.
+</p>
+
+</article>
+
+<article class="tech-image-card">
+
+<div class="tech-icon">🚀</div>
+
+<h3>Deployment</h3><div class="spw-rating" aria-label="5.0 out of 5 professional quality rating"><span class="spw-stars" aria-hidden="true">★★★★★</span><strong class="spw-rating-score">5.0/5</strong><span class="spw-rating-label">Professional quality</span></div>
+
+<p>
+Build, test, deploy and continuously improve.
+</p>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="sp-tech-roll-section alt"
+data-direction="right">
+
+<div class="sp-tech-roll-heading">
+
+<span>Technology 02</span>
+
+<h2>Technology in Motion</h2>
+
+<p>
+Explore another layer of the digital technologies used across
+modern products, platforms and infrastructure.
+</p>
+
+</div>
+
+<div class="sp-tech-roll-viewport">
+
+<div
+class="sp-tech-roll-track"
+data-roll-track="">
+
+<a
+aria-label="Web Development"
+class="sp-tech-roll-card"
+href="#technology-2-0">
+
+<img
+alt="Web Development"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Web Development
+</span>
+
+</a>
+
+<a
+aria-label="Mobile Technology"
+class="sp-tech-roll-card"
+href="#technology-2-1">
+
+<img
+alt="Mobile Technology"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Mobile Technology
+</span>
+
+</a>
+
+<a
+aria-label="Data Science"
+class="sp-tech-roll-card"
+href="#technology-2-2">
+
+<img
+alt="Data Science"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Data Science
+</span>
+
+</a>
+
+<a
+aria-label="Digital Infrastructure"
+class="sp-tech-roll-card"
+href="#technology-2-3">
+
+<img
+alt="Digital Infrastructure"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Digital Infrastructure
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="content-section light">
+
+<div class="container split-grid">
+
+<div>
+
+<span class="eyebrow dark">
+Our Structure
+</span>
+
+<h2>
+One technology company. Specialized digital businesses.
+</h2>
+
+<p>
+SP WorldTech is the company-level technology brand.
+World Net Hosting operates as a focused platform for
+domain registration, web hosting and related digital
+infrastructure.
+</p>
+
+<div class="page-actions">
+
+<a
+class="primary"
+href="./businesses.html">
+Explore Businesses
+</a>
+
+<a
+class="secondary"
+href="https://worldnethosting.com"
+rel="noopener"
+target="_blank">
+World Net Hosting
+</a>
+
+<a
+class="secondary"
+href="https://worldnethosting.com"
+rel="noopener"
+target="_blank">
+Buy Domain
+</a>
+
+<a
+class="secondary"
+href="./pricing.html">
+See Pricing
+</a>
+
+</div>
+
+</div>
+
+<div class="info-card">
+
+<h3>
+How We Work
+</h3>
+
+<ol class="feature-list">
+
+<li>
+Understand the business requirement.
+</li>
+
+<li>
+Design the right technical solution.
+</li>
+
+<li>
+Build, test and deploy.
+</li>
+
+<li>
+Support and improve after launch.
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="sp-tech-roll-section"
+data-direction="left">
+
+<div class="sp-tech-roll-heading">
+
+<span>Technology 03</span>
+
+<h2>Technology in Motion</h2>
+
+<p>
+Explore another layer of the digital technologies used across
+modern products, platforms and infrastructure.
+</p>
+
+</div>
+
+<div class="sp-tech-roll-viewport">
+
+<div
+class="sp-tech-roll-track"
+data-roll-track="">
+
+<a
+aria-label="APIs &amp; Integrations"
+class="sp-tech-roll-card"
+href="#technology-3-0">
+
+<img
+alt="APIs &amp; Integrations"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+APIs &amp; Integrations
+</span>
+
+</a>
+
+<a
+aria-label="Machine Learning"
+class="sp-tech-roll-card"
+href="#technology-3-1">
+
+<img
+alt="Machine Learning"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Machine Learning
+</span>
+
+</a>
+
+<a
+aria-label="Automation"
+class="sp-tech-roll-card"
+href="#technology-3-2">
+
+<img
+alt="Automation"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Automation
+</span>
+
+</a>
+
+<a
+aria-label="Database Systems"
+class="sp-tech-roll-card"
+href="#technology-3-3">
+
+<img
+alt="Database Systems"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Database Systems
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="content-section">
+
+<div class="container">
+
+<div class="info-card">
+
+<span class="eyebrow dark">
+Start Building
+</span>
+
+<h2>
+Have an idea? Let's turn it into a digital product.
+</h2>
+
+<p>
+Tell us what you want to build and our team can help
+transform the idea into a practical technology solution.
+</p>
+
+<div class="page-actions">
+
+<a
+class="primary"
+href="./contact.html">
+Start a Project
+</a>
+
+<a
+class="secondary"
+href="./projects.html">
+View Projects
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="sp-tech-roll-section alt"
+data-direction="right">
+
+<div class="sp-tech-roll-heading">
+
+<span>Technology 04</span>
+
+<h2>Technology in Motion</h2>
+
+<p>
+Explore another layer of the digital technologies used across
+modern products, platforms and infrastructure.
+</p>
+
+</div>
+
+<div class="sp-tech-roll-viewport">
+
+<div
+class="sp-tech-roll-track"
+data-roll-track="">
+
+<a
+aria-label="FinTech"
+class="sp-tech-roll-card"
+href="#technology-4-0">
+
+<img
+alt="FinTech"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+FinTech
+</span>
+
+</a>
+
+<a
+aria-label="Payment Technology"
+class="sp-tech-roll-card"
+href="#technology-4-1">
+
+<img
+alt="Payment Technology"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Payment Technology
+</span>
+
+</a>
+
+<a
+aria-label="Networking"
+class="sp-tech-roll-card"
+href="#technology-4-2">
+
+<img
+alt="Networking"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Networking
+</span>
+
+</a>
+
+<a
+aria-label="Enterprise Technology"
+class="sp-tech-roll-card"
+href="#technology-4-3">
+
+<img
+alt="Enterprise Technology"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Enterprise Technology
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="sp-tech-roll-section"
+data-direction="left">
+
+<div class="sp-tech-roll-heading">
+
+<span>Technology 05</span>
+
+<h2>Technology in Motion</h2>
+
+<p>
+Explore another layer of the digital technologies used across
+modern products, platforms and infrastructure.
+</p>
+
+</div>
+
+<div class="sp-tech-roll-viewport">
+
+<div
+class="sp-tech-roll-track"
+data-roll-track="">
+
+<a
+aria-label="Robotics"
+class="sp-tech-roll-card"
+href="#technology-5-0">
+
+<img
+alt="Robotics"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Robotics
+</span>
+
+</a>
+
+<a
+aria-label="Digital Transformation"
+class="sp-tech-roll-card"
+href="#technology-5-1">
+
+<img
+alt="Digital Transformation"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Digital Transformation
+</span>
+
+</a>
+
+<a
+aria-label="Future Technology"
+class="sp-tech-roll-card"
+href="#technology-5-2">
+
+<img
+alt="Future Technology"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+Future Technology
+</span>
+
+</a>
+
+<a
+aria-label="DevOps &amp; Deployment"
+class="sp-tech-roll-card"
+href="#technology-5-3">
+
+<img
+alt="DevOps &amp; Deployment"
+decoding="async"
+height="420"
+loading="eager"
+src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=82"
+width="720"/>
+
+<span class="sp-tech-roll-label">
+DevOps &amp; Deployment
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+
+<script>
+(function(){
+
+"use strict";
+
+function initSPTechRolling(){
+
+const sections=
+document.querySelectorAll(
+".sp-tech-roll-section"
+);
+
+sections.forEach(
+function(section,sectionIndex){
+
+const viewport=
+section.querySelector(
+".sp-tech-roll-viewport"
+);
+
+const track=
+section.querySelector(
+"[data-roll-track]"
+);
+
+if(!viewport||!track)return;
+
+const originalCards=
+Array.from(track.children);
+
+if(!originalCards.length)return;
+
+originalCards.forEach(
+function(card){
+track.appendChild(
+card.cloneNode(true)
+);
+}
+);
+
+let position=0;
+let paused=false;
+let lastTime=
+performance.now();
+
+const direction=
+section.dataset.direction==="right"
+?1
+:-1;
+
+const speed=
+34+(sectionIndex*3);
+
+function getHalfWidth(){
+return track.scrollWidth/2;
+}
+
+if(direction===1){
+position=-getHalfWidth();
+}
+
+function animate(now){
+
+const delta=
+Math.min(
+now-lastTime,
+40
+);
+
+lastTime=now;
+
+if(!paused){
+
+position+=
+direction*
+speed*
+(delta/1000);
+
+const halfWidth=
+getHalfWidth();
+
+if(
+direction===-1&&
+Math.abs(position)>=halfWidth
+){
+position=0;
+}
+
+if(
+direction===1&&
+position>=0
+){
+position=-halfWidth;
+}
+
+track.style.transform=
+"translate3d("+
+position+
+"px,0,0)";
+}
+
+requestAnimationFrame(
+animate
+);
+}
+
+viewport.addEventListener(
+"mouseenter",
+function(){
+paused=true;
+}
+);
+
+viewport.addEventListener(
+"mouseleave",
+function(){
+paused=false;
+}
+);
+
+viewport.addEventListener(
+"touchstart",
+function(){
+paused=true;
+},
+{passive:true}
+);
+
+viewport.addEventListener(
+"touchend",
+function(){
+
+window.setTimeout(
+function(){
+paused=false;
+},
+700
+);
+
+},
+{passive:true}
+);
+
+window.addEventListener(
+"resize",
+function(){
+
+if(
+direction===1&&
+position===0
+){
+
+position=
+-getHalfWidth();
+
+}
+
+}
+);
+
+requestAnimationFrame(
+animate
+);
+
+}
+);
+}
+
+if(
+document.readyState==="loading"
+){
+
+document.addEventListener(
+"DOMContentLoaded",
+initSPTechRolling
+);
+
+}else{
+
+initSPTechRolling();
+
+}
+
+})();
+</script>
+
+<script defer src="./assets/chat-widget.js"></script><script defer src="./assets/world-net-hosting-ads.js"></script>
+<script defer src="./assets/client-social-proof.js"></script><script defer src="./assets/comments.js"></script><script defer src="./assets/wireframe-header.js"></script><script id="spwt-shared-theme-script">
+(()=>{'use strict';const KEY='spworldtech-theme';const root=document.documentElement;function read(){try{return localStorage.getItem(KEY)}catch(e){return null}}function save(v){try{localStorage.setItem(KEY,v)}catch(e){}}function apply(theme){theme=theme==='dark'?'dark':'light';root.setAttribute('data-spwt-theme',theme);root.style.colorScheme=theme;const b=document.getElementById('spwt-theme-toggle');if(b){const dark=theme==='dark';b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');b.innerHTML='<span class="spwt-theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light mode':'Dark mode')+'</span>'}save(theme)}const initial=read();apply(initial==='dark'?'dark':'light');function install(){if(document.getElementById('spwt-theme-toggle'))return;const b=document.createElement('button');b.id='spwt-theme-toggle';b.type='button';b.addEventListener('click',()=>apply(root.getAttribute('data-spwt-theme')==='dark'?'light':'dark'));(document.body||document.documentElement).appendChild(b);apply(root.getAttribute('data-spwt-theme')||'light')}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();})();
+
+</script>
+<script defer src="./assets/theme-switcher-position.js"></script>
+</body>
+</html>
