@@ -43,6 +43,7 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
 <body class="admin-auth-page">
 <div class="admin-auth-wrap">
   <div class="admin-auth-brand"><img src="./assets/logo.jpeg" alt="SP WorldTech"><h1>SP WorldTech Administration</h1><p>Secure administrator access</p></div>
+<<<<<<< HEAD
 <main class="admin-auth-card">
     <div class="tabs"><button type="button" class="active" data-auth-tab="login">Admin Login</button><button type="button" data-auth-tab="signup">Admin Signup</button></div>
     <section id="loginPanel" class="panel">
@@ -52,10 +53,22 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
       <form id="adminLogin" class="form-stack">
         <label>Email<input id="adminEmail" name="email" type="email" autocomplete="username" required></label>
         <label>Password<div class="password-wrap"><input id="adminPassword" name="password" type="password" autocomplete="current-password" required><button type="button" data-password="adminPassword">Show</button></div></label>
+=======
+  <main class="admin-auth-card">
+    <div class="tabs"><button type="button" class="active" data-auth-tab="login">Admin Login</button><button type="button" data-auth-tab="signup">Admin Signup</button></div>
+    <section id="loginPanel" class="panel">
+      <h2>Welcome back</h2><p class="lead">Sign in with Google or your administrator credentials.</p>
+      <div id="adminGoogleLogin" class="google-card"></div><div class="google-note google-config-note">Loading Google authentication…</div>
+      <div class="divider">or use admin credentials</div>
+      <form id="adminLogin" class="form-stack">
+        <label>Username<input id="adminUsername" autocomplete="username" required></label>
+        <label>Password<div class="password-wrap"><input id="adminPassword" type="password" autocomplete="current-password" required><button type="button" data-password="adminPassword">Show</button></div></label>
+>>>>>>> origin/main
         <button class="primary-btn" type="submit">Login to Admin Dashboard</button><div id="loginStatus" class="status" role="status" aria-live="polite"></div>
       </form>
     </section>
     <section id="signupPanel" class="panel" hidden>
+<<<<<<< HEAD
       <h2>Create your Admin account</h2><p class="lead">Register using the configured administrator email, or use Google signup. Admin signup is restricted to the approved administrator email.</p>
       <div id="adminGoogleSignup" class="google-card"></div><div class="google-note google-config-note">Loading Google signup…</div>
       <div class="divider">or register with email</div>
@@ -65,6 +78,13 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
         <label>Password<div class="password-wrap"><input id="adminSignupPassword" name="password" type="password" autocomplete="new-password" minlength="8" required><button type="button" data-password="adminSignupPassword">Show</button></div></label>
         <button class="primary-btn" type="submit">Create Admin Account</button><div id="signupStatus" class="status" role="status" aria-live="polite"></div>
       </form>
+=======
+      <h2>Create your Admin account</h2>
+      <p class="lead">Create or access your administrator account using Google. Use the same Google account to sign in again.</p>
+      <div id="adminGoogleSignup" class="google-card"></div>
+      <div class="google-note google-config-note">Loading Google signup…</div>
+      <div id="signupStatus" class="status" role="status" aria-live="polite"></div>
+>>>>>>> origin/main
       <p class="switch">Already have an account? <button type="button" data-switch="login">Admin Login</button></p>
     </section>
   </main>
