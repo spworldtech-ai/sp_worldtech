@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="description"
+    content="Buy practical SP WorldTech e-books about solving problems, building software and technology skills."
+  >
+
+  <title>Marketplace | SP WorldTech</title>
+
+  <link rel="icon" href="./assets/favicon.jpeg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Existing project styles -->
+  <link rel="stylesheet" href="./assets/styles.css">
+  <link rel="stylesheet" href="./assets/brand-theme.css">
+  <link rel="stylesheet" href="./assets/light-theme.css">
+
+  <!-- Existing project scripts -->
+  <script defer src="./assets/site.js"></script>
+  <script defer src="./assets/app-config.js"></script><script defer src="./assets/global-ui.js"></script><script defer src="./assets/footer.js"></script>
+  <script defer src="./assets/marketplace.js"></script>
+
+  <link rel="stylesheet" href="./assets/site-fixes.css"><link rel="stylesheet" href="./assets/platform-rating.css">
+  
+
+  <!-- Marketplace navigation cleanup -->
+  <style>
+    /*
+      ============================================================
+      SP WORLDTECH MARKETPLACE NAVIGATION CLEANUP
+      ============================================================
+    */
+
+    /*
+      IMPORTANT:
+      The mobile navigation must NOT appear as seven huge rows
+      on desktop.
+    */
+    #mobileMenu {
+      display: none !important;
+      box-sizing: border-box;
+    }
+
+    /*
+      Mobile menu when opened.
+    */
+    #mobileMenu.spw-open {
+      display: flex !important;
+      flex-direction: column;
+      gap: 8px;
+
+      padding: 16px 20px 20px;
+
+      background: #ffffff;
+
+      border-top: 1px solid #e5edf7;
+
+      box-shadow:
+        0 12px 30px rgba(15, 35, 65, 0.08);
+
+      position: relative;
+      z-index: 1000;
+    }
+
+    /*
+      Mobile menu links.
+    */
+    #mobileMenu.spw-open a {
+      display: block;
+
+      padding: 14px 16px;
+
+      border: 1px solid #e3ebf5;
+      border-radius: 12px;
+
+      background: #ffffff;
+
+      color: #142b49 !important;
+
+      text-decoration: none;
+
+      font-weight: 700;
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    #mobileMenu.spw-open a:hover {
+      background: #f4f8fc;
+      border-color: #cbd9e8;
+      transform: translateY(-1px);
+    }
+
+    /*
+      Keep the desktop navigation normal.
+    */
+    @media (min-width: 901px) {
+      #mobileMenu,
+      #mobileMenu.spw-open {
+        display: none !important;
+      }
+
+      #mobileMenuBtn {
+        display: none !important;
+      }
+    }
+
+    /*
+      Mobile menu button.
+    */
+    @media (max-width: 900px) {
+      #mobileMenuBtn {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        border: 0;
+        background: transparent;
+
+        font-size: 24px;
+
+        color: #142b49;
+      }
+    }
+
+    /*
+      Make sure the Marketplace page does not create
+      artificial drawing/annotation layers.
+    */
+    .marketplace-page-overlay,
+    .annotation-layer,
+    .drawing-layer,
+    .blue-lines,
+    .scribble-overlay {
+      display: none !important;
+    }
+
+    /*
+      Professional Marketplace page spacing.
+    */
+    .inner-hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /*
+      Prevent accidental horizontal overflow.
+    */
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    /*
+      Marketplace buttons remain readable on white backgrounds.
+    */
+    .inner-hero .primary,
+    .inner-hero .secondary,
+    .content-section .primary,
+    .content-section .secondary {
+      text-decoration: none;
+    }
+
+    /*
+      Mobile improvements.
+    */
+    @media (max-width: 900px) {
+      .main-nav {
+        display: none !important;
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand-link {
+        display: flex;
+        align-items: center;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="./assets/global-ui.css"><link rel="stylesheet" href="./assets/premium-header.css"><script defer src="./assets/site-images.js"></script><link rel="stylesheet" href="./assets/chat-widget.css"><link rel="stylesheet" href="./assets/world-net-hosting-ads.css">
+<script defer src="./assets/image-fallback.js"></script><link rel="stylesheet" href="./assets/client-social-proof.css"><link rel="stylesheet" href="./assets/comments.css"><link rel="stylesheet" href="./assets/wireframe-header.css"><style id="spwt-shared-theme-style">
+/* SP WorldTech shared light/dark theme */
+:root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
+html[data-spwt-theme="dark"]{color-scheme:dark;--spwt-bg:#0b1220;--spwt-surface:#111d30;--spwt-text:#edf4ff;--spwt-muted:#a8b8ce;--spwt-border:#2b3c54;--spwt-input:#0e192a;--spwt-shadow:0 8px 28px rgba(0,0,0,.24)}
+html[data-spwt-theme="dark"] body{background-color:var(--spwt-bg)!important;color:var(--spwt-text)!important}
+html[data-spwt-theme="dark"] main,html[data-spwt-theme="dark"] section,html[data-spwt-theme="dark"] article,html[data-spwt-theme="dark"] aside,html[data-spwt-theme="dark"] .card,html[data-spwt-theme="dark"] .panel,html[data-spwt-theme="dark"] .modal,html[data-spwt-theme="dark"] .dashboard-card,html[data-spwt-theme="dark"] .content-card,html[data-spwt-theme="dark"] .auth-card,html[data-spwt-theme="dark"] .form-card,html[data-spwt-theme="dark"] .stat-card{color:var(--spwt-text)}
+html[data-spwt-theme="dark"] [class*="card"],html[data-spwt-theme="dark"] [class*="panel"],html[data-spwt-theme="dark"] [class*="modal"],html[data-spwt-theme="dark"] [class*="surface"]{border-color:var(--spwt-border)}
+html[data-spwt-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),html[data-spwt-theme="dark"] select,html[data-spwt-theme="dark"] textarea{background:var(--spwt-input)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] input::placeholder,html[data-spwt-theme="dark"] textarea::placeholder{color:var(--spwt-muted)!important}
+html[data-spwt-theme="dark"] table,html[data-spwt-theme="dark"] th,html[data-spwt-theme="dark"] td{border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] a:not([class*="btn"]):not([class*="button"]){color:#79baff}
+html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-theme="dark"] label,html[data-spwt-theme="dark"] small{color:inherit}
+#spwt-theme-toggle{position:fixed;right:18px;bottom:22px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:10px 14px;background:#0758b8;color:#fff;font:700 13px/1.1 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,35,90,.25);cursor:pointer;transition:transform .15s,box-shadow .15s}
+#spwt-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,35,90,.32)}#spwt-theme-toggle:focus-visible{outline:3px solid #61d7ff;outline-offset:3px}#spwt-theme-toggle .spwt-theme-icon{font-size:17px;line-height:1}
+@media(max-width:600px){#spwt-theme-toggle{right:12px;bottom:14px;padding:9px 12px;font-size:12px}}
+
+</style>
+<link rel="stylesheet" href="./assets/theme-switcher-position.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+
+  <header class="spw-wireframe-header" data-spw-wireframe-header>
+  <div class="spw-header-inner">
+    <a class="spw-brand" href="./index.html" aria-label="SP WorldTech home">
+      <img src="./assets/logo.jpeg" alt="SP WorldTech logo">
+      <span class="spw-brand-name">SP WorldTech</span>
+      <span class="spw-brand-tagline">Technology <b>•</b> Innovation <b>•</b> Global Growth</span>
+    </a>
+    <nav class="spw-desktop-nav" aria-label="Primary navigation">
+      <a class="spw-nav-home" href="./index.html"><span class="spw-ico">⌂</span><span>Home</span></a>
+      <a href="./services.html"><span class="spw-ico">⚙</span><span>Services</span></a>
+      <a href="./businesses.html"><span class="spw-ico">▥</span><span>Businesses</span></a>
+      <a href="./projects.html"><span class="spw-ico">□</span><span>Projects</span></a>
+      <a href="./pricing.html"><span class="spw-ico">◇</span><span>Pricing</span></a>
+      <a href="./marketplace.html"><span class="spw-ico">🛒</span><span>Marketplace</span></a>
+      <a href="./academy.html"><span class="spw-ico">◇</span><span>Academy</span></a>
+      <a href="./about.html"><span class="spw-ico">ⓘ</span><span>About</span></a>
+      <a href="./privacy-policy.html"><span class="spw-ico">♢</span><span>Privacy</span></a>
+      <a href="./terms-and-conditions.html"><span class="spw-ico">▤</span><span>Terms</span></a>
+      <a href="./contact.html"><span class="spw-ico">⌕</span><span>Contact</span></a>
+      <a class="spw-join-btn" href="./auth.html">Join Free</a>
+    </nav>
+    <button class="spw-mobile-btn" id="spwWireframeMenuBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+  <div class="spw-mobile-menu" id="spwWireframeMenu" hidden>
+    <a href="./index.html">Home</a><a href="./services.html">Services</a><a href="./businesses.html">Businesses</a>
+    <a href="./projects.html">Projects</a><a href="./pricing.html">Pricing</a><a href="./marketplace.html">Marketplace</a>
+    <a href="./academy.html">Academy</a><a href="./about.html">About</a><a href="./privacy-policy.html">Privacy</a>
+    <a href="./terms-and-conditions.html">Terms</a><a href="./contact.html">Contact</a><a class="mobile-join" href="./auth.html">Join Free</a>
+  </div>
+</header>
+
+
+  <!-- ============================================================
+       MAIN MARKETPLACE
+       ============================================================ -->
+
+  <main>
+
+    <!-- Marketplace Hero -->
+    <section class="inner-hero sp-tech-inner-hero" style="--sp-hero-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2400&q=90');">
+
+      <div class="container">
+
+        <!-- International language/currency controls -->
+        <div
+          class="spw-global-tools-host"
+          data-spw-global-host
+        ></div>
+
+        <span class="eyebrow">
+          SP WorldTech Marketplace
+        </span>
+
+        <h1>
+          Practical digital knowledge you can buy and keep.
+        </h1>
+
+        <p class="section-lead">
+          Explore e-books created for developers, entrepreneurs,
+          students and problem-solvers — from building software
+          to solving real technology challenges.
+        </p>
+
+        <div class="page-actions">
+
+          <a
+            class="primary"
+            href="./auth.html"
+          >
+            Join Free
+          </a>
+
+          <a
+            class="secondary"
+            href="#ebooks"
+          >
+            Browse E-books
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==========================================================
+         E-BOOK MARKETPLACE
+         ========================================================== -->
+
+    <section
+      class="content-section"
+      id="ebooks"
+    >
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="eyebrow dark">
+              Digital Products
+            </span>
+
+            <h2 class="section-title">
+              E-books &amp; practical guides
+            </h2>
+
+            <p class="section-lead">
+              Secure checkout with Paystack. After successful
+              payment, your file becomes available in your
+              dashboard for download.
+            </p>
+
+          </div>
+
+          <a
+            class="secondary"
+            href="./dashboard.html"
+          >
+            My Dashboard
+          </a>
+
+        </div>
+
+
+        <div class="marketplace-search-wrap" style="margin:18px 0 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <input id="marketplaceSearch" class="input" type="search" placeholder="Search products..." aria-label="Search marketplace products" style="flex:1;min-width:240px;height:46px;border:1px solid #dbe5f0;border-radius:12px;padding:0 14px;font:inherit">
+          <span id="marketplaceCount" class="status" aria-live="polite"></span>
+        </div>
+
+        <!-- Dynamic e-book products -->
+        <div
+          id="ebookGrid"
+          class="ebook-grid"
+        >
+
+          <div class="info-card">
+
+            <h3>
+              Loading marketplace…
+            </h3>
+
+            <p>
+              Connecting to the SP WorldTech marketplace.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Marketplace status -->
+        <div
+          id="marketStatus"
+          class="status"
+          style="margin-top:18px"
+        ></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+
+  
+
+
+  <!-- ============================================================
+       INTERNATIONAL SYSTEM
+       ============================================================ -->
+
+
+  <!-- ============================================================
+       MOBILE MENU CONTROL
+       ============================================================ -->
+
+  <script>
+    (function () {
+
+      const button =
+        document.getElementById("mobileMenuBtn");
+
+      const menu =
+        document.getElementById("mobileMenu");
+
+      if (!button || !menu) {
+        return;
+      }
+
+
+      /*
+       * Initial state
+       */
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      menu.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      /*
+       * Open / close mobile menu
+       */
+      button.addEventListener(
+        "click",
+        function () {
+
+          const isOpen =
+            menu.classList.toggle("spw-open");
+
+          menu.setAttribute(
+            "aria-hidden",
+            String(!isOpen)
+          );
+
+          button.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
+
+          button.setAttribute(
+            "aria-label",
+            isOpen
+              ? "Close navigation menu"
+              : "Open navigation menu"
+          );
+
+        }
+      );
+
+
+      /*
+       * Close after clicking a navigation link
+       */
+      menu
+        .querySelectorAll("a")
+        .forEach(function (link) {
+
+          link.addEventListener(
+            "click",
+            function () {
+
+              menu.classList.remove(
+                "spw-open"
+              );
+
+              menu.setAttribute(
+                "aria-hidden",
+                "true"
+              );
+
+              button.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+              button.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+              );
+
+            }
+          );
+
+        });
+
+
+      /*
+       * Automatically close the mobile menu
+       * when returning to desktop width.
+       */
+      window.addEventListener(
+        "resize",
+        function () {
+
+          if (window.innerWidth > 900) {
+
+            menu.classList.remove(
+              "spw-open"
+            );
+
+            menu.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+            button.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+            button.setAttribute(
+              "aria-label",
+              "Open navigation menu"
+            );
+
+          }
+
+        }
+      );
+
+    })();
+  </script>
+
+<script defer src="./assets/chat-widget.js"></script><script defer src="./assets/world-net-hosting-ads.js"></script>
+<script defer src="./assets/client-social-proof.js"></script><script defer src="./assets/comments.js"></script><script defer src="./assets/wireframe-header.js"></script><script id="spwt-shared-theme-script">
+(()=>{'use strict';const KEY='spworldtech-theme';const root=document.documentElement;function read(){try{return localStorage.getItem(KEY)}catch(e){return null}}function save(v){try{localStorage.setItem(KEY,v)}catch(e){}}function apply(theme){theme=theme==='dark'?'dark':'light';root.setAttribute('data-spwt-theme',theme);root.style.colorScheme=theme;const b=document.getElementById('spwt-theme-toggle');if(b){const dark=theme==='dark';b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');b.innerHTML='<span class="spwt-theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light mode':'Dark mode')+'</span>'}save(theme)}const initial=read();apply(initial==='dark'?'dark':'light');function install(){if(document.getElementById('spwt-theme-toggle'))return;const b=document.createElement('button');b.id='spwt-theme-toggle';b.type='button';b.addEventListener('click',()=>apply(root.getAttribute('data-spwt-theme')==='dark'?'light':'dark'));(document.body||document.documentElement).appendChild(b);apply(root.getAttribute('data-spwt-theme')||'light')}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();})();
+
+</script>
+<script defer src="./assets/theme-switcher-position.js"></script>
+</body>
+</html>
