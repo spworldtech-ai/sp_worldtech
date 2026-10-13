@@ -241,25 +241,38 @@ router.get('/admin/ebooks', protect, requireAdmin, async (_req, res) => {
 router.post('/admin/ebooks', protect, requireAdmin, async (req, res) => {
   try {
     const { title, description, category, productType = 'ebook', price, oldPrice = 0, pageCount = 0, whatsappNumber = '', fileName, mimeType, fileBase64, coverUrl = '', coverFileName = '', coverMimeType = '', coverBase64 = '', published = true } = req.body || {};
-    if (!title || !fileName || !mimeType || !fileBase64) return res.status(400).json({ message: 'Product title and downloadable product file are required.' });
+    const cleanTitle = String(title || '').trim();
+    if (!cleanTitle || !fileName || !mimeType || !fileBase64) return res.status(400).json({ message: 'Product title and downloadable product file are required.' });
+    if (cleanTitle.length > 180) return res.status(400).json({ message: 'Product titles must be 180 characters or fewer.' });
     const allowed = ['application/zip', 'application/x-zip-compressed', 'application/pdf', 'application/epub+zip', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'text/plain', 'image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/svg+xml', 'application/octet-stream', 'application/vnd.oasis.opendocument.text'];
     const normalizedType = String(productType || 'ebook').toLowerCase();
     if (!['ebook', 'download', 'logo', 'template', 'software', 'other'].includes(normalizedType)) return res.status(400).json({ message: 'Choose a valid product type.' });
-    if (!allowed.includes(mimeType)) return res.status(400).json({ message: 'Supported files: ZIP, PDF, EPUB, DOC/DOCX, TXT, ODT, PNG, JPG, WEBP, GIF or SVG.' });
+    if (!allowed.includes(String(mimeType))) return res.status(400).json({ message: 'Supported files: ZIP, PDF, EPUB, DOC/DOCX, TXT, ODT, PNG, JPG, WEBP, GIF or SVG.' });
+    const numericFields = { price: price ?? 0, oldPrice: oldPrice ?? 0, pageCount: pageCount ?? 0 };
+    for (const [field, raw] of Object.entries(numericFields)) {
+      const value = Number(raw);
+      if (!Number.isFinite(value) || value < 0) return res.status(400).json({ message: `Enter a valid non-negative ${field === 'pageCount' ? 'page count' : field === 'oldPrice' ? 'old price' : 'price'}.` });
+    }
     const cleanBase64 = String(fileBase64).replace(/^data:[^;]+;base64,/, '');
+    if (!/^[A-Za-z0-9+/]*={0,2}$/.test(cleanBase64) || cleanBase64.length % 4 === 1) return res.status(400).json({ message: 'The uploaded product file could not be read. Please choose the file again.' });
     const buffer = Buffer.from(cleanBase64, 'base64');
     if (!buffer.length) return res.status(400).json({ message: 'The uploaded product file is empty.' });
     if (buffer.length > 15 * 1024 * 1024) return res.status(413).json({ message: 'Product files must be 15 MB or smaller.' });
     let coverBuffer = null;
+    const allowedCoverTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
     if (coverBase64) {
-      if (!String(coverMimeType).startsWith('image/')) return res.status(400).json({ message: 'The product cover must be an image file.' });
-      coverBuffer = Buffer.from(String(coverBase64).replace(/^data:[^;]+;base64,/, ''), 'base64');
+      if (!allowedCoverTypes.includes(String(coverMimeType).toLowerCase())) return res.status(400).json({ message: 'Product covers must be PNG, JPG, WEBP or GIF images.' });
+      const cleanCoverBase64 = String(coverBase64).replace(/^data:[^;]+;base64,/, '');
+      if (!/^[A-Za-z0-9+/]*={0,2}$/.test(cleanCoverBase64) || cleanCoverBase64.length % 4 === 1) return res.status(400).json({ message: 'The product cover could not be read. Please choose the image again.' });
+      coverBuffer = Buffer.from(cleanCoverBase64, 'base64');
       if (!coverBuffer.length) return res.status(400).json({ message: 'The product cover is empty.' });
       if (coverBuffer.length > 3 * 1024 * 1024) return res.status(413).json({ message: 'Product covers must be 3 MB or smaller.' });
     }
-    let slug = slugify(title);
+    let slug = slugify(cleanTitle);
     if (await Ebook.findOne({ slug })) slug = `${slug}-${Date.now().toString().slice(-6)}`;
-    const ebook = await Ebook.create({ title: String(title).trim(), slug, description: String(description || '').trim(), category: String(category || 'Digital Product').trim(), productType: normalizedType, whatsappNumber: String(whatsappNumber || '').trim(), price: Math.max(0, Number(price || 0)), oldPrice: Math.max(0, Number(oldPrice || 0)), currency: 'USD', pageCount: Math.max(0, Number(pageCount || 0)), fileName: String(fileName).trim(), mimeType, fileSize: buffer.length, fileData: buffer, coverUrl: coverBuffer ? `/api/marketplace/ebooks/COVER_ID/cover` : String(coverUrl || '').trim(), coverMimeType: coverBuffer ? String(coverMimeType) : '', coverData: coverBuffer || undefined, published: Boolean(published), createdBy: req.user._id });
+    const safeFileName = String(fileName).split(/[\\/]/).pop().replace(/[\r\n\"\x00-\x1f]/g, '_').trim().slice(0, 180) || 'download';
+    const isPublished = published === false || String(published).toLowerCase() === 'false' ? false : true;
+    const ebook = await Ebook.create({ title: cleanTitle, slug, description: String(description || '').trim(), category: String(category || 'Digital Product').trim().slice(0, 100), productType: normalizedType, whatsappNumber: String(whatsappNumber || '').trim().slice(0, 40), price: Number(price ?? 0), oldPrice: Number(oldPrice ?? 0), currency: 'USD', pageCount: Number(pageCount ?? 0), fileName: safeFileName, mimeType: String(mimeType), fileSize: buffer.length, fileData: buffer, coverUrl: coverBuffer ? `/api/marketplace/ebooks/COVER_ID/cover` : String(coverUrl || '').trim(), coverMimeType: coverBuffer ? String(coverMimeType) : '', coverData: coverBuffer || undefined, published: isPublished, createdBy: req.user._id });
     if (coverBuffer) { ebook.coverUrl = `/api/marketplace/ebooks/${ebook._id}/cover`; await ebook.save(); }
     await JobNotification.create({ role: 'admin', title: 'Marketplace product uploaded', message: `${ebook.title} was uploaded by ${req.user.email || req.user.username || 'an administrator'} and is ${ebook.published ? 'published' : 'hidden'}.` }).catch((error) => console.error('Could not save product notification:', error.message));
     void sendAdminNotification('New SP WorldTech marketplace product', `A product was uploaded to SP WorldTech.

@@ -253,24 +253,27 @@
     language = LANGUAGES.some(item => item[0] === language) ? language : 'en';
     state.language = language;
     try { localStorage.setItem(STORAGE_LANGUAGE, language); } catch (_) {}
+    const languageSelect = document.getElementById('spwLanguageSelect');
+    if (languageSelect && languageSelect.value !== language) languageSelect.value = language;
     const status = document.getElementById('spwGlobalStatus');
     const nodes = captureTextNodes();
     const attributes = captureTranslatableAttributes();
 
-    // Always restore the source text first, so switching languages never translates
-    // an already translated sentence into another language.
-    nodes.forEach(node => {
-      const source = originalText.get(node);
-      if (source != null) node.nodeValue = source;
-    });
-    attributes.forEach(item => item.element.setAttribute(item.name, item.source));
-
+    // Keep the currently rendered language visible while the next translation
+    // is loading. Restoring English before the API responds made a failed or slow
+    // translation look like the user's language selection had reset automatically.
     document.documentElement.lang = language || 'en';
     if (!language || language === 'en') {
+      nodes.forEach(node => {
+        const source = originalText.get(node);
+        if (source != null) node.nodeValue = source;
+      });
+      attributes.forEach(item => item.element.setAttribute(item.name, item.source));
       state.translating = false;
       document.title = originalDocumentTitle;
       document.documentElement.dir = 'ltr';
       if (status) status.textContent = 'English';
+      if (state.currency !== 'USD') void applyCurrency(state.currency);
       return;
     }
 
@@ -312,12 +315,9 @@
     } catch (error) {
       if (requestId !== languageApplySequence || language !== state.language) return;
       if (status) status.textContent = error.message;
-      // Keep English content visible when a selected target is not supported by
-      // the configured translation service.
-      nodes.forEach(node => {
-        const source = originalText.get(node);
-        if (source != null) node.nodeValue = source;
-      });
+      // Do not force the page back to English on a transient translation/API
+      // failure. Keep the last successfully rendered language and keep the chosen
+      // language saved; the status message explains that the new selection failed.
     } finally {
       if (requestId === languageApplySequence) state.translating = false;
     }
@@ -402,6 +402,8 @@
     currency = CURRENCIES.includes(currency) ? currency : 'USD';
     state.currency = currency;
     try { localStorage.setItem(STORAGE_CURRENCY, currency); } catch (_) {}
+    const currencySelect = document.getElementById('spwCurrencySelect');
+    if (currencySelect && currencySelect.value !== currency) currencySelect.value = currency;
     const status = document.getElementById('spwGlobalStatus');
     if (!state.rates[currency]) {
       const loaded = await loadRates();

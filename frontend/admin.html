@@ -44,9 +44,9 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
 <div class="admin-auth-wrap">
   <div class="admin-auth-brand"><img src="./assets/logo.jpeg" alt="SP WorldTech"><h1>SP WorldTech Administration</h1><p>Secure administrator access</p></div>
   <main class="admin-auth-card">
-    <div class="tabs"><button type="button" class="active" data-auth-tab="login">Admin Login</button></div>
+    <div class="tabs"><button type="button" class="active" data-auth-tab="login">Admin Login</button><button type="button" data-auth-tab="signup">Admin Signup</button></div>
     <section id="loginPanel" class="panel">
-      <h2>Welcome back</h2><p class="lead">Sign in with your administrator credentials or authorized Google account. Your administrator session will open after authentication.</p>
+      <h2>Welcome back</h2><p class="lead">Sign in with Google or your administrator credentials.</p>
       <div id="adminGoogleLogin" class="google-card"></div><div class="google-note google-config-note">Loading Google authentication…</div>
       <div class="divider">or use admin credentials</div>
       <form id="adminLogin" class="form-stack">
@@ -54,6 +54,14 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
         <label>Password<div class="password-wrap"><input id="adminPassword" type="password" autocomplete="current-password" required><button type="button" data-password="adminPassword">Show</button></div></label>
         <button class="primary-btn" type="submit">Login to Admin Dashboard</button><div id="loginStatus" class="status" role="status" aria-live="polite"></div>
       </form>
+    </section>
+    <section id="signupPanel" class="panel" hidden>
+      <h2>Create your Admin account</h2>
+      <p class="lead">Create or access your administrator account using Google. Use the same Google account to sign in again.</p>
+      <div id="adminGoogleSignup" class="google-card"></div>
+      <div class="google-note google-config-note">Loading Google signup…</div>
+      <div id="signupStatus" class="status" role="status" aria-live="polite"></div>
+      <p class="switch">Already have an account? <button type="button" data-switch="login">Admin Login</button></p>
     </section>
   </main>
 </div>

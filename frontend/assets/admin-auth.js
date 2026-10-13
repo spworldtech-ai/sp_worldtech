@@ -27,6 +27,7 @@
     document.querySelectorAll('[data-auth-tab]').forEach(b => b.classList.remove('active'));
     button.classList.add('active');
     $('loginPanel').hidden = button.dataset.authTab !== 'login';
+    if ($('signupPanel')) $('signupPanel').hidden = button.dataset.authTab !== 'signup';
   }));
 
   document.querySelectorAll('[data-switch]').forEach(button => button.addEventListener('click', () => {
@@ -63,8 +64,8 @@
       window.google.accounts.id.initialize({ client_id: config.googleClientId, callback: async ({ credential }) => {
         try {
           if (!credential) throw new Error('Google did not return a valid credential.');
-          setStatus('loginStatus', 'Verifying your Google admin account…');
-          setStatus('signupStatus', 'Verifying your Google admin account…');
+          setStatus('loginStatus', 'Verifying your Google account…');
+          setStatus('signupStatus', 'Verifying your Google account…');
           const response = await fetch(`${API}/api/admin/auth/google`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ credential }) });
           const data = await window.SPW_APP.parseResponse(response);
           if (!response.ok) throw new Error(data.message || 'Admin Google authentication failed.');
