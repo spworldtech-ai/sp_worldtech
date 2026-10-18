@@ -127,6 +127,7 @@
       state.language = event.target.value;
       localStorage.setItem(STORAGE_LANGUAGE, state.language);
       await applyLanguage(state.language);
+      window.dispatchEvent(new CustomEvent('spw:languagechange', { detail: { language: state.language } }));
     });
 
     document.getElementById('spwCurrencySelect')?.addEventListener('change', async event => {

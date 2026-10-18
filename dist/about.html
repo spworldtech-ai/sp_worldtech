@@ -890,7 +890,7 @@
 
 </style>
 
-<link rel="stylesheet" href="./assets/chat-widget.css"><link rel="stylesheet" href="./assets/world-net-hosting-ads.css">
+<link rel="stylesheet" href="./assets/world-net-hosting-ads.css">
 <script defer src="./assets/image-fallback.js"></script><link rel="stylesheet" href="./assets/client-social-proof.css"><link rel="stylesheet" href="./assets/comments.css"><link rel="stylesheet" href="./assets/wireframe-header.css"><style id="spwt-shared-theme-style">
 /* SP WorldTech shared light/dark theme */
 :root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
@@ -1594,11 +1594,13 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
 
 
 
-<script defer src="./assets/chat-widget.js"></script><script defer src="./assets/world-net-hosting-ads.js"></script>
+<script defer src="./assets/world-net-hosting-ads.js"></script>
 <script defer src="./assets/client-social-proof.js"></script><script defer src="./assets/comments.js"></script><script defer src="./assets/wireframe-header.js"></script><script id="spwt-shared-theme-script">
 (()=>{'use strict';const KEY='spworldtech-theme';const root=document.documentElement;function read(){try{return localStorage.getItem(KEY)}catch(e){return null}}function save(v){try{localStorage.setItem(KEY,v)}catch(e){}}function apply(theme){theme=theme==='dark'?'dark':'light';root.setAttribute('data-spwt-theme',theme);root.style.colorScheme=theme;const b=document.getElementById('spwt-theme-toggle');if(b){const dark=theme==='dark';b.setAttribute('aria-pressed',String(dark));b.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');b.innerHTML='<span class="spwt-theme-icon" aria-hidden="true">'+(dark?'☀':'☾')+'</span><span>'+(dark?'Light mode':'Dark mode')+'</span>'}save(theme)}const initial=read();apply(initial==='dark'?'dark':'light');function install(){if(document.getElementById('spwt-theme-toggle'))return;const b=document.createElement('button');b.id='spwt-theme-toggle';b.type='button';b.addEventListener('click',()=>apply(root.getAttribute('data-spwt-theme')==='dark'?'light':'dark'));(document.body||document.documentElement).appendChild(b);apply(root.getAttribute('data-spwt-theme')||'light')}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();})();
 
 </script>
 <script defer src="./assets/theme-switcher-position.js"></script>
+
+<script defer src="./assets/spwt-robot.js"></script>
 </body>
 </html>

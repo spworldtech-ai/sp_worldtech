@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b2147">
+<title>SP WorldTech Scientific Calculator</title>
+<meta name="description" content="SP WorldTech Scientific Calculator with scientific functions and calculation history.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/global-ui.css"><link rel="stylesheet" href="./assets/premium-header.css"><link rel="stylesheet" href="./assets/wireframe-header.css"><link rel="stylesheet" href="./assets/world-net-hosting-ads.css"><link rel="stylesheet" href="./assets/client-social-proof.css"><link rel="stylesheet" href="./assets/comments.css">
+<style>
+:root{color-scheme:dark;--navy:#0b2147;--panel:#102e5c;--cyan:#16bfd6;--gold:#d9b45b;--ink:#f8fafc;--muted:#a9bad2;--line:#2a4771;--danger:#ffb4b4}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--spwt-bg,#f4f7fb);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--spwt-text,#172b45);padding:0}
+button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.page{width:min(100%,1180px);max-width:1180px;margin:24px auto 40px;padding:0 20px}
+.layout{display:grid;grid-template-columns:minmax(0, 660px) minmax(230px,290px);justify-content:center;align-items:start;gap:16px;max-width:980px;margin:0 auto}.card{background:#fff;border:1px solid #d6e3f4;border-radius:18px;padding:16px;box-shadow:0 10px 28px #173f7010;min-width:0;width:100%;color:#102747}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}.toolbar label{font-size:.82rem;color:var(--muted)}select,.mini{border:1px solid #c8d8ed;background:#f8fbff;color:#102747;border-radius:10px;padding:8px 10px}.display{background:#0b1e38;border:1px solid #25476e;border-radius:14px;padding:14px 16px;margin-bottom:10px;min-height:100px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;overflow:hidden}.expression{min-height:25px;text-align:right;color:var(--muted);font-size:clamp(.9rem,2vw,1.1rem);overflow-wrap:anywhere}.result{font-size:clamp(2rem,6vw,3rem);font-weight:850;text-align:right;overflow-wrap:anywhere;line-height:1.1}.message{min-height:20px;font-size:.82rem;color:#9a6200;margin:0 2px 10px}.message.error{color:var(--danger)}.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.key{min-height:45px;border:1px solid #ffffff0d;border-radius:12px;background:#f1f5f9;color:#0a1930;font-weight:750;font-size:1rem;transition:transform .08s,filter .12s}.key:hover{filter:brightness(1.08)}.key:active{transform:scale(.97)}.key.fn{background:#174f8a;color:#e8f4ff;border-color:#2b6197}.key.op,.key.special{background:var(--cyan);color:#062238}.key.equals{background:var(--gold);color:#172238}.key.danger{background:#6b2631;color:#fff}.key.wide{grid-column:span 2}.side-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}.side-title h2{font-size:1.05rem;margin:0}.outline{background:#f8fbff;color:#174c86;border:1px solid #c8d8ed;border-radius:9px;padding:7px 10px;font-size:.78rem;white-space:nowrap;flex-shrink:0}.history{display:flex;flex-direction:column;gap:8px;max-height:360px;overflow:auto}.empty{color:#627894;font-size:.86rem;line-height:1.5;border:1px dashed #c8d8ed;border-radius:12px;padding:12px}.history-item{width:100%;text-align:right;background:#f5f9ff;border:1px solid #d6e3f4;border-radius:10px;padding:10px;color:#102747}.history-item .hist-exp{display:block;color:var(--muted);font-size:.78rem;overflow-wrap:anywhere}.history-item .hist-result{display:block;font-size:1.05rem;font-weight:800;margin-top:4px;overflow-wrap:anywhere}.note{color:#627894;font-size:.78rem;line-height:1.5;margin-top:12px}.footer{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr);max-width:660px}.page{margin:16px auto 28px;padding:0 12px}.layout{grid-template-columns:1fr;gap:12px}.card{padding:14px}.history{max-height:220px}.key{min-height:44px}}@media(max-width:390px){.keys{gap:5px}.key{min-height:42px;font-size:.9rem;border-radius:9px}.card{padding:10px}.display{padding:12px}.toolbar{align-items:stretch}.toolbar>div{display:flex;gap:6px;flex-wrap:wrap}.mini{font-size:.82rem}.side-title{align-items:center}.side-title h2{font-size:1rem}}
+
+
+/* Use the same SP WorldTech theme tokens as the public homepage. */
+:root{color-scheme:light;--spwt-bg:#f4f7fb;--spwt-surface:#fff;--spwt-text:#172b45;--spwt-muted:#62758d;--spwt-border:#dce5f0;--spwt-input:#fff;--spwt-shadow:0 8px 28px rgba(15,42,78,.08)}
+html[data-spwt-theme="dark"]{color-scheme:dark;--spwt-bg:#0b1220;--spwt-surface:#111d30;--spwt-text:#edf4ff;--spwt-muted:#a8b8ce;--spwt-border:#2b3c54;--spwt-input:#0e192a;--spwt-shadow:0 8px 28px rgba(0,0,0,.24)}
+html[data-spwt-theme="dark"] body{background:var(--spwt-bg)!important;color:var(--spwt-text)!important}
+html[data-spwt-theme="dark"] .card{background:var(--spwt-surface)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+html[data-spwt-theme="dark"] .empty,html[data-spwt-theme="dark"] .history-item{background:var(--spwt-input)!important;color:var(--spwt-text)!important;border-color:var(--spwt-border)!important}
+/* Match the blue, horizontal public SP WorldTech masthead; keep Join Free last. */
+.spw-wireframe-header{background:#0b58b4!important;border:0!important;border-radius:0 0 18px 18px!important;box-shadow:none!important;color:#fff!important}
+.spw-header-inner{width:100%!important;max-width:none!important;min-height:0!important;padding:12px 24px!important;display:flex!important;flex-direction:row!important;align-items:center!important;gap:22px!important;border-bottom:1px solid rgba(255,255,255,.22)!important}
+.spw-brand{flex:0 0 auto!important;width:auto!important;display:flex!important;flex-direction:row!important;align-items:center!important;gap:14px!important;text-align:left!important;color:#fff!important}
+.spw-brand img{width:58px!important;height:58px!important;border-radius:12px!important}
+.spw-brand-name{font-size:clamp(18px,1.5vw,25px)!important;color:#fff!important;white-space:nowrap}
+.spw-brand-tagline{display:inline!important;color:#e5f1ff!important;font-size:clamp(10px,.9vw,15px)!important;white-space:nowrap}
+.spw-brand-tagline b{color:#fff!important}
+.spw-desktop-nav{justify-content:space-between!important;gap:3px!important;flex-wrap:nowrap!important}
+.spw-desktop-nav>a:not(.spw-join-btn){background:transparent!important;border:0!important;box-shadow:none!important;color:#fff!important;padding:10px 9px!important;margin:0!important;font-size:clamp(11px,.9vw,15px)!important;white-space:nowrap!important}
+.spw-desktop-nav>a:not(.spw-join-btn):hover{background:rgba(255,255,255,.13)!important;color:#fff!important}
+.spw-desktop-nav .spw-join-btn{order:99!important;white-space:nowrap!important;background:#fff!important;color:#0758b8!important;box-shadow:none!important;margin-left:4px!important}
+.spw-mobile-btn{background:#fff!important;color:#0758b8!important;flex:0 0 48px!important}
+.spw-mobile-menu{background:#0b58b4!important;border-color:#2c79ce!important}
+.spw-mobile-menu a{color:#0b3973!important}
+.spw-mobile-menu .mobile-join{color:#fff!important}
+@media(max-width:1180px){.spw-header-inner{padding:10px 16px!important}.spw-brand{flex-direction:row!important;flex-basis:auto!important}.spw-brand-tagline{display:none!important}}
+@media(max-width:600px){.spw-header-inner{width:100%!important;padding:8px 12px!important}.spw-brand img{width:48px!important;height:48px!important}.spw-brand-name{font-size:17px!important}}
+
+.spwt-live-strip{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap;margin:18px 20px 0;padding:10px 14px;border:1px solid var(--spwt-border,#dce5f0);border-radius:13px;background:linear-gradient(100deg,#082a52,#095e99);color:#fff;overflow:hidden;min-height:48px}
+.spwt-ticker{flex:1;min-width:180px;overflow:hidden;white-space:nowrap;font-size:.9rem;font-weight:750}
+.spwt-ticker-track{display:inline-block;padding-left:100%;animation:spwtTicker 25s linear infinite}
+.spwt-ticker:hover .spwt-ticker-track{animation-play-state:paused}
+@keyframes spwtTicker{to{transform:translateX(-100%)}}
+.spwt-live-clock{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:800;font-size:.86rem;color:#fff}
+.page{margin-top:18px}
+@media(max-width:700px){.spwt-live-strip{margin:12px 12px 0;gap:6px}.spwt-live-clock{font-size:.78rem}.page{margin-top:12px;padding:0 12px}}
+</style>
+<link rel="stylesheet" href="./assets/theme-switcher-position.css">
+</head>
+<body>
+<header class="spw-wireframe-header" data-spw-wireframe-header>
+  <div class="spw-header-inner">
+    <a class="spw-brand" href="./index.html" aria-label="SP WorldTech home">
+      <img src="./assets/logo.jpeg" alt="SP WorldTech logo">
+      <span class="spw-brand-name">SP WorldTech</span>
+      <span class="spw-brand-tagline">Technology <b>•</b> Innovation <b>•</b> Global Growth</span>
+    </a>
+    <nav class="spw-desktop-nav" aria-label="Primary navigation">
+      <a class="spw-nav-home" href="./index.html"><span class="spw-ico">⌂</span><span>Home</span></a>
+      <a href="./services.html"><span class="spw-ico">⚙</span><span>Services</span></a>
+      <a href="./businesses.html"><span class="spw-ico">▥</span><span>Businesses</span></a>
+      <a href="./projects.html"><span class="spw-ico">□</span><span>Projects</span></a>
+      <a href="./pricing.html"><span class="spw-ico">◇</span><span>Pricing</span></a>
+      <a href="./marketplace.html"><span class="spw-ico">🛒</span><span>Marketplace</span></a>
+      <a href="./academy.html"><span class="spw-ico">◇</span><span>Academy</span></a>
+      <a href="./about.html"><span class="spw-ico">ⓘ</span><span>About</span></a>
+      <a href="./privacy-policy.html"><span class="spw-ico">♢</span><span>Privacy</span></a>
+      <a href="./terms-and-conditions.html"><span class="spw-ico">▤</span><span>Terms</span></a>
+      <a href="./contact.html"><span class="spw-ico">⌕</span><span>Contact</span></a>
+      <a href="./calculator.html">Calculator</a>
+      <a class="spw-join-btn" href="./auth.html">Join Free</a></nav>
+    <button class="spw-mobile-btn" id="spwWireframeMenuBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+  <div class="spw-mobile-menu" id="spwWireframeMenu" hidden>
+    <a href="./index.html">Home</a><a href="./services.html">Services</a><a href="./businesses.html">Businesses</a>
+    <a href="./projects.html">Projects</a><a href="./pricing.html">Pricing</a><a href="./marketplace.html">Marketplace</a>
+    <a href="./academy.html">Academy</a><a href="./about.html">About</a><a href="./privacy-policy.html">Privacy</a>
+    <a href="./terms-and-conditions.html">Terms</a><a href="./contact.html">Contact</a><a href="./calculator.html">Calculator</a><a class="mobile-join" href="./auth.html">Join Free</a>
+  </div>
+</header>
+<section class="spwt-live-strip" aria-label="SP WorldTech announcements and local time">
+  <div class="spwt-ticker" aria-label="Announcements"><div class="spwt-ticker-track">SP WorldTech • Software Development • Digital Products • Web Design • Digital Marketing • World Net Hosting • Explore our marketplace • Contact our support team •&nbsp;</div></div>
+  <time class="spwt-live-clock" id="spwtLiveClock" aria-label="Current local date and time">Loading time…</time>
+</section>
+<div class="page">
+<main class="layout">
+<section class="card" aria-label="Scientific calculator">
+  <div class="toolbar">
+    <label for="angleMode">Angle mode
+      <select id="angleMode" aria-label="Angle mode"><option value="DEG">Degrees (DEG)</option><option value="RAD">Radians (RAD)</option></select>
+    </label>
+    <div><button class="mini" id="copyResult" type="button">Copy result</button> <button class="mini" id="toggleFormat" type="button" aria-pressed="false">Scientific notation: OFF</button></div>
+  </div>
+  <div class="display" aria-live="polite" aria-atomic="true">
+    <div class="expression" id="expression">Ready</div>
+    <div class="result" id="result">0</div>
+  </div>
+  <p class="message" id="message" role="status">Tip: use your keyboard or tap the buttons.</p>
+  <div class="keys" id="keys">
+    <button class="key danger" data-action="clear">AC</button><button class="key danger" data-action="delete">DEL</button><button class="key fn" data-insert="(">(</button><button class="key fn" data-insert=")">)</button><button class="key op" data-insert="÷">÷</button>
+    <button class="key fn" data-insert="sin(">sin</button><button class="key fn" data-insert="cos(">cos</button><button class="key fn" data-insert="tan(">tan</button><button class="key fn" data-insert="sqrt(">√</button><button class="key op" data-insert="×">×</button>
+    <button class="key fn" data-insert="asin(">sin⁻¹</button><button class="key fn" data-insert="acos(">cos⁻¹</button><button class="key fn" data-insert="atan(">tan⁻¹</button><button class="key fn" data-insert="log(">log</button><button class="key op" data-insert="−">−</button>
+    <button class="key fn" data-insert="ln(">ln</button><button class="key fn" data-insert="abs(">abs</button><button class="key fn" data-insert="π">π</button><button class="key fn" data-insert="e">e</button><button class="key op" data-insert="+">+</button>
+    <button class="key" data-insert="7">7</button><button class="key" data-insert="8">8</button><button class="key" data-insert="9">9</button><button class="key fn" data-insert="%">%</button><button class="key fn" data-insert="^">xʸ</button>
+    <button class="key" data-insert="4">4</button><button class="key" data-insert="5">5</button><button class="key" data-insert="6">6</button><button class="key fn" data-insert="!">x!</button><button class="key fn" data-action="reciprocal">1/x</button>
+    <button class="key" data-insert="1">1</button><button class="key" data-insert="2">2</button><button class="key" data-insert="3">3</button><button class="key fn" data-action="square">x²</button><button class="key fn" data-action="sign">±</button>
+    <button class="key wide" data-insert="0">0</button><button class="key" data-insert=".">.</button><button class="key equals" data-action="equals">=</button><button class="key special" data-action="ans">ANS</button>
+  </div>
+  <p class="note">Functions include trigonometry, inverse trigonometry, logarithms, square root, powers, factorial, percentage, π, e, absolute value and reciprocal. Factorials are supported for whole numbers from 0 to 170.</p>
+</section>
+<aside class="card" aria-label="Calculation history">
+  <div class="side-title"><h2>Calculation history</h2><button class="outline" id="clearHistory" type="button">Clear history</button></div>
+  <div class="history" id="history"><div class="empty">Your completed calculations will appear here. Select a history item to reuse its answer.</div></div>
+  <p class="note">History is kept in this browser tab only. Connect the optional API endpoint in the JavaScript configuration to save calculations to your backend.</p>
+</aside>
+</main>
+
+</div>
+<script>
+(() => {
+  'use strict';
+  // Optional backend: set to your authenticated API endpoint, e.g. "/api/calculator/history".
+  // Leave empty to use the calculator locally. Do not put secret keys in frontend code.
+  const API_ENDPOINT = '';
+  const state = { input:'', answer:0, lastExpression:'', history:[], scientific:false };
+  const $ = id => document.getElementById(id);
+  const expressionEl = $('expression'), resultEl = $('result'), messageEl = $('message');
+  const yearEl = $('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  function message(text, error=false){ messageEl.textContent=text; messageEl.classList.toggle('error',error); }
+  function format(n){
+    if (!Number.isFinite(n)) throw new Error('Result is not finite.');
+    if (Math.abs(n) < 1e-12) n=0;
+    if (state.scientific) return n.toExponential(8).replace(/\.?0+e/,'e');
+    return Number(n.toPrecision(12)).toLocaleString('en-US',{useGrouping:false,maximumSignificantDigits:12});
+  }
+  function show(){ expressionEl.textContent=state.input || 'Ready'; resultEl.textContent=state.input ? '…' : format(state.answer); }
+  function insert(s){
+    const operators=['+','−','×','÷','^'];
+    if (state.input==='0' && /^[0-9]$/.test(s)) state.input=s;
+    else if (operators.includes(s) && operators.includes(state.input.slice(-1))) state.input=state.input.slice(0,-1)+s;
+    else state.input+=s;
+    show(); message('Ready to calculate.');
+  }
+  function tokenize(src){
+    const s=src.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/\s+/g,'');
+    const tokens=[]; let i=0;
+    while(i<s.length){
+      const rest=s.slice(i); let m;
+      if((m=rest.match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/i))){tokens.push({t:'num',v:Number(m[0])});i+=m[0].length;continue;}
+      if((m=rest.match(/^[a-zA-Z]+/))){tokens.push({t:'id',v:m[0].toLowerCase()});i+=m[0].length;continue;}
+      const c=s[i]; if('+-*/^()%!,'.includes(c)){tokens.push({t:c,v:c});i++;continue;}
+      if(c==='π'){tokens.push({t:'num',v:Math.PI});i++;continue;}
+      throw Error('Unsupported character: '+c);
+    }
+    // Insert multiplication for cases such as 2π, 2(3), and )(
+    const expanded=[];
+    for(const tok of tokens){
+      const prev=expanded[expanded.length-1];
+      const prevEnds=prev&&(prev.t==='num'||prev.t===')'||prev.t==='!'||prev.t==='%');
+      const nextStarts=tok.t==='num'||tok.t==='id'||tok.t==='(';
+      if(prevEnds&&nextStarts) expanded.push({t:'*',v:'*'});
+      expanded.push(tok);
+    }
+    return expanded;
+  }
+  function evaluate(src){
+    const ts=tokenize(src); let p=0; const mode=$('angleMode').value;
+    const peek=()=>ts[p]; const take=()=>ts[p++];
+    const expect=t=>{if(!peek()||peek().t!==t)throw Error('Check your brackets or operators.');return take();};
+    const angle=x=>mode==='DEG'?x*Math.PI/180:x;
+    const unangle=x=>mode==='DEG'?x*180/Math.PI:x;
+    function primary(){
+      const t=peek(); if(!t)throw Error('Enter a calculation.');
+      if(t.t==='+'){take();return unary();}
+      if(t.t==='-'){take();return -unary();}
+      if(t.t==='num'){take();return t.v;}
+      if(t.t==='('){take();const v=add();expect(')');return v;}
+      if(t.t==='id'){
+        take(); const name=t.v;
+        if(name==='pi')return Math.PI;if(name==='e')return Math.E;
+        if(name==='ans')return state.answer;
+        if(name==='inf')throw Error('Infinity is not supported.');
+        if(peek()&&peek().t==='('){
+          take();const a=add();expect(')');
+          const f={
+            sin:x=>Math.sin(angle(x)),cos:x=>Math.cos(angle(x)),tan:x=>Math.tan(angle(x)),
+            asin:x=>unangle(Math.asin(x)),acos:x=>unangle(Math.acos(x)),atan:x=>unangle(Math.atan(x)),
+            sqrt:x=>{if(x<0)throw Error('Square root needs a non-negative number.');return Math.sqrt(x);},
+            log:x=>{if(x<=0)throw Error('Logarithm needs a positive number.');return Math.log10(x);},
+            ln:x=>{if(x<=0)throw Error('Logarithm needs a positive number.');return Math.log(x);},
+            abs:x=>Math.abs(x),exp:x=>Math.exp(x),floor:x=>Math.floor(x),ceil:x=>Math.ceil(x)
+          };
+          if(!f[name])throw Error('Unknown function: '+name);
+          if(['asin','acos'].includes(name)&&(a < -1||a>1))throw Error('Inverse sine/cosine input must be between -1 and 1.');
+          return f[name](a);
+        }
+        throw Error('Unknown name: '+name);
+      }
+      throw Error('Unexpected input.');
+    }
+    function factorial(n){if(n<0||!Number.isInteger(n)||n>170)throw Error('Factorial requires a whole number from 0 to 170.');let r=1;for(let k=2;k<=n;k++)r*=k;return r;}
+    function postfix(){let v=primary();while(peek()&&(peek().t==='!'||peek().t==='%')){const op=take().t;if(op==='!')v=factorial(v);else v/=100;}return v;}
+    function power(){let v=postfix();if(peek()&&peek().t==='^'){take();v=Math.pow(v,unary());}return v;}
+    function unary(){return power();}
+    function mul(){let v=unary();while(peek()&&['*','/'].includes(peek().t)){const op=take().t;const b=unary();if(op==='/'&&b===0)throw Error('Cannot divide by zero.');v=op==='*'?v*b:v/b;}return v;}
+    function add(){let v=mul();while(peek()&&['+','-'].includes(peek().t)){const op=take().t;const b=mul();v=op==='+'?v+b:v-b;}return v;}
+    if(!ts.length)throw Error('Enter a calculation.');
+    const value=add();if(p!==ts.length)throw Error('Check your expression.');if(!Number.isFinite(value))throw Error('Result is outside the supported range.');return value;
+  }
+  function calculate(){
+    try{
+      const value=evaluate(state.input); const expr=state.input;
+      state.answer=value;state.lastExpression=expr;state.history.unshift({expr,result:value});
+      state.history=state.history.slice(0,50);renderHistory();expressionEl.textContent=expr+' =';resultEl.textContent=format(value);
+      state.input='';message('Calculation complete.');saveToBackend(expr,value);
+    }catch(e){message(e.message||'Unable to calculate this expression.',true);}
+  }
+  function renderHistory(){
+    const box=$('history');box.replaceChildren();
+    if(!state.history.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Your completed calculations will appear here. Select a history item to reuse its answer.';box.append(empty);return;}
+    state.history.forEach(item=>{
+      const b=document.createElement('button');b.type='button';b.className='history-item';
+      const exp=document.createElement('span');exp.className='hist-exp';exp.textContent=item.expr+' =';
+      const res=document.createElement('span');res.className='hist-result';res.textContent=format(item.result);
+      b.append(exp,res);b.addEventListener('click',()=>{state.answer=item.result;state.input=String(item.result);show();message('History answer loaded.');});box.append(b);
+    });
+  }
+  async function saveToBackend(expression,result){
+    if(!API_ENDPOINT)return;
+    try{
+      const response=await fetch(API_ENDPOINT,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({expression,result,angleMode:$('angleMode').value,createdAt:new Date().toISOString()})});
+      if(!response.ok)throw new Error('API returned '+response.status);
+    }catch(err){console.error('Calculator history was not saved:',err);message('Calculated locally; backend save failed.',true);}
+  }
+  $('keys').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    const action=b.dataset.action, value=b.dataset.insert;
+    if(value!==undefined){insert(value);return;}
+    if(action==='clear'){state.input='';expressionEl.textContent='Ready';resultEl.textContent='0';message('Cleared.');}
+    else if(action==='delete'){state.input=state.input.slice(0,-1);show();}
+    else if(action==='equals')calculate();
+    else if(action==='ans')insert('ans');
+    else if(action==='square'){if(!state.input)state.input=String(state.answer);state.input='('+state.input+')^2';show();}
+    else if(action==='reciprocal'){if(!state.input)state.input=String(state.answer);state.input='1/('+state.input+')';show();}
+    else if(action==='sign'){if(!state.input)state.input=String(state.answer);state.input=state.input.startsWith('-')?state.input.slice(1):'-('+state.input+')';show();}
+  });
+  $('clearHistory').addEventListener('click',()=>{state.history=[];renderHistory();message('History cleared.');});
+  $('toggleFormat').addEventListener('click',()=>{state.scientific=!state.scientific;$('toggleFormat').textContent='Scientific notation: '+(state.scientific?'ON':'OFF');$('toggleFormat').setAttribute('aria-pressed',String(state.scientific));resultEl.textContent=format(state.answer);renderHistory();});
+  $('copyResult').addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(String(state.answer));message('Result copied.');}
+    catch{message('Clipboard access is unavailable in this browser.',true);}
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(/^[0-9.]$/.test(e.key)){insert(e.key);return;}
+    const map={'+':'+','-':'−','*':'×','/':'÷','^':'^','(':'(',')':')','%':'%','!':'!'};
+    if(map[e.key]){e.preventDefault();insert(map[e.key]);return;}
+    if(e.key==='Enter'||e.key==='='){e.preventDefault();calculate();}
+    else if(e.key==='Backspace'){state.input=state.input.slice(0,-1);show();}
+    else if(e.key==='Escape'){state.input='';show();message('Cleared.');}
+  });
+  show();
+})();
+</script>
+<script defer src="./assets/wireframe-header.js"></script>
+<script defer src="./assets/world-net-hosting-ads.js"></script>
+<script defer src="./assets/client-social-proof.js"></script>
+<script defer src="./assets/comments.js"></script>
+<script defer src="./assets/theme-switcher-position.js"></script>
+<script>
+(function(){const clock=document.getElementById('spwtLiveClock');if(!clock)return;function tick(){const now=new Date();clock.textContent=new Intl.DateTimeFormat('en-NG',{weekday:'short',month:'short',day:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true,timeZone:'Africa/Lagos'}).format(now)+' WAT';}tick();setInterval(tick,1000);})();
+</script>
+
+<script defer src="./assets/spwt-robot.js"></script>
+</body>
+</html>

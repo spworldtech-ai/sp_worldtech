@@ -19,7 +19,11 @@ exports.chat = async (req, res) => {
     const message = safeMessage(req);
     const context = req.body.context || 'website-knowledge';
     const provider = req.body.provider || 'copilot';
-    const result = await callAIProvider({ provider, context, message, user: req.user, system: 'You answer as SP WorldTech website knowledge AI. Explain platform features accurately and never expose API details.' });
+    const academyContext = String(context).toLowerCase().includes('academy');
+    const system = academyContext
+      ? 'You are the SP WorldTech Academy instructor. Teach step by step, adapt to the learner level, explain why each step works, use small examples and exercises, and help debug code from supplied error messages. Never claim you executed code unless a verified execution tool did so. Do not reveal secrets, API keys, passwords, or private user data. Do not invent course catalog, grades, certificates, or account/payment status.'
+      : 'You are SP WorldTech virtual platform guide. Explain services, products, account navigation, login/signup, pricing pages, calculator, projects, marketplace, academy, and support using only known information. Give numbered steps and troubleshoot from symptoms the user describes. Do not invent live prices, product stock, platform activity, order/payment status, or access private account data. Never expose API details or secrets. For financial/security/role changes, direct the user to authorized support.';
+    const result = await callAIProvider({ provider, context, message, user: req.user, system });
     await saveHistory({ req, context, provider, question: message, answer: result.content });
     res.json({ answer: result.content, provider });
   } catch (error) { res.status(error.statusCode || 500).json({ message: error.message }); }

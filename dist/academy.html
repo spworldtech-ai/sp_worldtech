@@ -87,13 +87,17 @@ html[data-spwt-theme="dark"] p,html[data-spwt-theme="dark"] li,html[data-spwt-th
 
 </script>
 <script defer src="./assets/theme-switcher-position.js"></script>
+
+<script defer src="./assets/spwt-robot.js"></script>
 </body>
 </html></textarea><div class="terminal-actions"><button class="academy-btn" id="runCode" type="button">Run Code</button><button class="academy-btn secondary" id="resetCode" type="button">Reset</button></div><div class="terminal-output" id="codeOutput">Click “Run Code” to preview your HTML.</div></div><div class="future-note"><strong>AI coding support — Coming Soon</strong>The future version can provide guided explanations, debugging help, project suggestions and learning assistance without replacing the student's own work.</div></section>
 </div></div></section>
 </main>
 <script defer src="./assets/site.js"></script><script defer src="./assets/app-config.js"></script><script defer src="./assets/global-ui.js"></script><script defer src="./assets/footer.js"></script><script defer src="./assets/site-images.js"></script><script defer src="./assets/world-net-hosting-ads.js"></script>
-<script defer src="./assets/chat-widget.js"></script>
+
 <script>
 (()=>{const input=document.getElementById('codeInput'),out=document.getElementById('codeOutput'),run=document.getElementById('runCode'),reset=document.getElementById('resetCode');const initial=input.value;run.addEventListener('click',()=>{const win=window.open('about:blank','_blank','noopener,noreferrer,width=900,height=650');if(!win){out.textContent='Your browser blocked the preview window. Allow pop-ups for this page and try again.';return}win.document.open();win.document.write(input.value);win.document.close();out.textContent='Preview opened in a new tab/window.'});reset.addEventListener('click',()=>{input.value=initial;out.textContent='Code reset to the Academy starter example.'});})();
 </script>
-<script defer src="./assets/client-social-proof.js"></script></body></html>
+<script defer src="./assets/client-social-proof.js"></script>
+
+</body></html>

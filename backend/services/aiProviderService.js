@@ -4,9 +4,16 @@ function getKey() {
 
 function pickEndpoint(provider = 'gemini') {
   const p = String(provider || '').toLowerCase();
-  if (p.includes('gemini')) return process.env.GEMINI_API_URL || process.env.AI_PROVIDER_URL || '';
   if (p.includes('chatgpt') || p.includes('gpt')) return process.env.CHATGPT_API_URL || process.env.AI_PROVIDER_URL || '';
-  return process.env.AI_PROVIDER_URL || process.env.GEMINI_API_URL || '';
+  // A custom provider URL takes precedence. Otherwise the Google Gemini REST API is used.
+  if (process.env.AI_PROVIDER_URL) return process.env.AI_PROVIDER_URL;
+  if (process.env.GEMINI_API_URL) return process.env.GEMINI_API_URL;
+  const model = String(process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+  return `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+}
+
+function isNativeGeminiEndpoint(endpoint, provider) {
+  return /generativelanguage\.googleapis\.com\/v1beta\/models\//i.test(endpoint) && !String(process.env.AI_PROVIDER_URL || '').trim() && !String(process.env.GEMINI_API_URL || '').trim() && !String(provider || '').toLowerCase().includes('gpt');
 }
 
 function extractText(data) {
@@ -36,19 +43,23 @@ async function callAIProvider({ provider = 'gemini', context = 'general', messag
   const endpoint = pickEndpoint(provider);
   if (!endpoint) { const err = new Error('SP WorldTech AI endpoint is not configured yet.'); err.statusCode = 503; throw err; }
   const prompt = buildProfessionalPrompt({ context, message, user, system });
-  const payload = { prompt, message: prompt, input: prompt, query: prompt, context, provider, ...extra };
+  const nativeGemini = isNativeGeminiEndpoint(endpoint, provider);
+  const payload = nativeGemini
+    ? { contents: [{ role: 'user', parts: [{ text: prompt }] }], generationConfig: { temperature: 0.35, maxOutputTokens: 1200 } }
+    : { prompt, message: prompt, input: prompt, query: prompt, context, provider, ...extra };
+  const requestUrl = nativeGemini ? `${endpoint}?key=${encodeURIComponent(apiKey)}` : endpoint;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 20000);
   try {
-    const response = await fetch(endpoint, {
+    const headers = { Accept: 'application/json', 'Content-Type': 'application/json' };
+    if (!nativeGemini) {
+      headers['X-API-Key'] = apiKey;
+      headers['x-api-key'] = apiKey;
+      headers.Authorization = `Bearer ${apiKey}`;
+    }
+    const response = await fetch(requestUrl, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-API-Key': apiKey,
-        'x-api-key': apiKey,
-        Authorization: `Bearer ${apiKey}`
-      },
+      headers,
       body: JSON.stringify(payload),
       signal: controller.signal
     });

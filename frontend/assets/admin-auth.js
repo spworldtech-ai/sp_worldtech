@@ -1,4 +1,4 @@
-(() => {
+﻿(() => {
   'use strict';
   const API = (window.SPW_APP?.API_BASE || location.origin).replace(/\/$/, '').replace(/\/api$/i, '');
   const $ = id => document.getElementById(id);
@@ -27,12 +27,12 @@
   }
   $('adminLogin')?.addEventListener('submit', async event => {
     event.preventDefault();
-    try { await sendForm('login', { email: $('adminEmail').value.trim(), password: $('adminPassword').value }, 'loginStatus', 'Signing you in…'); }
+    try { await sendForm('login', { email: $('adminEmail').value.trim(), password: $('adminPassword').value }, 'loginStatus', 'Signing you inΓÇª'); }
     catch (error) { setStatus('loginStatus', error.message); window.SPW_APP?.notify?.(error.message, 'error'); }
   });
   $('adminSignup')?.addEventListener('submit', async event => {
     event.preventDefault();
-    try { await sendForm('signup', { fullName: $('adminFullName').value.trim(), email: $('adminSignupEmail').value.trim(), password: $('adminSignupPassword').value }, 'signupStatus', 'Creating administrator account…'); }
+    try { await sendForm('signup', { fullName: $('adminFullName').value.trim(), email: $('adminSignupEmail').value.trim(), password: $('adminSignupPassword').value }, 'signupStatus', 'Creating administrator accountΓÇª'); }
     catch (error) { setStatus('signupStatus', error.message); window.SPW_APP?.notify?.(error.message, 'error'); }
   });
   async function setupGoogle() {
@@ -51,7 +51,7 @@
       window.google.accounts.id.initialize({ client_id: config.googleClientId, callback: async ({ credential }) => {
         try {
           if (!credential) throw new Error('Google did not return a valid credential.');
-          setStatus('loginStatus', 'Verifying your Google administrator account…'); setStatus('signupStatus', 'Verifying your Google administrator account…');
+          setStatus('loginStatus', 'Verifying your Google administrator accountΓÇª'); setStatus('signupStatus', 'Verifying your Google administrator accountΓÇª');
           const response = await fetch(`${API}/api/admin/auth/google`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ credential }) });
           const data = await window.SPW_APP.parseResponse(response); if (!response.ok) throw new Error(data.message || 'Admin Google authentication failed.'); handleAuthResponse(data);
         } catch (error) { setStatus('loginStatus', error.message); setStatus('signupStatus', error.message); window.SPW_APP?.notify?.(error.message, 'error'); }
