@@ -162,6 +162,7 @@ exports.staffSignup = async (req, res) => {
     if (!email || !email.includes('@')) return res.status(400).json({ message: 'Enter a valid email address.' });
     if (!username || username.length < 3) return res.status(400).json({ message: 'Username must be at least 3 characters.' });
     if (!validatePassword(password)) return res.status(400).json({ message: 'Password must be at least 8 characters.' });
+    if (!staffEmailAllowed(email)) return res.status(403).json({ message: 'This email is not authorized for staff access. Contact an administrator.' });
     if (await User.findOne({ $or: [{ email }, { username }] })) return res.status(400).json({ message: 'Email or username already exists.' });
     const user = await User.create({ fullName, username, email, phone, password: await bcrypt.hash(password, 10), role: 'staff' });
     res.status(201).json({ ...authPayload(user), message: 'Staff account created successfully.' });
@@ -196,7 +197,24 @@ function normalizePinAccessRole(role) {
 function isProtectedOperationsRole(role) { return ['staff', 'admin', 'owner'].includes(role); }
 function makeOperationsTokenId(role) { const prefix = role === 'owner' ? 'OWNER' : role.toUpperCase(); return `SP-${prefix}-${crypto.randomBytes(3).toString('hex').toUpperCase()}`; }
 async function uniqueOperationsTokenId(role) { for (let attempt = 0; attempt < 8; attempt += 1) { const tokenId = makeOperationsTokenId(role); const existing = await User.findOne({ operationsTokenId: tokenId }); if (!existing) return tokenId; } throw new Error('Unable to generate a unique Token ID. Try again.'); }
-function requireSetupCode(req, role) { const setupCode = process.env.OPERATIONS_SETUP_CODE; if (!setupCode) return true; const provided = String(req.body.setupCode || '').trim(); return provided === String(setupCode).trim(); }
+// Privileged operations access (staff/admin/owner) can only be created with the
+// server-side setup code. If OPERATIONS_SETUP_CODE is not configured, creation of
+// privileged PIN accounts is refused (fail closed) instead of being open to anyone.
+function requireSetupCode(req, role) {
+  const setupCode = String(process.env.OPERATIONS_SETUP_CODE || '').trim();
+  if (!setupCode) return false;
+  const provided = String(req.body.setupCode || '').trim();
+  const a = Buffer.from(provided), b = Buffer.from(setupCode);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+// Optional allowlist for self-service staff registration (STAFF_ALLOWED_EMAILS, comma separated).
+// When it is not configured, existing behaviour is unchanged.
+function staffEmailAllowed(email) {
+  const list = String(process.env.STAFF_ALLOWED_EMAILS || '').split(',').map((item) => item.trim().toLowerCase()).filter(Boolean);
+  if (!list.length) return true;
+  return list.includes(cleanEmail(email));
+}
 
 exports.createOperationsPin = async (req, res) => {
   try {
@@ -207,7 +225,7 @@ exports.createOperationsPin = async (req, res) => {
     if (!role) return res.status(400).json({ message: 'Choose User, Staff, Admin, or Owner / Super Admin.' });
     if (!fullName || fullName.length < 2) return res.status(400).json({ message: 'Enter the access holder full name.' });
     if (!validatePin(pin)) return res.status(400).json({ message: 'PIN must be 4 to 8 digits.' });
-    if (isProtectedOperationsRole(role) && !requireSetupCode(req, role)) return res.status(403).json({ message: 'Invalid operations setup code.' });
+    if (isProtectedOperationsRole(role) && !requireSetupCode(req, role)) return res.status(403).json({ message: 'Invalid or unavailable operations setup code.' });
 
     const tokenId = await uniqueOperationsTokenId(role);
     const pinHash = await bcrypt.hash(pin, 10);
@@ -286,6 +304,10 @@ exports.googleLogin = async (req, res) => {
     }
     if (user && requestedRole === 'user' && normalizeRole(user.role) !== 'user') {
       return res.status(403).json({ message: 'This Google account belongs to a staff or administration account.' });
+    }
+
+    if (!user && requestedRole === 'staff' && !staffEmailAllowed(email)) {
+      return res.status(403).json({ message: 'This Google account is not authorized for staff access. Contact an administrator.' });
     }
 
     if (!user) {

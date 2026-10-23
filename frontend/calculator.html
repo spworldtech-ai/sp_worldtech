@@ -144,6 +144,12 @@ html[data-spwt-theme="dark"] .empty,html[data-spwt-theme="dark"] .history-item{b
   function show(){ expressionEl.textContent=state.input || 'Ready'; resultEl.textContent=state.input ? '…' : format(state.answer); }
   function insert(s){
     const operators=['+','−','×','÷','^'];
+    const lastChar=state.input.slice(-1);
+    if (s==='.') {
+      const currentNumber=state.input.split(/[+\u2212\u00d7\u00f7^()%!]/).pop();
+      if (currentNumber.includes('.')) { message('A number can only contain one decimal point.', true); return; }
+    }
+    if (s==='e' && /[0-9.)]/.test(lastChar)) s='\u00d7e';
     if (state.input==='0' && /^[0-9]$/.test(s)) state.input=s;
     else if (operators.includes(s) && operators.includes(state.input.slice(-1))) state.input=state.input.slice(0,-1)+s;
     else state.input+=s;
@@ -154,7 +160,7 @@ html[data-spwt-theme="dark"] .empty,html[data-spwt-theme="dark"] .history-item{b
     const tokens=[]; let i=0;
     while(i<s.length){
       const rest=s.slice(i); let m;
-      if((m=rest.match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/i))){tokens.push({t:'num',v:Number(m[0])});i+=m[0].length;continue;}
+      if((m=rest.match(/^(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?/i))){if(s[i+m[0].length]==='.')throw Error('Invalid number: a number can only contain one decimal point.');tokens.push({t:'num',v:Number(m[0])});i+=m[0].length;continue;}
       if((m=rest.match(/^[a-zA-Z]+/))){tokens.push({t:'id',v:m[0].toLowerCase()});i+=m[0].length;continue;}
       const c=s[i]; if('+-*/^()%!,'.includes(c)){tokens.push({t:c,v:c});i++;continue;}
       if(c==='π'){tokens.push({t:'num',v:Math.PI});i++;continue;}
@@ -164,7 +170,7 @@ html[data-spwt-theme="dark"] .empty,html[data-spwt-theme="dark"] .history-item{b
     const expanded=[];
     for(const tok of tokens){
       const prev=expanded[expanded.length-1];
-      const prevEnds=prev&&(prev.t==='num'||prev.t===')'||prev.t==='!'||prev.t==='%');
+      const prevEnds=prev&&(prev.t==='num'||prev.t===')'||prev.t==='!'||prev.t==='%'||(prev.t==='id'&&['e','pi','ans'].includes(prev.v)));
       const nextStarts=tok.t==='num'||tok.t==='id'||tok.t==='(';
       if(prevEnds&&nextStarts) expanded.push({t:'*',v:'*'});
       expanded.push(tok);
@@ -270,6 +276,9 @@ html[data-spwt-theme="dark"] .empty,html[data-spwt-theme="dark"] .history-item{b
   show();
 })();
 </script>
+<script>
+(function(){try{var t=localStorage.getItem('spw_user_token');if(!t)return;var r=String((JSON.parse(localStorage.getItem('spw_user')||'{}').role)||'').toLowerCase();var dest=(r==='admin'||r==='owner')?'./admin-dashboard.html':(r==='staff'||r==='social_worker')?'./staff.html':'./dashboard.html';document.querySelectorAll('.spw-join-btn,.mobile-join').forEach(function(a){a.setAttribute('href',dest);a.textContent='My Dashboard';});}catch(e){}})();
+</script>
 <script defer src="./assets/wireframe-header.js"></script>
 <script defer src="./assets/world-net-hosting-ads.js"></script>
 <script defer src="./assets/client-social-proof.js"></script>
@@ -278,7 +287,5 @@ html[data-spwt-theme="dark"] .empty,html[data-spwt-theme="dark"] .history-item{b
 <script>
 (function(){const clock=document.getElementById('spwtLiveClock');if(!clock)return;function tick(){const now=new Date();clock.textContent=new Intl.DateTimeFormat('en-NG',{weekday:'short',month:'short',day:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true,timeZone:'Africa/Lagos'}).format(now)+' WAT';}tick();setInterval(tick,1000);})();
 </script>
-
-<script defer src="./assets/spwt-robot.js"></script>
 </body>
 </html>

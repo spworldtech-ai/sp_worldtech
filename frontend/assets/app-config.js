@@ -62,6 +62,7 @@ window.SPW_APP.api = async (path, options = {}) => {
   };
   const response = await fetch(`${window.SPW_APP.API_BASE}${path}`, { ...options, headers });
   const data = await window.SPW_APP.parseResponse(response);
+  if (response.status === 401 && typeof window.SPW_APP.onUnauthorized === 'function') window.SPW_APP.onUnauthorized(data);
   if (!response.ok) throw new Error(data.message || 'Request failed.');
   return data;
 };

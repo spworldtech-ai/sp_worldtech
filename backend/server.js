@@ -28,6 +28,7 @@ const commentRoutes = require('./routes/commentRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const fxRoutes = require('./routes/fxRoutes');
 const { ensureJobs } = require('./services/jobService');
+const { rateLimit } = require('./middleware/rateLimit');
 
 dotenv.config();
 const app = express();
@@ -70,6 +71,11 @@ app.use((req, _res, next) => {
 });
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, name: 'SP WorldTech API' }));
+
+// Throttle credential endpoints (brute-force protection).
+const credentialLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20 });
+['/api/auth/user-login', '/api/auth/login', '/api/auth/staff-login', '/api/auth/staff-signup', '/api/auth/register', '/api/auth/signup', '/api/auth/operations-pin/create', '/api/auth/operations-pin/login', '/api/admin/auth/login', '/api/admin/auth/signup']
+  .forEach((route) => app.use(route, credentialLimiter));
 
 // Vercel serverless functions do not execute the local start() block.  Every
 // database-backed API request therefore establishes/reuses the cached MongoDB

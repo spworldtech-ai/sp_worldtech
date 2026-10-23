@@ -5,15 +5,68 @@ const EbookPurchase = require('../models/EbookPurchase');
 const Wallet = require('../models/Wallet');
 const SystemWallet = require('../models/SystemWallet');
 const Transaction = require('../models/Transaction');
-const { protect, authorize } = require('../middleware/auth');
+const mongoose = require('mongoose');
+const { protect, authorize, normalizeRole } = require('../middleware/auth');
 const { initializePaystackPayment, verifyPaystackTransaction } = require('../services/paystackService');
 const { convertUsdToNgn } = require('../services/fxService');
 const { sendAdminNotification } = require('../services/adminEmailService');
 const JobNotification = require('../models/JobNotification');
 
+// Admins, owners and staff may manage products (upload, edit, publish/hide).
 function requireAdmin(req, res, next) {
-  if (!['admin', 'owner', 'staff'].includes(req.user?.role)) return res.status(403).json({ message: 'Admin or owner access required.' });
+  const role = normalizeRole(String(req.user?.role || '').toLowerCase());
+  if (!['admin', 'owner', 'staff'].includes(role)) return res.status(403).json({ message: 'Administrator, owner or staff access required.' });
   next();
+}
+
+// Destructive operations stay administrator/owner only.
+function requireAdminOnly(req, res, next) {
+  const role = String(req.user?.role || '').toLowerCase();
+  if (!['admin', 'owner'].includes(role)) return res.status(403).json({ message: 'Only an administrator or owner can delete products. Staff can hide a product instead.' });
+  next();
+}
+
+const PRODUCT_TYPES = ['ebook', 'download', 'logo', 'template', 'software', 'other'];
+const ALLOWED_FILE_TYPES = ['application/zip', 'application/x-zip-compressed', 'application/pdf', 'application/epub+zip', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'text/plain', 'image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/svg+xml', 'application/octet-stream', 'application/vnd.oasis.opendocument.text'];
+const ALLOWED_COVER_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
+const MAX_FILE_BYTES = 15 * 1024 * 1024;
+const MAX_COVER_BYTES = 3 * 1024 * 1024;
+
+// Server-side check that the bytes match the declared type, so a client cannot
+// label an arbitrary file as a PDF/image.
+function signatureMatches(mime, buffer) {
+  const type = String(mime || '').toLowerCase();
+  const startsWith = (...bytes) => bytes.every((byte, index) => buffer[index] === byte);
+  if (type === 'application/pdf') return startsWith(0x25, 0x50, 0x44, 0x46);
+  if (['application/zip', 'application/x-zip-compressed', 'application/epub+zip', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.oasis.opendocument.text'].includes(type)) return startsWith(0x50, 0x4b, 0x03, 0x04) || startsWith(0x50, 0x4b, 0x05, 0x06);
+  if (type === 'application/msword') return startsWith(0xd0, 0xcf, 0x11, 0xe0) || startsWith(0x50, 0x4b, 0x03, 0x04);
+  if (type === 'image/png') return startsWith(0x89, 0x50, 0x4e, 0x47);
+  if (type === 'image/jpeg') return startsWith(0xff, 0xd8, 0xff);
+  if (type === 'image/gif') return startsWith(0x47, 0x49, 0x46, 0x38);
+  if (type === 'image/webp') return buffer.length > 12 && buffer.slice(0, 4).toString('ascii') === 'RIFF' && buffer.slice(8, 12).toString('ascii') === 'WEBP';
+  if (type === 'image/svg+xml') return /<svg[\s>]/i.test(buffer.slice(0, 2048).toString('utf8'));
+  if (type === 'text/plain') return !buffer.slice(0, 4096).includes(0);
+  return true; // application/octet-stream: no signature to verify
+}
+
+function decodeBase64(raw) {
+  const clean = String(raw || '').replace(/^data:[^;]+;base64,/, '');
+  if (!/^[A-Za-z0-9+/]*={0,2}$/.test(clean) || clean.length % 4 === 1) return null;
+  return Buffer.from(clean, 'base64');
+}
+
+function parseBoolean(value, fallback) {
+  if (typeof value === 'boolean') return value;
+  if (value === undefined || value === null || value === '') return fallback;
+  const text = String(value).trim().toLowerCase();
+  if (['true', '1', 'yes', 'on'].includes(text)) return true;
+  if (['false', '0', 'no', 'off'].includes(text)) return false;
+  return fallback;
+}
+
+function validCoverUrl(value) {
+  const url = String(value || '').trim();
+  return url === '' || /^(https:\/\/|\/assets\/|\.\/assets\/|\/api\/marketplace\/ebooks\/[a-f0-9]{24}\/cover$)/i.test(url);
 }
 
 function slugify(value) {
@@ -69,7 +122,8 @@ router.get('/ebooks/:id/cover', async (req, res) => {
       res.setHeader('Cache-Control', 'public, max-age=3600');
       return res.send(ebook.coverData);
     }
-    return res.redirect(ebook.coverUrl || '/assets/logo.jpeg');
+    const target = ebook.coverUrl && !/\/api\/marketplace\/ebooks\/[^/]+\/cover$/i.test(ebook.coverUrl) ? ebook.coverUrl : '/assets/logo.jpeg';
+    return res.redirect(target);
   } catch (_error) { return res.status(404).end(); }
 });
 
@@ -234,8 +288,10 @@ router.get('/download/:purchaseId', protect, async (req, res) => {
 });
 
 router.get('/admin/ebooks', protect, requireAdmin, async (_req, res) => {
-  const ebooks = await Ebook.find().sort({ createdAt: -1 });
-  res.json({ ebooks: ebooks.map(publicEbook) });
+  try {
+    const ebooks = await Ebook.find().sort({ createdAt: -1 });
+    res.json({ ebooks: ebooks.map(publicEbook) });
+  } catch (error) { res.status(500).json({ message: 'Could not load products. Please try again.' }); }
 });
 
 router.post('/admin/ebooks', protect, requireAdmin, async (req, res) => {
@@ -257,7 +313,8 @@ router.post('/admin/ebooks', protect, requireAdmin, async (req, res) => {
     if (!/^[A-Za-z0-9+/]*={0,2}$/.test(cleanBase64) || cleanBase64.length % 4 === 1) return res.status(400).json({ message: 'The uploaded product file could not be read. Please choose the file again.' });
     const buffer = Buffer.from(cleanBase64, 'base64');
     if (!buffer.length) return res.status(400).json({ message: 'The uploaded product file is empty.' });
-    if (buffer.length > 15 * 1024 * 1024) return res.status(413).json({ message: 'Product files must be 15 MB or smaller.' });
+    if (buffer.length > MAX_FILE_BYTES) return res.status(413).json({ message: 'Product files must be 15 MB or smaller.' });
+    if (!signatureMatches(mimeType, buffer)) return res.status(400).json({ message: 'The uploaded file content does not match its declared type. Choose a valid file.' });
     let coverBuffer = null;
     const allowedCoverTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif'];
     if (coverBase64) {
@@ -266,8 +323,10 @@ router.post('/admin/ebooks', protect, requireAdmin, async (req, res) => {
       if (!/^[A-Za-z0-9+/]*={0,2}$/.test(cleanCoverBase64) || cleanCoverBase64.length % 4 === 1) return res.status(400).json({ message: 'The product cover could not be read. Please choose the image again.' });
       coverBuffer = Buffer.from(cleanCoverBase64, 'base64');
       if (!coverBuffer.length) return res.status(400).json({ message: 'The product cover is empty.' });
-      if (coverBuffer.length > 3 * 1024 * 1024) return res.status(413).json({ message: 'Product covers must be 3 MB or smaller.' });
+      if (coverBuffer.length > MAX_COVER_BYTES) return res.status(413).json({ message: 'Product covers must be 3 MB or smaller.' });
+      if (!signatureMatches(coverMimeType, coverBuffer)) return res.status(400).json({ message: 'The cover image content does not match its declared type. Choose a valid image.' });
     }
+    if (!coverBuffer && !validCoverUrl(coverUrl)) return res.status(400).json({ message: 'Cover URL must be an https:// link or a site asset path.' });
     let slug = slugify(cleanTitle);
     if (await Ebook.findOne({ slug })) slug = `${slug}-${Date.now().toString().slice(-6)}`;
     const safeFileName = String(fileName).split(/[\\/]/).pop().replace(/[\r\n\"\x00-\x1f]/g, '_').trim().slice(0, 180) || 'download';
@@ -302,32 +361,97 @@ router.get('/admin/ebooks/:id/download', protect, requireAdmin, async (req, res)
 
 router.patch('/admin/ebooks/:id', protect, requireAdmin, async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) return res.status(404).json({ message: 'Product not found.' });
     const ebook = await Ebook.findById(req.params.id);
-    if (!ebook) return res.status(404).json({ message: 'E-book not found.' });
-    const allowed = ['title', 'description', 'category', 'productType', 'price', 'oldPrice', 'pageCount', 'whatsappNumber', 'coverUrl', 'published'];
-    for (const field of allowed) {
-      if (Object.prototype.hasOwnProperty.call(req.body || {}, field)) {
-        if (field === 'price') ebook.price = Math.max(0, Number(req.body[field] || 0));
-        else if (field === 'oldPrice') ebook.oldPrice = Math.max(0, Number(req.body[field] || 0));
-        else if (field === 'pageCount') ebook.pageCount = Math.max(0, Number(req.body[field] || 0));
-        else if (field === 'published') ebook.published = Boolean(req.body[field]);
-        else if (field === 'productType') { const value = String(req.body[field] || 'other').toLowerCase(); if (!['ebook', 'download', 'logo', 'template', 'software', 'other'].includes(value)) return res.status(400).json({ message: 'Choose a valid product type.' }); ebook.productType = value; }
-        else ebook[field] = String(req.body[field] ?? '').trim();
-      }
+    if (!ebook) return res.status(404).json({ message: 'Product not found.' });
+    const body = req.body || {};
+    const has = (field) => Object.prototype.hasOwnProperty.call(body, field);
+
+    if (has('title')) {
+      const title = String(body.title || '').trim();
+      if (!title) return res.status(400).json({ message: 'Product title is required.' });
+      if (title.length > 180) return res.status(400).json({ message: 'Product titles must be 180 characters or fewer.' });
+      ebook.title = title;
     }
-    if (!ebook.title) return res.status(400).json({ message: 'Product title is required.' });
+    if (has('description')) ebook.description = String(body.description ?? '').trim();
+    if (has('category')) ebook.category = String(body.category || 'Digital Product').trim().slice(0, 100);
+    if (has('whatsappNumber')) ebook.whatsappNumber = String(body.whatsappNumber ?? '').trim().slice(0, 40);
+    if (has('productType')) {
+      const value = String(body.productType || 'other').toLowerCase();
+      if (!PRODUCT_TYPES.includes(value)) return res.status(400).json({ message: 'Choose a valid product type.' });
+      ebook.productType = value;
+    }
+    for (const [field, label] of [['price', 'price'], ['oldPrice', 'old price'], ['pageCount', 'page count']]) {
+      if (!has(field)) continue;
+      const value = Number(body[field] === '' || body[field] === null ? 0 : body[field]);
+      if (!Number.isFinite(value) || value < 0) return res.status(400).json({ message: `Enter a valid non-negative ${label}.` });
+      ebook[field] = value;
+    }
+    if (has('published')) {
+      const value = parseBoolean(body.published, null);
+      if (value === null) return res.status(400).json({ message: 'Published must be true or false.' });
+      ebook.published = value;
+    }
+
+    // Optional replacement of the downloadable file.
+    if (body.fileBase64) {
+      const mimeType = String(body.mimeType || '');
+      if (!ALLOWED_FILE_TYPES.includes(mimeType)) return res.status(400).json({ message: 'Supported files: ZIP, PDF, EPUB, DOC/DOCX, TXT, ODT, PNG, JPG, WEBP, GIF or SVG.' });
+      const buffer = decodeBase64(body.fileBase64);
+      if (!buffer) return res.status(400).json({ message: 'The uploaded product file could not be read. Please choose the file again.' });
+      if (!buffer.length) return res.status(400).json({ message: 'The uploaded product file is empty.' });
+      if (buffer.length > MAX_FILE_BYTES) return res.status(413).json({ message: 'Product files must be 15 MB or smaller.' });
+      if (!signatureMatches(mimeType, buffer)) return res.status(400).json({ message: 'The uploaded file content does not match its declared type. Choose a valid file.' });
+      ebook.fileData = buffer;
+      ebook.fileSize = buffer.length;
+      ebook.mimeType = mimeType;
+      ebook.fileName = String(body.fileName || ebook.fileName).split(/[\\/]/).pop().replace(/[\r\n"\x00-\x1f]/g, '_').trim().slice(0, 180) || 'download';
+    }
+
+    // Optional replacement / removal of the cover image.
+    if (body.coverBase64) {
+      const coverMimeType = String(body.coverMimeType || '').toLowerCase();
+      if (!ALLOWED_COVER_TYPES.includes(coverMimeType)) return res.status(400).json({ message: 'Product covers must be PNG, JPG, WEBP or GIF images.' });
+      const coverBuffer = decodeBase64(body.coverBase64);
+      if (!coverBuffer || !coverBuffer.length) return res.status(400).json({ message: 'The product cover could not be read. Please choose the image again.' });
+      if (coverBuffer.length > MAX_COVER_BYTES) return res.status(413).json({ message: 'Product covers must be 3 MB or smaller.' });
+      if (!signatureMatches(coverMimeType, coverBuffer)) return res.status(400).json({ message: 'The cover image content does not match its declared type. Choose a valid image.' });
+      ebook.coverData = coverBuffer;
+      ebook.coverMimeType = coverMimeType;
+      ebook.coverUrl = `/api/marketplace/ebooks/${ebook._id}/cover`;
+    } else if (parseBoolean(body.removeCover, false)) {
+      ebook.coverData = undefined;
+      ebook.coverMimeType = '';
+      ebook.coverUrl = '';
+    } else if (has('coverUrl')) {
+      if (!validCoverUrl(body.coverUrl)) return res.status(400).json({ message: 'Cover URL must be an https:// link or a site asset path.' });
+      ebook.coverUrl = String(body.coverUrl || '').trim();
+    }
+
     await ebook.save();
     res.json({ message: ebook.published ? 'Product updated and published live.' : 'Product updated and hidden from the public marketplace.', ebook: publicEbook(ebook) });
-  } catch (error) { res.status(500).json({ message: error.message }); }
+  } catch (error) {
+    console.error('Product update failed:', error.message);
+    res.status(500).json({ message: 'Could not update the product. Please try again.' });
+  }
 });
 
-router.delete('/admin/ebooks/:id', protect, requireAdmin, async (req, res) => {
+router.delete('/admin/ebooks/:id', protect, requireAdminOnly, async (req, res) => {
   try {
-    const ebook = await Ebook.findByIdAndDelete(req.params.id);
-    if (!ebook) return res.status(404).json({ message: 'E-book not found.' });
-    await EbookPurchase.deleteMany({ ebook: ebook._id });
-    res.json({ message: 'E-book removed.' });
-  } catch (error) { res.status(500).json({ message: error.message }); }
+    if (!mongoose.isValidObjectId(req.params.id)) return res.status(404).json({ message: 'Product not found.' });
+    const ebook = await Ebook.findById(req.params.id).select('title');
+    if (!ebook) return res.status(404).json({ message: 'Product not found.' });
+    const paidPurchases = await EbookPurchase.countDocuments({ ebook: ebook._id, status: 'paid' });
+    if (paidPurchases > 0) {
+      return res.status(409).json({ message: `${ebook.title} has ${paidPurchases} paid purchase(s), so it cannot be deleted. Hide it instead; buyers keep their downloads.` });
+    }
+    await Ebook.deleteOne({ _id: ebook._id });
+    await EbookPurchase.deleteMany({ ebook: ebook._id, status: { $ne: 'paid' } });
+    res.json({ message: 'Product deleted.' });
+  } catch (error) {
+    console.error('Product delete failed:', error.message);
+    res.status(500).json({ message: 'Could not delete the product. Please try again.' });
+  }
 });
 
 module.exports = router;

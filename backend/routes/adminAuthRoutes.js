@@ -83,11 +83,16 @@ router.post('/signup', async (req, res) => {
     if (fullName.length < 2) return res.status(400).json({ message: 'Enter your full name.' });
     if (!email.includes('@')) return res.status(400).json({ message: 'Enter a valid administrator email.' });
     if (password.length < 8) return res.status(400).json({ message: 'Password must be at least 8 characters.' });
-    if (!isAllowedAdminEmail(email)) return res.status(403).json({ message: `Admin signup is restricted to the configured administrator email: ${allowedAdminEmails()[0]}.` });
+    if (!isAllowedAdminEmail(email)) return res.status(403).json({ message: 'Admin signup is restricted to the approved administrator email.' });
     if (!requireSecurityConfig(res)) return;
     const existing = await User.findOne({ email }).select('+password');
     if (existing && ['owner', 'admin'].includes(String(existing.role || '').toLowerCase()) && existing.password) {
       return res.status(409).json({ message: 'An admin account already exists for this email. Please use Admin Login or Google sign-in.' });
+    }
+    // An existing non-admin account must not be taken over or promoted with an unverified password.
+    // Verified Google sign-in (which proves ownership of the email) remains the promotion path.
+    if (existing) {
+      return res.status(409).json({ message: 'An account already exists for this email. Use Google sign-in with the administrator email to continue.' });
     }
     const passwordHash = await bcrypt.hash(password, 12);
     const user = await findOrPromoteAdmin({ email, fullName, password: passwordHash });
@@ -115,7 +120,7 @@ async function googleAdminAuth(req, res) {
     }
     const email = cleanEmail(profile.email);
     if (!isAllowedAdminEmail(email)) {
-      return res.status(403).json({ message: `This Google email is not configured for administrator access. Sign in with ${allowedAdminEmails()[0]}.` });
+      return res.status(403).json({ message: 'This Google email is not configured for administrator access.' });
     }
     const passwordHash = await bcrypt.hash(crypto.randomBytes(32).toString('hex'), 12);
     const user = await findOrPromoteAdmin({ email, fullName: profile.name, googleId: profile.sub, password: undefined });
