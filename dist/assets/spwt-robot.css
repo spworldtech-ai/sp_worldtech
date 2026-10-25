@@ -1,0 +1,96 @@
+/* SP WorldTech robot assistant — scoped styles only */
+#spwt-guide-launcher{position:fixed;right:20px;bottom:20px;z-index:9998;border:1px solid rgba(92,221,255,.7);border-radius:999px;background:#071d34;color:#fff;padding:10px 15px;display:flex;gap:9px;align-items:center;box-shadow:0 8px 30px #00182b55;font:600 13px/1.2 system-ui;cursor:pointer}
+#spwt-guide-launcher img{width:36px;height:36px;object-fit:contain;object-position:center;border-radius:50%;background:#0a2741}
+#spwt-guide-panel{position:fixed;right:20px;bottom:82px;width:min(390px,calc(100vw - 28px));height:min(570px,calc(100dvh - 110px));z-index:9999;display:none;flex-direction:column;overflow:hidden;border:1px solid #1c5479;border-radius:18px;background:#f7fbff;color:#132d44;box-shadow:0 20px 65px #00152d66;font:14px/1.45 system-ui,sans-serif}
+#spwt-guide-panel.spwt-open{display:flex}#spwt-guide-panel *{box-sizing:border-box}
+#spwt-guide-head{display:flex;gap:10px;align-items:center;padding:13px;background:linear-gradient(120deg,#071b31,#124d73);color:#fff}
+#spwt-guide-head img{width:52px;height:52px;object-fit:contain;object-position:center;border-radius:12px;border:1px solid #50d8ff}
+#spwt-guide-head strong{display:block;font-size:14px}#spwt-guide-head small{color:#c6eaff}#spwt-guide-close{margin-left:auto;border:0;background:transparent;color:white;font-size:24px;cursor:pointer}
+#spwt-guide-greeting{padding:9px 12px;background:#eaf6ff;border-bottom:1px solid #d7e9f5;font-size:12px;color:#31536e}
+#spwt-guide-messages{padding:12px;flex:1;overflow:auto;display:flex;flex-direction:column;gap:9px}
+.spwt-guide-msg{white-space:pre-wrap;overflow-wrap:anywhere;max-width:94%;padding:10px 12px;border-radius:13px;background:white;border:1px solid #e0eaf2;align-self:flex-start}
+.spwt-guide-msg.user{align-self:flex-end;background:#dff4ff;border-color:#b5e4f7}
+#spwt-guide-quick{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 9px}#spwt-guide-quick button{border:1px solid #b9d9eb;border-radius:999px;background:white;color:#164365;padding:6px 9px;font-size:11px;cursor:pointer}
+#spwt-guide-form{display:flex;gap:7px;padding:10px;border-top:1px solid #d9e6ef;background:white}#spwt-guide-input{min-width:0;flex:1;border:1px solid #c7d9e6;border-radius:10px;padding:10px;font:inherit;outline-color:#149cda}#spwt-guide-form button{border:0;border-radius:10px;padding:0 13px;background:#087fbd;color:white;font-weight:700;cursor:pointer}
+#spwt-guide-tools{display:flex;gap:10px;align-items:center;padding:0 12px 10px;background:white;font-size:11px}#spwt-guide-tools button{border:0;background:transparent;color:#12638e;text-decoration:underline;cursor:pointer;padding:2px}
+#spwt-hero-robot{display:flex;align-items:center;gap:14px;margin-top:18px;max-width:390px;padding:10px 14px 10px 10px;border:1px solid #66dfff66;border-radius:18px;background:linear-gradient(115deg,rgba(4,22,42,.82),rgba(12,71,104,.58));color:#fff;box-shadow:0 12px 32px #00172c33;backdrop-filter:blur(8px)}
+#spwt-hero-robot img{width:76px;height:76px;object-fit:cover;object-position:top;border-radius:14px;background:#061c31;flex-shrink:0}#spwt-hero-robot strong{display:block;font-size:14px}#spwt-hero-robot p{font-size:12px;line-height:1.45;margin:4px 0 8px;color:inherit}#spwt-hero-robot button{border:1px solid #64dfff;border-radius:999px;background:#087fbd;color:#fff;padding:7px 11px;font-weight:700;font-size:11px;cursor:pointer}
+@media(max-width:600px){#spwt-guide-launcher{right:12px;bottom:12px;padding:7px 10px}#spwt-guide-launcher img{width:30px;height:30px}#spwt-guide-panel{right:8px;bottom:70px;width:calc(100vw - 16px);height:min(600px,calc(100dvh - 82px))}#spwt-hero-robot{max-width:100%}}
+@media(prefers-reduced-motion:reduce){#spwt-guide-panel *{scroll-behavior:auto!important}}
+/* Full-width robot integration: keeps the existing hero background and content intact. */
+.spwt-robot-hero-host{position:relative;isolation:isolate}
+#spwt-hero-robot{width:100%;max-width:none;min-height:clamp(190px,25vw,320px);margin:clamp(18px,3vw,34px) 0 0;padding:clamp(14px,2.4vw,28px);display:flex;align-items:center;gap:clamp(16px,3vw,38px);border:1px solid rgba(101,220,255,.5);border-radius:22px;background:linear-gradient(105deg,rgba(4,17,34,.32),rgba(7,35,58,.24));color:inherit;box-shadow:0 16px 42px rgba(0,12,28,.16);backdrop-filter:blur(5px)}
+#spwt-hero-robot .spwt-hero-robot-visual{flex:0 0 clamp(118px,19vw,230px);height:clamp(155px,24vw,285px);display:flex;align-items:center;justify-content:center;overflow:visible}
+#spwt-hero-robot .spwt-hero-robot-visual img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;border-radius:0;background:transparent;filter:drop-shadow(0 10px 22px rgba(0,0,0,.28))}
+#spwt-hero-robot .spwt-hero-robot-copy{flex:1;min-width:0}
+#spwt-hero-robot .spwt-hero-kicker{display:block;margin-bottom:8px;font-size:11px;font-weight:800;letter-spacing:.16em;color:#4bcfff}
+#spwt-hero-robot .spwt-hero-robot-copy strong{display:block;font-size:clamp(18px,2.2vw,30px);line-height:1.18;color:inherit}
+#spwt-hero-robot .spwt-hero-robot-copy p{font-size:clamp(12px,1.2vw,15px);line-height:1.55;margin:10px 0 14px;color:inherit;opacity:.9}
+#spwt-hero-robot .spwt-hero-robot-copy button{border:1px solid #64dfff;border-radius:999px;background:#087fbd;color:#fff;padding:10px 16px;font-weight:700;font-size:12px;cursor:pointer}
+#spwt-guide-launcher img,#spwt-guide-head img{object-fit:contain;object-position:center;background:#071d34}
+@media(max-width:600px){#spwt-hero-robot{gap:10px;padding:12px;border-radius:16px;min-height:0}#spwt-hero-robot .spwt-hero-robot-visual{flex-basis:100px;height:145px}#spwt-hero-robot .spwt-hero-robot-copy strong{font-size:17px}#spwt-hero-robot .spwt-hero-robot-copy p{font-size:11px}}
+
+/* Unified edge-to-edge hero band: actual supplied SPWT robot artwork, transparent branded overlay. */
+.spwt-robot-hero-host{position:relative;isolation:isolate;}
+#spwt-hero-robot{box-sizing:border-box;position:relative;display:flex;align-items:center;gap:clamp(18px,4vw,64px);width:100%;max-width:none;min-height:clamp(260px,32vw,430px);margin:clamp(22px,3.5vw,44px) 0 0;padding:clamp(18px,4vw,52px);overflow:hidden;border:1px solid rgba(105,220,255,.38);border-radius:clamp(16px,2vw,28px);background:linear-gradient(100deg,rgba(3,17,34,.12),rgba(4,29,51,.42));color:inherit;box-shadow:0 18px 52px rgba(0,12,28,.18);backdrop-filter:blur(3px);}
+#spwt-hero-robot:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(3,18,35,.05),rgba(3,18,35,.22));pointer-events:none;}
+#spwt-hero-robot .spwt-hero-robot-visual{position:relative;flex:0 0 clamp(150px,25vw,320px);height:clamp(210px,30vw,370px);display:flex;align-items:center;justify-content:center;overflow:visible;}
+#spwt-hero-robot .spwt-hero-robot-visual img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:transparent;border:0;border-radius:0;filter:drop-shadow(0 14px 25px rgba(0,0,0,.34));}
+#spwt-hero-robot .spwt-hero-robot-copy{position:relative;z-index:1;flex:1;min-width:0;}
+#spwt-hero-robot .spwt-hero-kicker{display:block;margin:0 0 10px;color:#49cfff;font-size:11px;font-weight:850;letter-spacing:.17em;text-transform:uppercase;}
+#spwt-hero-robot .spwt-hero-robot-copy strong{display:block;max-width:780px;font-size:clamp(24px,3.3vw,48px);line-height:1.08;letter-spacing:-.025em;color:inherit;text-wrap:balance;}
+#spwt-hero-robot .spwt-hero-robot-copy p{max-width:680px;margin:14px 0 20px;color:inherit;font-size:clamp(13px,1.25vw,17px);line-height:1.65;opacity:.94;}
+#spwt-hero-robot .spwt-hero-robot-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+#spwt-hero-robot .spwt-hero-robot-copy button{border:1px solid #68e0ff;border-radius:999px;background:linear-gradient(135deg,#0789c9,#075c9c);color:#fff;padding:11px 19px;font-weight:750;font-size:13px;cursor:pointer;box-shadow:0 6px 18px rgba(0,91,145,.25);}
+#spwt-hero-robot .spwt-hero-robot-copy button:hover{filter:brightness(1.1);transform:translateY(-1px)}
+#spwt-hero-robot .spwt-hero-rolling{display:inline-block;max-width:100%;color:inherit;font-size:12px;opacity:.88;letter-spacing:.025em;}
+@media(max-width:700px){#spwt-hero-robot{gap:12px;min-height:0;padding:14px;margin-top:16px;align-items:center;}#spwt-hero-robot .spwt-hero-robot-visual{flex-basis:36%;height:clamp(155px,48vw,230px);}#spwt-hero-robot .spwt-hero-robot-copy strong{font-size:clamp(18px,5vw,25px);}#spwt-hero-robot .spwt-hero-robot-copy p{font-size:12px;margin:8px 0 12px;}#spwt-hero-robot .spwt-hero-robot-actions{gap:9px;}#spwt-hero-robot .spwt-hero-robot-copy button{padding:9px 12px;font-size:11px;}}
+@media(max-width:420px){#spwt-hero-robot{align-items:flex-start;}#spwt-hero-robot .spwt-hero-robot-visual{flex-basis:31%;height:145px;}#spwt-hero-robot .spwt-hero-robot-copy strong{font-size:17px;}#spwt-hero-robot .spwt-hero-robot-copy p{font-size:11px;}}
+
+/* Unified robot hero + expressive character states */
+#spwt-hero-robot{grid-column:1/-1;align-self:stretch;display:flex;isolation:isolate;}
+#spwt-hero-robot .spwt-hero-robot-visual{position:relative;isolation:isolate;overflow:visible;transform-origin:50% 80%;animation:spwt-body-bob 4.8s ease-in-out infinite;}
+#spwt-hero-robot .spwt-hero-robot-visual img{position:relative;z-index:1;animation:spwt-robot-sway 7s ease-in-out infinite;transform-origin:50% 75%;}
+#spwt-hero-robot .spwt-robot-eye-overlay{position:absolute;z-index:2;left:29%;top:25%;width:42%;height:5%;border-radius:50%;pointer-events:none;background:transparent;}
+#spwt-hero-robot .spwt-robot-eye-overlay:before,#spwt-hero-robot .spwt-robot-eye-overlay:after{content:"";position:absolute;top:0;width:32%;height:100%;border-radius:50%;background:linear-gradient(#dcecf5,#9bbbd0);opacity:0;}
+#spwt-hero-robot .spwt-robot-eye-overlay:before{left:0}#spwt-hero-robot .spwt-robot-eye-overlay:after{right:0}
+#spwt-hero-robot .spwt-robot-mouth-overlay{position:absolute;z-index:3;left:43%;top:38%;width:14%;height:2%;border:1px solid rgba(7,33,52,.7);border-top:0;border-radius:0 0 50% 50%;background:rgba(9,35,55,.15);pointer-events:none;transform-origin:50% 0;}
+#spwt-hero-robot .spwt-robot-arm-overlay{position:absolute;z-index:2;top:57%;width:11%;height:21%;border-radius:45%;background:linear-gradient(100deg,rgba(240,250,255,.08),rgba(105,190,230,.12),rgba(240,250,255,.05));pointer-events:none;transform-origin:50% 8%;}
+#spwt-hero-robot .spwt-robot-arm-overlay.left{left:13%;transform:rotate(7deg)}#spwt-hero-robot .spwt-robot-arm-overlay.right{right:13%;transform:rotate(-7deg)}
+#spwt-hero-robot .spwt-robot-motion-ring{position:absolute;z-index:0;inset:8% 7% 3%;border:1px solid rgba(76,214,255,.15);border-radius:48%;pointer-events:none;animation:spwt-ring-pulse 5s ease-in-out infinite;}
+#spwt-hero-robot .spwt-hero-robot-visual[data-state="speaking"]{animation:spwt-body-speak .55s ease-in-out infinite alternate;}
+#spwt-hero-robot .spwt-hero-robot-visual[data-state="speaking"] .spwt-robot-mouth-overlay{height:5%;border-radius:45%;background:rgba(8,30,47,.9);animation:spwt-mouth-talk .16s ease-in-out infinite alternate;}
+#spwt-hero-robot .spwt-hero-robot-visual[data-state="speaking"] .spwt-robot-arm-overlay.left{animation:spwt-gesture-left .85s ease-in-out infinite alternate;}
+#spwt-hero-robot .spwt-hero-robot-visual[data-state="speaking"] .spwt-robot-arm-overlay.right{animation:spwt-gesture-right .85s ease-in-out infinite alternate;}
+#spwt-hero-robot .spwt-hero-robot-visual[data-state="thinking"] .spwt-robot-eye-overlay{animation:spwt-blink 3.1s ease-in-out infinite;}
+#spwt-hero-robot .spwt-robot-eye-overlay{animation:spwt-blink 4.5s ease-in-out infinite;}
+#spwt-guide-tools{background:#f4fbff;padding:8px 12px;}
+#spwt-guide-tools #spwt-guide-voice{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid #b6c8d3;border-radius:999px;background:#edf2f5;color:#405568;text-decoration:none;font-size:12px;font-weight:800;transition:background .18s ease,color .18s ease,box-shadow .18s ease;}
+#spwt-guide-tools #spwt-guide-voice:before{content:"";width:8px;height:8px;border-radius:50%;background:#758695;}
+#spwt-guide-tools #spwt-guide-voice.is-on{background:#168447;color:#fff;border-color:#168447;box-shadow:0 3px 12px #16844733;}
+#spwt-guide-tools #spwt-guide-voice.is-on:before{background:#a6ffc4;box-shadow:0 0 0 3px #ffffff26;}
+#spwt-guide-tools #spwt-guide-voice.is-off{background:#eef3f6;color:#42596b;}
+#spwt-guide-greeting{background:#eaf6ff;color:#24465f;}
+/* The robot is the single customer-facing chat launcher; hide legacy live-chat bubble styling. */
+.spw-chat-fab,#spwChatFab,#spwChatWidget .spw-chat-fab{display:none!important;}
+@keyframes spwt-body-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes spwt-body-speak{from{transform:translateY(0) rotate(-.6deg)}to{transform:translateY(-4px) rotate(.6deg)}}
+@keyframes spwt-robot-sway{0%,100%{transform:rotate(0)}25%{transform:rotate(-.5deg)}75%{transform:rotate(.5deg)}}
+@keyframes spwt-blink{0%,43%,47%,100%{opacity:0}45%{opacity:1}}
+@keyframes spwt-mouth-talk{from{transform:scaleY(.55)}to{transform:scaleY(1.15)}}
+@keyframes spwt-gesture-left{from{transform:rotate(5deg)}to{transform:rotate(-13deg)}}
+@keyframes spwt-gesture-right{from{transform:rotate(-5deg)}to{transform:rotate(13deg)}}
+@keyframes spwt-ring-pulse{0%,100%{opacity:.4;transform:scale(.98)}50%{opacity:.9;transform:scale(1.02)}}
+@media(prefers-reduced-motion:reduce){#spwt-hero-robot *,#spwt-guide-tools #spwt-guide-voice{animation:none!important;transition:none!important}}
+@media(max-width:700px){#spwt-hero-robot{grid-column:1/-1;flex-direction:row;}#spwt-hero-robot .spwt-hero-robot-visual{flex-basis:36%;}}
+/* Final shared hero layout: one robot hero per page, original hero background retained. */
+.spwt-robot-hero-host{position:relative!important;isolation:isolate!important;display:flex!important;align-items:stretch!important;min-height:clamp(480px,68vh,760px)!important;padding:clamp(20px,4vw,58px)!important;overflow:hidden!important;}
+.spwt-robot-hero-host>.spwt-original-hero-hidden{display:none!important;}
+.spwt-robot-hero-host>#spwt-hero-robot{flex:1 1 auto;align-self:stretch;grid-column:auto;min-height:0;margin:0;width:100%;border:1px solid rgba(96,218,255,.24);border-radius:24px;background:linear-gradient(105deg,rgba(4,19,37,.20),rgba(4,24,43,.46));backdrop-filter:blur(2px);}
+#spwt-hero-robot .spwt-hero-robot-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#spwt-hero-robot .spwt-hero-robot-actions .spwt-hero-action{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.8);background:#f7fbff;color:#102238;text-decoration:none;font-weight:750;font-size:12px;}
+#spwt-hero-robot .spwt-hero-robot-actions .spwt-hero-action.secondary{background:rgba(7,28,49,.72);border-color:rgba(105,220,255,.48);color:#fff;}
+#spwt-hero-robot .spwt-robot-eye-overlay:before,#spwt-hero-robot .spwt-robot-eye-overlay:after{opacity:1;}
+#spwt-hero-robot .spwt-robot-eye-overlay{animation:spwt-blink 4.5s ease-in-out infinite;}
+#spwt-guide-tools #spwt-guide-voice{min-width:152px;justify-content:center;}
+@media(max-width:700px){.spwt-robot-hero-host{min-height:0!important;padding:12px!important;} .spwt-robot-hero-host>#spwt-hero-robot{flex-direction:column;gap:12px;padding:16px;align-items:stretch;}#spwt-hero-robot .spwt-hero-robot-visual{flex:0 0 auto;width:min(62vw,220px);height:190px;align-self:center;}#spwt-hero-robot .spwt-hero-robot-copy strong{font-size:clamp(23px,7vw,34px);}}

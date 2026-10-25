@@ -1,0 +1,11 @@
+node_modules/
+.env
+backend/.env
+frontend/.env
+*.log
+.DS_Store
+
+# Keep environment secrets out of Git
+.env
+.env.*
+!.env.example
